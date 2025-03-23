@@ -1,0 +1,49 @@
+
+
+
+/* MODELADO 3D */
+.imagenes-modelado-3d{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3px;
+    max-width: 100%;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    justify-content: space-evenly;
+}
+
+.imagenes-modelado-3d img{
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 3px;
+    
+}
+
+
+@media only screen and (max-width: 900px){
+
+    .imagenes-modelado-3d{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 3px;
+        max-width: 100%;
+        margin-top: 20px;
+        margin-bottom: 60px;
+        justify-content: space-evenly;
+    }
+}
+
+@media only screen and (max-width: 450px){
+
+    .imagenes-modelado-3d{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: 3px;
+        max-width: 100%;
+        margin-top: 20px;
+        margin-bottom: 60px;
+        justify-content: space-evenly;
+    }
+
+}
+

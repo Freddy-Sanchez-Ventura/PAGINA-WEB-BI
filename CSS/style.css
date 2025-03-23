@@ -1,17 +1,17 @@
 
-@import url(front.css?v=5);
-@import url(header.css?v=5);
-@import url(inicio_servicios.css?v=5);
+@import url(front.css);
+@import url(header.css);
+@import url(inicio_servicios.css);
 @import url(inicio_Topografia.css);
-@import url(inicio_cursos.css?v=5);
-@import url(footer.css?v=5);
-@import url(cursos.css?v=5);
-@import url(cursos_ventanas_individuales.css?v=5);
-@import url(servicio.css?v=5);
-@import url(blog.css?v=5);
-@import url(_blog_contenido.css?v=5);
-@import url(_dynamo.css?v=1);
-@import url(curso_ventana_individual.css?v=5);
+@import url(inicio_cursos.css);
+@import url(footer.css);
+@import url(cursos.css);
+@import url(cursos_ventanas_individuales.css);
+@import url(Modelado3D.css);
+@import url(blog.css);
+@import url(_blog_contenido.css);
+@import url(_dynamo.css);
+@import url(curso_ventana_individual.css);
 
 /*Escogiendo la Fuente que se usara en la Pagina web*/
 @import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
