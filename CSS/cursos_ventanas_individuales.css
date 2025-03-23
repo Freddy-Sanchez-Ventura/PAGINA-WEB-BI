@@ -1,0 +1,265 @@
+.contenido-curso-individual{
+    width: 100vw; /* ancho del viewport */
+    height: 100vh; /* altura del viewport */
+    background-color: #ffffff; /* color de fondo */
+    padding: 0;
+    position: fixed;
+}
+
+.bloque-columnas{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    margin-top: 55px;
+
+}
+
+.nav-item{
+    list-style-type: none; /* Elimina el marcador */
+}
+
+.h2-titulo-curso{
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: rgb(255, 255, 255);
+    line-height: 1.1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 25PX;
+}
+
+.h3-titulo-curso{
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-left: -25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: underline;
+    background-color: #4f4f4f;
+}
+
+
+/*Grilla con el Contenido y el Video*/
+.contenido-curso-grid-columns{
+    display: grid;
+    grid-template-columns: minmax(auto, 450px) 1fr;
+    grid-template-rows: calc(100vh - 55px);
+    width: 100%;
+    height: 100vh;
+    border: solid 1px ;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+        /*Lista del Contenido*/
+        .columns-contenido:nth-of-type(1){
+            display: grid;
+            grid-template-rows: 180px auto;
+            justify-items: center;
+            width: 100%;
+            height: 100%;
+        }
+            .filas:nth-of-type(1){
+                justify-items: center;
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+                align-items: center; /* Centrado vertical */
+                justify-content: center; /* Centrado horizontal */
+                text-align: center;
+            }
+
+            #button_Curso {
+                max-width: 7rem;
+                max-height: 2rem;
+                font-size: 1rem;
+                margin-top: 0rem;
+                padding: 0.8rem 1rem 0rem 1rem;
+                background-color: var(--color-celeste);
+                border-radius: 0.6rem;
+                color: white;
+                align-items: center; /* Centrado vertical */
+                justify-content: center; /* Centrado horizontal */
+                text-align: center;
+            }
+            
+            #button_Curso:hover {
+                background-color: var(--color-naranja);
+                color: rgb(255, 255, 255);
+            }
+            
+
+            .filas:nth-of-type(2){
+                overflow: auto;
+                display: grid;
+                grid-template-rows: repeat(auto-fill, minmax(auto auto));
+                justify-items: left;
+                align-items: top;
+                width: 100%;
+                height: 100%;
+                padding-bottom: 30px;
+                background: rgb(243, 243, 243);
+            }
+
+            #ContenidoGeneral{
+                background: rgb(61, 61, 61);
+            }
+
+            .indice{
+                background: rgb(224, 224, 224);
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+                color: rgba(77, 77, 77, 0.959);
+                padding-left: 15px;
+                padding-top: 5px;
+                box-sizing: border-box;
+            }
+
+            .indice.indice-contenido a:hover{
+                color: rgb(83, 181, 149);
+                font-weight: bold;
+            }
+
+            .indice.indice-SubContenido01 a:hover{
+                color: rgb(83, 181, 149);
+                font-weight: bold;
+            }
+
+            .indice a{
+                text-decoration: none;
+                display: inline-block;
+                color: rgb(0, 0, 0);
+                width: 100%;
+                height: 100%;
+                margin: auto auto;
+            }
+
+            .indice-contenido{
+                padding-left: 40px;
+                background: rgb(243, 243, 243);
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .indice-SubContenido01{
+                padding-left: 80px;
+                background: rgb(243, 243, 243);
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+            }
+
+            .titulo-contenido{
+                font-weight: bold;
+                width: 100%;
+                height: 100%;
+                background: rgb(224, 224, 224);
+                padding-left: 15px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .titulo-contenido a{
+                color: #444444;
+            }
+
+            .nav-item.active a {
+                color: rgb(28, 153, 255); /* color de fuente para enlace activo */
+                font-weight: bold;
+              }
+
+        /*Video*/
+        .columns-contenido:nth-of-type(2){
+        width: 100%;
+        height: 100%;
+        justify-items: center;
+        align-items: center;   
+        }
+
+            .columns-contenido:nth-of-type(2) iframe{
+                width: 100%;
+                height: 100%;
+            }
+
+.descarga-contenido{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(247, 247, 247, 0.74);
+    display: block;
+    margin-top: -30px;
+    padding: 0 0 20px 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+    .descarga-contenido a:link{
+    color: rgb(35, 133, 245);
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline-block;
+    }   
+
+    .descarga-contenido a:visited{
+    color: rgb(14, 94, 160);
+    font-weight: bold;
+    }
+
+    .descarga-contenido a:hover{
+        cursor: pointer;
+        color: #ffffff;
+        background-color: rgb(42, 77, 117);;
+        border-radius: 4px;
+    }
+
+
+/*Contenido Responsive*/
+@media only screen and (max-width: 1000px){
+   
+    .contenido-curso-individual{
+        width: 100vw; /* ancho del viewport */
+        height: 100%; /* altura del viewport */
+        background-color: #44ff4a; /* color de fondo */
+        position: relative;
+    }
+   
+    .contenido-curso-grid-columns{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        width: 100%;
+        height: 100%;
+        align-content: center;
+    }
+
+
+        .columns-contenido:nth-of-type(1){
+            min-height: 200px;
+            max-height: 400px;
+            grid-template-rows: auto auto;
+        }
+
+        .filas:nth-of-type(2){
+            overflow: auto;
+            display: grid;
+            grid-template-rows: repeat(auto-fill, minmax(auto auto));
+            justify-items: left;
+            width: 100%;
+            height: 100%;
+            padding-bottom: 20px;
+            background: rgb(243, 243, 243);
+        }
+
+        /*Video*/
+        .columns-contenido:nth-of-type(2){
+            width: 100%;
+            height: 100%;
+            justify-items: center;  
+        }
+
+        .columns-contenido:nth-of-type(2) iframe{
+            position: absolute;
+            min-width: 100%;
+            height: 100%;
+            margin-left: -1px;
+        }
+}
