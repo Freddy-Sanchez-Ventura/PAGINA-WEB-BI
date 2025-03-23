@@ -1,0 +1,66 @@
+.container-servicios{
+    background-color: var(--color-transparente);
+    width: 100%;
+    padding: 25px 0;
+    margin-top: -32px;
+}
+
+.container-servicios-general{
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lista-servicios{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-gap: 20px;
+    justify-content: space-evenly;
+}
+
+.bloque-servicio-individual{
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+
+.image-individual{
+    margin: 0 auto;
+}
+
+.image-individual img{
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.imagen-busqueda-resaltado{
+    width: 100%;
+    height: 100%;
+    background: rgba(108, 229, 245, 0.6);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.bloque-servicio-individual:hover .imagen-busqueda-resaltado{
+    display: flex;
+}
+
+.texto-ver{
+     width: 50px;
+     margin: 10px;
+     font-weight: bold;
+     display: block;
+     font-size: 25px;
+}

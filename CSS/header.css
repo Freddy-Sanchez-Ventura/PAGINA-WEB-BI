@@ -1,0 +1,135 @@
+
+/*Bloque de Encabezado*/
+.header{
+    background-image: var(--color-degradado-01);
+    height: 55px;
+
+    /*Haciendo que la Cabecera sea Fija*/
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0; /*Podemos hacer lo mismo con width: 100%*/
+    z-index: 100;
+    
+}
+
+.header a{
+    color: white;
+    text-decoration: none;
+}
+
+.container-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+    width: 85%;
+    height: 55px;
+    max-width: 1200px;
+}
+.logo{
+    display: flex;
+}
+
+.logo img{
+    width: 170px;
+    height: 35px;
+}
+    .logo img:hover{
+        transform: scale(1.1);
+    }
+
+.logo p{
+    font-weight: bold;
+}
+
+.menu-icon{
+    display: none;
+}
+
+.navigation ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    .navigation ul li{
+        display: inline-block;
+    }
+
+        .navigation ul li a{
+            display: block;
+            padding: 0.4rem 1rem;
+            transition: all 0.4s linear;
+            border-radius: 0.4rem;
+            
+        }
+
+            .navigation ul li a:hover{
+                background-color: var(--color-celeste);
+            }
+
+#inicio, #cursos, #servicios, #blog{
+    font-weight: bold;
+    background-color: var(--color-celeste);
+}
+
+@media only screen and (max-width: 1240px){
+    .logo{
+        padding-left: 10px;
+    }
+}
+            
+@media only screen and (max-width: 768px){
+    .menu-icon{
+        display: block;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+        .menu-icon img:hover{
+            background-color: rgb(36, 36, 36);
+        }
+
+    .navigation ul{
+        display: none;
+    }
+
+    .navigation ul.show{
+        display: block;
+    }
+
+    .navigation{
+        width: 100%;
+        padding-right: 10px;
+        background-color: rgba(36, 36, 36, 0.8);
+    }
+
+    .navigation ul li{
+        display: block;
+    
+    } 
+    
+    .navigation ul li a{
+        display: block; 
+        padding: 0.5rem 15px;
+        transition: all 0.4s linear;
+        border-radius: 5px;
+        border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+    }
+
+    #inicio{
+        margin-top: 20px;
+    }
+    
+ 
+    .menu-icon img {
+        width: 35px;
+        height: 35px;
+        padding-right: 10px;
+    }
+     
+    a:hover{
+        background-color: #4a4a4a;
+    }
+}

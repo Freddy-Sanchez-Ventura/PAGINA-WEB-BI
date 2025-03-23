@@ -1,0 +1,148 @@
+/* CURSOS DE PAGO*/
+.contenido-general-cursos{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.h3-azul {
+    margin: 2rem 0 1.5rem 0;
+    padding-top: 1rem;
+    /*
+    color: rgb(252, 169, 86);
+    */
+    background-image: var(--color-degradado-02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.lista-cursos{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 290px);
+    grid-gap: 20px;
+    justify-content: space-evenly;
+}
+
+.image-individual-marco{
+    margin: 0 auto;
+}
+    .image-individual-marco img{
+        width: 100%;
+        height: auto;
+        vertical-align: top;
+        box-sizing: border-box;
+        border: 2px solid var(--color-blancoOpaco);
+        border-radius: 15px;
+    }
+        .image-individual-marco img:hover{
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+
+.image-individual-marco-gratis{
+    margin: 0 auto;
+}
+    .image-individual-marco-gratis img{
+        width: 100%;
+        height: auto;
+        vertical-align: top;
+        box-sizing: border-box;
+        border: 2px solid var(--color-blancoOpaco);
+        border-radius: 15px;
+    }
+        .image-individual-marco-gratis img:hover{
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgb(61, 232, 255);
+        }
+
+        
+.imagen-busqueda-resaltado-cursos-pago{
+    width: 100%;
+    height: 100%;
+    background: rgba(232, 232, 232, 0.6);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bloque-servicio-individual:hover .imagen-busqueda-resaltado-cursos-pago{
+    display: flex;
+
+}
+
+#Precio-Cursos:link, #Precio-Cursos:visited{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+    background: rgb(42, 77, 137);
+    color: rgb(255, 255, 255);
+    margin-top: 10px;
+    border-radius: 15px;
+    
+}
+
+#Precio-Cursos:hover, #Precio-Cursos:active{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+    background: rgb(255, 154, 65);
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.imagen-buscar{
+    margin-left: 18px;
+}
+    .imagen-buscar img{
+        width: 30px;
+        height: 30px;
+    }
+
+/* CURSOS GRATUITOS*/
+.portada-cursos{
+    background-color: white;
+    width: 100%;
+    margin: 20px auto;
+    padding: 25px 0;
+    margin-top: -20px;
+    
+}
+
+.imagen-busqueda-resaltado-cursos-gratuito{
+    width: 100%;
+    height: 100%;
+    background: rgba(91, 255, 83, 0.6);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.bloque-servicio-individual:hover .imagen-busqueda-resaltado-cursos-gratuito{
+    display: flex;
+}
