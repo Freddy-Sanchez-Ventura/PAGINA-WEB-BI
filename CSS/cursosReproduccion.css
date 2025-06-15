@@ -166,7 +166,7 @@ body {
 .tree-view span.caret:hover {
     background-color: #333333;
     color: #ffffff;
-    border-left-color: #555555; /* Borde al pasar el ratón para los carets */
+    border-left-color: hsl(22, 99%, 62%); /* Borde al pasar el ratón para los carets */
 }
 
 /* Estilos para los enlaces (el contenido final) */
@@ -220,7 +220,7 @@ body {
     display: inline-block;
     margin-right: 8px;
     color: #b0b0b0;
-    font-size: 0.9em;
+    font-size: 1.1rem;
 }
 
 .caret::before {
