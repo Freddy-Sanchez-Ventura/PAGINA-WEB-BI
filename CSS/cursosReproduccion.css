@@ -33,14 +33,6 @@ body {
     display: flex;
 }
 
-.logo img{
-    width: 170px;
-    height: 35px;
-}
-    .logo img:hover{
-        transform: scale(1.1);
-    }
-
 .logo p{
     font-weight: bold;
 }
@@ -75,6 +67,7 @@ body {
     flex-grow: 1;
     height: calc(100vh - 80px); /* Ajusta a la altura total de la ventana menos la altura de la cabecera (aprox. 80px) */
     align-items: stretch;
+    padding: 0;
 }
 
 .sidebar {
