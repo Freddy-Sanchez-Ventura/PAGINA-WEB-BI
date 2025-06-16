@@ -223,7 +223,7 @@ img {
 .main-nav .nav-link {
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.3rem;
     text-transform: uppercase;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--border-radius-small);
