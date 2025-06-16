@@ -1,3 +1,8 @@
+/*Escogiendo la Fuente que se usara en la Pagina web*/
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
 /* --- 0. Variables CSS (Colores, Fuentes, Espaciado) --- */
 :root {
     /* Colores */
@@ -19,8 +24,8 @@
     --gradient-orange-text: linear-gradient(to right, var(--color-accent-orange), var(--color-hover-orange));
 
     /* Tipografía */
-    --font-primary: 'Montserrat', sans-serif;
-    --font-secondary: 'Open Sans', sans-serif;
+    --font-primary: "Grandstander", cursive, "Roboto", sans-serif;
+    --font-secondary: "Grandstander", cursive, "Roboto", sans-serif;
 
     /* Espaciado */
     --spacing-xs: 0.5rem;
@@ -426,7 +431,7 @@ img {
     border-radius: var(--border-radius-small);
     display: inline-block;
     margin-top: var(--spacing-xs); /* Más espacio */
-    color: var(--color-dark-bg); /* Texto oscuro */
+    color: var(--color-text-light); /* Texto oscuro */
     background-color: var(--color-primary-blue); /* Fondo para categoría por defecto */
 }
 

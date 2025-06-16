@@ -1,6 +1,11 @@
+/*Escogiendo la Fuente que se usara en la Pagina web*/
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
 /* style.css */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Grandstander", cursive, "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     background-color: #1a1a1a;
