@@ -382,11 +382,15 @@ img {
     display: flex; /* Para organizar contenido interno */
     flex-direction: column;
     width: 100%; /* Para que ocupe todo el minmax */
+
+    border: 0px solid rgb(174, 174, 174); /* Borde blanco delgado */
 }
 
 .course-card:hover {
     transform: translateY(-5px); /* Menos elevación */
     box-shadow: var(--shadow-large);
+    transform: translateY(-5px); /* Menos elevación */
+    box-shadow: 0 0 15px rgb(255, 255, 255); /* Sombra blanca al pasar el mouse */
 }
 
 .course-figure {
@@ -403,7 +407,7 @@ img {
 }
 
 .course-card:hover .course-figure img {
-    transform: scale(1.05); /* Zoom reducido */
+    transform: scale(1.00); /* Zoom reducido */
 }
 
 .course-info {
