@@ -1,0 +1,35 @@
+:root{
+  --bg:#0b0e12; --card:#141b23; --text:#e8edf5; --muted:#9fb1c9; --border:#223243; --brand:#4fa3ff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0b0e12;color:var(--text);font:400 16px/1.6 Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+.muted{color:var(--muted)}
+
+.doc{
+  max-width: 1000px; margin: 0 auto; padding: 18px 18px 28px;
+}
+.doc-header{margin-bottom: 10px}
+.doc h1{font-size:clamp(1.4rem,1.6vw + 1rem,2rem);margin:.2rem 0 .5rem}
+.doc h2{font-size:1.15rem;margin:1.1rem 0 .4rem}
+.doc p, .doc li{color:var(--text)}
+.doc ul, .doc ol{margin:.3rem 0 .9rem 1.1rem}
+
+.code{
+  background: #10151b; border:1px solid var(--border); border-radius:12px;
+  padding: 12px; overflow:auto; box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+.code code{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .95rem; color:#dfe7ff}
+
+.tip{
+  background: #0f1a22; border:1px solid var(--border); border-left:4px solid var(--brand);
+  padding:.7rem .9rem; border-radius:10px; color:var(--text)
+}
+
+.doc-footer{
+  display:flex; gap:.8rem; align-items:center; margin-top:1rem; padding-top:.8rem;
+  border-top:1px dashed var(--border)
+}
+.copy-btn{
+  background: var(--brand); color:#001428; border:0; border-radius:10px; padding:.55rem .8rem; font-weight:800; cursor:pointer
+}
+#copyTarget{background:#0f1a22;border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem}
