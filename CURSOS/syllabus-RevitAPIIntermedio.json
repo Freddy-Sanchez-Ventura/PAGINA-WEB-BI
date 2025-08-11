@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Automatización de Procesos con la API de Revit · Nivel Intermedio",
+    "subtitle": "WPF, filtrado de parámetros, JSON, eventos externos y distribución de plugins.",
+    "price": "S/ 250.00",
+    "badges": "Online en vivo · Grabaciones · Material descargable",
+    "sidebar": "Temario del curso",
+    "metaLine": "YouTube · Revit API · C#/Python",
+    "contact": "https://wa.me/51968744058",
+    "default": {
+      "url": "https://www.youtube.com/embed/Eg2pqDkUagg",
+      "respectLastWatched": true
+    }
+  },
+  "syllabus": [
+    {
+      "title": "MODULO I: PLANTILLAS PERSONALIZADAS",
+      "items": [
+        { "title": "1.1 Plantilla IExternalCommand .NET Framework y .NET 8", "url": "https://www.youtube.com/embed/Eg2pqDkUagg?autoplay=1" },
+        { "title": "1.2 Plantilla IExternalApplication .NET Framework",       "url": "https://www.youtube.com/embed/H7-JMW24mMw?autoplay=1" },
+        { "title": "1.3 Plantilla IExternalApplication .NET 8",               "url": "https://www.youtube.com/embed/SoXWaaXFhNs?autoplay=1" },
+        { "title": "1.4 Formulario Personalizado con WPF (.NET Framework)",   "url": "https://www.youtube.com/embed/jnoLYNyJSAY?autoplay=1" },
+        { "title": "1.5 Formulario Personalizado con WPF (.NET 8)",           "url": "https://www.youtube.com/embed/IeRbXDZUwSs?autoplay=1" },
+        { "title": "1.6 Inicio de Proyectos con Plantillas Generadas",        "url": "https://www.youtube.com/embed/4MuToYyZmG0?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO II: DESARROLLO DEL PLUGIN SECTORIZAR",
+      "items": [
+        { "title": "2.1 Interfaz de Usuario con WPF",                           "url": "https://www.youtube.com/embed/2a8Ut7V2YKM?autoplay=1" },
+        { "title": "2.2 Seleccionar Elementos",                                 "url": "https://www.youtube.com/embed/v8CizMY1qzs?autoplay=1" },
+        { "title": "2.3 Filtrado de Parámetros de Instancia y Tipo",            "url": "https://www.youtube.com/embed/JYoEgFRp3s4?autoplay=1" },
+        { "title": "2.4 Parámetros Según Tipo de Almacenamiento",               "url": "https://www.youtube.com/embed/uhmkPtVQ_JA?autoplay=1" },
+        { "title": "2.5 Generación de Filtros",                                 "url": "https://www.youtube.com/embed/Wm3_AHwnuy4?autoplay=1" },
+        { "title": "2.6 Estilos de Visualización",                              "url": "https://www.youtube.com/embed/MDdsIzFO3WY?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO III: DESARROLLO DEL PLUGIN GRID",
+      "items": [
+        { "title": "3.2 Interfaz de Usuario con WPF",                           "url": "https://www.youtube.com/embed/XZ1dyOsSNTA?autoplay=1" },
+        { "title": "3.3 Archivos JSON",                                         "url": "https://www.youtube.com/embed/ntcA3dmnHwA?autoplay=1" },
+        { "title": "3.4 Llenar ListBox (Categorías, JSON y Eventos)",           "url": "https://www.youtube.com/embed/z_xLqMjDZT4?autoplay=1" },
+        { "title": "3.5 Filtrado de Parámetros",                                "url": "https://www.youtube.com/embed/H0MXenoiFCU?autoplay=1" },
+        { "title": "3.6 Puntos de Localización de Elementos",                   "url": "https://www.youtube.com/embed/tfHco9svq08?autoplay=1" },
+        { "title": "3.7 Clasificación de Grillas (Horizontales y Verticales)",  "url": "https://www.youtube.com/embed/-LkIdA4VszU?autoplay=1" },
+        { "title": "3.8 Localizar Puntos (Nombre + Distancia)",                 "url": "https://www.youtube.com/embed/qfsrbBuazgo?autoplay=1" },
+        { "title": "3.9 Integración de Eventos Externos",                       "url": "https://www.youtube.com/embed/XxPry_x7Dzs?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO IV: SISTEMA DE AUTENTICACIÓN CON GOOGLE SHEETS - LOGIN",
+      "items": [
+        { "title": "4.1 Interfaz de Usuario con WPF",                           "url": "https://www.youtube.com/embed/98UQbTNKN9Y?autoplay=1" },
+        { "title": "4.2 Cuenta Google Cloud - Credenciales",                    "url": "https://www.youtube.com/embed/4e-wdGljuK8?autoplay=1" },
+        { "title": "4.3 Google Sheets - Base de Datos",                         "url": "https://www.youtube.com/embed/1I5wouM3dPU?autoplay=1" },
+        { "title": "4.4 Autenticación de Credenciales",                         "url": "https://www.youtube.com/embed/Dxt9k8U9LwQ?autoplay=1" },
+        { "title": "4.5 Crear Usuarios Nuevos",                                 "url": "https://www.youtube.com/embed/oo2PSIFl-20?autoplay=1" },
+        { "title": "4.6 Otorgar Acceso a Usuarios",                             "url": "https://www.youtube.com/embed/qexf6VfRf60?autoplay=1" },
+        { "title": "4.7 Implementar Autenticación en Plugin Sectorizar",        "url": "https://www.youtube.com/embed/2aPzsRHER_k?autoplay=1" },
+        { "title": "4.8 Implementar Autenticación en Plugin Grid",              "url": "https://www.youtube.com/embed/EE8knkyBnnQ?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO V: PROTECCIÓN Y DISTRIBUCIÓN DE PLUGINS",
+      "items": [
+        { "title": "5.1 Proteger Código (Ofuscar)",                             "url": "https://www.youtube.com/embed/rY3JH0QNvFw?autoplay=1" },
+        { "title": "5.2 Crear Instalador",                                      "url": "https://www.youtube.com/embed/pN0PVu3SpnY?autoplay=1" }
+      ]
+    }
+  ]
+}

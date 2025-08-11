@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Dynamo para Revit Nivel IV · Python y la API de Revit",
+    "subtitle": "Python en Dynamo, fundamentos de la API de Revit y automatización práctica.",
+    "price": "S/ 150.00",
+    "badges": "Online en vivo · Grabaciones · Material descargable",
+    "sidebar": "Temario del curso",
+    "metaLine": "YouTube · Dynamo · Revit API · Python",
+    "contact": "https://wa.me/51968744058",
+    "default": {
+      "url": "https://www.youtube.com/embed/_KCiSKuo89k",
+      "respectLastWatched": true
+    }
+  },
+  "syllabus": [
+    {
+      "title": "MODULO I: DYNAMO Y PYTHON",
+      "items": [
+        { "title": "1.1. Python Script.", "url": "https://www.youtube.com/embed/_KCiSKuo89k?autoplay=1" },
+        { "title": "1.2. Python Script From String.", "url": "https://www.youtube.com/embed/haOMIagJ758?autoplay=1" },
+        { "title": "1.3. Visual Studio Code.", "url": "https://www.youtube.com/embed/e-wblOBmKwg?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO II: PYTHON PARA DYNAMO",
+      "items": [
+        { "title": "2.1. Variables.", "url": "https://www.youtube.com/embed/kI1D1PvIXoM?autoplay=1" },
+        { "title": "2.2. Listas y Tuplas.", "url": "https://www.youtube.com/embed/H47ZH7Ycyz0?autoplay=1" },
+        { "title": "2.3. Diccionarios.", "url": "https://www.youtube.com/embed/7Riny9fp3pM?autoplay=1" },
+        { "title": "2.4. Operadores Matemáticos y Lógicos.", "url": "https://www.youtube.com/embed/CQnGOhitqbk?autoplay=1" },
+        { "title": "2.5. Condicionales.", "url": "https://www.youtube.com/embed/ER51pgBx6po?autoplay=1" },
+        { "title": "2.6. Bucles.", "url": "https://www.youtube.com/embed/NmJ1QtP5EnM?autoplay=1" },
+        { "title": "2.7. Funciones.", "url": "https://www.youtube.com/embed/WlUnGVeGE5U?autoplay=1" },
+        { "title": "2.8. Compresión de Listas.", "url": "https://www.youtube.com/embed/2jLP6FBo3wY?autoplay=1" },
+        { "title": "2.9. Funciones Lambda.", "url": "https://www.youtube.com/embed/b18ANE_dydk?autoplay=1" },
+        { "title": "2.10. Manejo de Errores.", "url": "https://www.youtube.com/embed/d_IPkx7m4p0?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO III: REFERENCIAS",
+      "items": [
+        { "title": "3.1. Referencias Internas.", "url": "https://www.youtube.com/embed/PG0L7eVAkOY?autoplay=1" },
+        { "title": "3.2. Referencias Externas.", "url": "https://www.youtube.com/embed/J_HHxIMPZ_4?autoplay=1" },
+        { "title": "3.3. Crear Plantilla Personalizada en Dynamo.", "url": "https://www.youtube.com/embed/pK9nSF5dKco?autoplay=1" },
+        { "title": "3.4. Crear Plantilla Personalizada en Visual Studio Code.", "url": "https://www.youtube.com/embed/JhFm6t8zEus?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO IV: PYTHON Y LA API DE REVIT",
+      "items": [
+        { "title": "4.1. ¿Qué es la Programación Orientada a Objetos?", "url": "https://www.youtube.com/embed/zSAE8GaIJw0?autoplay=1" },
+        { "title": "4.2. RevitLookup.", "url": "https://www.youtube.com/embed/H6SWhXvvqAU?autoplay=1" },
+        {
+          "title": "4.3. Selección de Elementos.",
+          "children": [
+            { "title": "4.3.1. Selection.", "url": "https://www.youtube.com/embed/HoZhy6kEr8c?autoplay=1" },
+            { "title": "4.3.2. PickObjects.", "url": "https://www.youtube.com/embed/HXla8hbzmqY?autoplay=1" },
+            { "title": "4.3.3. FilteredElementCollector.", "url": "https://www.youtube.com/embed/yCbk5FtLc2w?autoplay=1" }
+          ]
+        },
+        {
+          "title": "4.4. Parámetros Revit.",
+          "children": [
+            { "title": "4.4.1. Parámetros de Ejemplar.", "url": "https://www.youtube.com/embed/SSeUd7Gvi18?autoplay=1" },
+            { "title": "4.4.2. Parámetros de Tipo.", "url": "https://www.youtube.com/embed/VnZY80mZ7Xw?autoplay=1" },
+            { "title": "4.4.3. Parámetros Compartidos.", "url": "https://www.youtube.com/embed/xXMqxsGYILw?autoplay=1" }
+          ]
+        },
+        {
+          "title": "4.5. Crear Elementos.",
+          "children": [
+            { "title": "4.5.1. Crear Cimentaciones.", "url": "https://www.youtube.com/embed/k5olEqG243k?autoplay=1" },
+            { "title": "4.5.2. Crear Columnas.", "url": "https://www.youtube.com/embed/lWnGjxhwCs8?autoplay=1" },
+            { "title": "4.5.3. Crear Vigas.", "url": "https://www.youtube.com/embed/rTs2JL1yJeE?autoplay=1" },
+            { "title": "4.5.4. Crear Muros.", "url": "https://www.youtube.com/embed/LQSbnvW5s_4?autoplay=1" },
+            { "title": "4.5.5. Crear Suelos.", "url": "https://www.youtube.com/embed/oVPcm-IiuR0?autoplay=1" },
+            { "title": "4.5.6. Crear Tuberías.", "url": "https://www.youtube.com/embed/bxGYrmQ32-w?autoplay=1" }
+          ]
+        },
+        {
+          "title": "4.6. Conversiones.",
+          "children": [
+            { "title": "4.6.1. RevitNodes.", "url": "https://www.youtube.com/embed/ZbzEK3m3H5o?autoplay=1" },
+            { "title": "4.6.2. ToPoint y ToXyz.", "url": "https://www.youtube.com/embed/78MazlUsq0k?autoplay=1" },
+            { "title": "4.6.3. ToProtoType y ToRevitType.", "url": "https://www.youtube.com/embed/_W0csPeOq1c?autoplay=1" },
+            { "title": "4.6.4. UnwrapElement y ToDSType.", "url": "https://www.youtube.com/embed/op2UO-asHVs?autoplay=1" }
+          ]
+        },
+        {
+          "title": "4.7. Geometría de Elementos.",
+          "children": [
+            { "title": "4.7.1. Sólidos.", "url": "https://www.youtube.com/embed/2kaPMnA4ohQ?autoplay=1" },
+            { "title": "4.7.2. Caras.", "url": "https://www.youtube.com/embed/4Lgp7EyrGVc?autoplay=1" },
+            { "title": "4.7.3. Bordes.", "url": "https://www.youtube.com/embed/KoupsjBsnaU?autoplay=1" },
+            { "title": "4.7.4. Vértices.", "url": "https://www.youtube.com/embed/ZglZaHgDa4c?autoplay=1" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "MODULO V: REVIT API EN LA CONSTRUCCIÓN",
+      "items": [
+        { "title": "5.1. Recuperar Geometrías de CAD.", "url": "https://www.youtube.com/embed/ReFZoeeRLmA?autoplay=1" },
+        { "title": "5.2. Suelos Inclinados.", "url": "https://www.youtube.com/embed/MfoAOr-Cba8?autoplay=1" },
+        { "title": "5.3. Creación de Aceros en Cimentación.", "url": "https://www.youtube.com/embed/HvB4ljlARK4?autoplay=1" },
+        { "title": "5.4. Creación de Aceros en Muros.", "url": "https://www.youtube.com/embed/Ie_b6eU6m00?autoplay=1" },
+        { "title": "5.5. Ubicar Elementos Según el Nivel.", "url": "https://www.youtube.com/embed/MC4jOzHmdGQ?autoplay=1" },
+        { "title": "5.6. Ubicar Elementos Según la Habitación.", "url": "https://www.youtube.com/embed/qg8D8O8ln_Q?autoplay=1" }
+      ]
+    }
+  ]
+}

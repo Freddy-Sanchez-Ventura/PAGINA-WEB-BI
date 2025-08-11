@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "Automatización de Procesos con la API de Revit · Nivel Básico",
+    "subtitle": "C#, Python y fundamentos para automatizar Revit desde cero.",
+    "price": "S/ 00.00",
+    "badges": "Online en vivo · Grabaciones · Material descargable",
+    "sidebar": "Temario del curso",
+    "metaLine": "YouTube · Revit API · C#/Python",
+    "contact": "https://wa.me/51968744058",
+    "default": {
+      "url": "https://www.youtube.com/embed/Y0K_Qhr_lVc",
+      "respectLastWatched": true
+    }
+  },
+  "syllabus": [
+    {
+      "title": "MODULO I: INTRODUCCIÓN Y CONCEPTOS BÁSICOS",
+      "items": [
+        { "title": "1.1. Presentación del Curso.",           "url": "https://www.youtube.com/embed/Y0K_Qhr_lVc?autoplay=1" },
+        { "title": "1.2. Conceptos y Sintaxis Básica de C#.", "url": "https://www.youtube.com/embed/LMJYMcvpwEc?autoplay=1" },
+        { "title": "1.3. C# y Revit.",                        "url": "https://www.youtube.com/embed/jp5ppCmuXDE?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO II: INSTALACIÓN DE PROGRAMAS",
+      "items": [
+        { "title": "2.1. Instalando los Programas a Utilizar.",                 "url": "https://www.youtube.com/embed/_mqEoOToysg?autoplay=1" },
+        { "title": "2.2. Interfaz del Editor de Codigo - Visual Studio.",       "url": "https://www.youtube.com/embed/W2QmgamTGHs?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO III: MI PRIMERA APLICACIÓN IEXTERNALCOMMAND",
+      "items": [
+        { "title": "3.1. Mi Primera Aplicacion IExternalCommand - Archivo DLL..",            "url": "https://www.youtube.com/embed/_TdVIV22FL8?autoplay=1" },
+        { "title": "3.2. Mi Primera Aplicacion IExternalCommand - Archivo Manifiesto (.ADDIN).", "url": "https://www.youtube.com/embed/HoOQJiuCwqw?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO IV: MI PRIMERA APLICACIÓN IEXTERNALAPPLICATION",
+      "items": [
+        { "title": "4.1. Implementando el Interfaz IExternalApplication.", "url": "https://www.youtube.com/embed/2vdCK1WR8x4?autoplay=1" },
+        { "title": "4.2. Archivo Manifiesto (.ADDIN).",                   "url": "https://www.youtube.com/embed/Lmb6OEAXFSw?autoplay=1" },
+        { "title": "4.3. Cinta y Panel.",                                 "url": "https://www.youtube.com/embed/NwT2i_d9kNg?autoplay=1" },
+        {
+          "title": "4.4. PushButton.",
+          "children": [
+            { "title": "4.4.1. Creando el PushButton.",   "url": "https://www.youtube.com/embed/k8WqW94YwiA?autoplay=1" },
+            { "title": "4.4.2. Ejecutando el PushButton.", "url": "https://www.youtube.com/embed/OjZs83zgfe8?autoplay=1" }
+          ]
+        },
+        { "title": "4.5. PulldownButton.",  "url": "https://www.youtube.com/embed/lFklCaK8Wr8?autoplay=1" },
+        { "title": "4.6. SplitButton.",     "url": "https://www.youtube.com/embed/xMbMc93cCXY?autoplay=1" },
+        { "title": "4.7. RadioButtonGroup.", "url": "https://www.youtube.com/embed/MYLGVMtpRSc?autoplay=1" },
+        { "title": "4.8. SteckedItem.",     "url": "https://www.youtube.com/embed/sykQsltof9E?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO V: CREACIÓN DE PLANTILLAS PERSONALIZADAS",
+      "items": [
+        { "title": "5.1. Plantilla IExternalCommand.",     "url": "https://www.youtube.com/embed/MlVfRABXPCI?autoplay=1" },
+        { "title": "5.2. Plantilla IExternalApplication.", "url": "https://www.youtube.com/embed/0jI80C-usCc?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO VI: COMANDOS MAS UTILIZADOS",
+      "items": [
+        {
+          "title": "6.1. Selección de Elementos.",
+          "children": [
+            { "title": "6.1.1. Selección de Elementos 01.", "url": "https://www.youtube.com/embed/u6Y6J3SxkjQ?autoplay=1" },
+            { "title": "6.1.2. Seleccion de Elementos 02.", "url": "https://www.youtube.com/embed/TUl_fllLTkM?autoplay=1" },
+            { "title": "6.1.3. Seleccion de Elementos 03.", "url": "https://www.youtube.com/embed/bLEyabQOngQ?autoplay=1" },
+            { "title": "6.1.4. Seleccion de Elementos 04.", "url": "https://www.youtube.com/embed/qn6iwbiFWvs?autoplay=1" }
+          ]
+        },
+        { "title": "6.2. Obtener los Parametros.", "url": "https://www.youtube.com/embed/sTbUm2ntCoY?autoplay=1" },
+        {
+          "title": "6.3. Crear Elementos.",
+          "children": [
+            { "title": "6.3.1. Crear Muros.",                   "url": "https://www.youtube.com/embed/CJ-9N8OSzgM?autoplay=1" },
+            { "title": "6.3.2. Crear Columnas, Vigas y Suelos.", "url": "https://www.youtube.com/embed/QIEXtRaf3qk?autoplay=1" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "MODULO VII: INTERFAZ DE PROGRAMACION DE APLICACIONES GRAFICAS CON WINDOWN FORM",
+      "items": [
+        { "title": "7.1. Label.",         "url": "https://www.youtube.com/embed/dv0dZx99y3o?autoplay=1" },
+        { "title": "7.2. TextBox.",       "url": "https://www.youtube.com/embed/PjJglqktXYE?autoplay=1" },
+        { "title": "7.3. ComboBox.",      "url": "https://www.youtube.com/embed/4MMKYEhM24w?autoplay=1" },
+        { "title": "7.4. NumericUpDown.", "url": "https://www.youtube.com/embed/VwqXr6hdj8Q?autoplay=1" },
+        { "title": "7.5. ListBox.",       "url": "https://www.youtube.com/embed/b1irUPzuWq4?autoplay=1" },
+        { "title": "7.6. Button.",        "url": "https://www.youtube.com/embed/6VVB74L3xYg?autoplay=1" },
+        { "title": "7.7. CheckBox.",      "url": "https://www.youtube.com/embed/9alsQR_6qqY?autoplay=1" },
+        { "title": "7.8. RadioButton.",   "url": "https://www.youtube.com/embed/lCjNjg6iFvo?autoplay=1" },
+        { "title": "7.9. TreeView.",      "url": "https://www.youtube.com/embed/3EN_zuUeEjs?autoplay=1" },
+        { "title": "7.10. DatagridView.", "url": "https://www.youtube.com/embed/ncfMMXixgFA?autoplay=1" },
+        { "title": "7.11. PictureBox.",   "url": "https://www.youtube.com/embed/nH-ATtcBf1E?autoplay=1" },
+        { "title": "7.12. Panel.",        "url": "https://www.youtube.com/embed/Y0N_watGaXc?autoplay=1" },
+        { "title": "7.13. Formulario.",   "url": "https://www.youtube.com/embed/23eiWhOBW3U?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO VIII: APLICACION 01 - METRADOS AUTOMATICOS",
+      "items": [
+        { "title": "8.1. Uso de la Plantilla.",                         "url": "https://www.youtube.com/embed/QZX1iN4nzww?autoplay=1" },
+        { "title": "8.2. Desarrollo de la Aplicacion Metrados Automaticos.", "url": "https://www.youtube.com/embed/z0goCck-z_c?autoplay=1" }
+      ]
+    },
+    {
+      "title": "MODULO IX: APLICACION 02 - UBICAR ELEMENTOS RESPECTO A LAS GRILLAS",
+      "items": [
+        { "title": "9.1. Uso de la Plantilla.",                                           "url": "https://www.youtube.com/embed/62FAtiB5zQU?autoplay=1" },
+        { "title": "9.2. Desarrollo de la Aplicacion Ubicar Elementos Respecto a las Grillas.", "url": "https://www.youtube.com/embed/__MDhSjjxjs?autoplay=1" }
+      ]
+    }
+  ]
+}

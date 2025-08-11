@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BIM INGENIEROS · Revizto</title>
-  <meta name="description" content="Curso Revizto" />
+  <title>BIM INGENIEROS · Revit API Básico</title>
+  <meta name="description" content="Curso de automatización con la API de Revit (Nivel Básico): C#, Python y fundamentos para crear add-ins.">
   <link rel="icon" href="img/Favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -14,36 +14,36 @@
 
   <!-- Cabecera -->
   <header class="site-header" aria-label="Cabecera principal">
-    <div class="container header-inner header-compact">
-        <!-- Solo icono (sin texto) -->
-        <a class="brand" href="index.html" aria-label="Ir a Inicio">
-        <img src="img/Logo_Letra_Blanco.png" alt="BIM Ingenieros" class="brand-logo" />
-        </a>
+  <div class="container header-inner header-compact">
+    <!-- Solo icono (sin texto) -->
+    <a class="brand" href="index.html" aria-label="Ir a Inicio">
+      <img src="img/Logo_Letra_Blanco.png" alt="BIM Ingenieros" class="brand-logo" />
+    </a>
 
-        <nav class="nav" aria-label="Navegación principal">
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
-            <span class="nav-toggle-bar" aria-hidden="true"></span>
-            <span class="nav-toggle-bar" aria-hidden="true"></span>
-            <span class="nav-toggle-bar" aria-hidden="true"></span>
-        </button>
-        <div class="nav-panel" id="navPanel" aria-hidden="true"></div>
-        <ul class="nav-menu" id="navMenu" role="menu">
-            <!-- Solo dos opciones -->
-            <li role="none"><a role="menuitem" class="nav-link" href="index.html">Inicio</a></li>
-            <li role="none"><a role="menuitem" class="nav-link" href="blog.html">Blog</a></li>
-        </ul>
-        </nav>
-    </div>
-  </header>
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <div class="nav-panel" id="navPanel" aria-hidden="true"></div>
+      <ul class="nav-menu" id="navMenu" role="menu">
+        <!-- Solo dos opciones -->
+        <li role="none"><a role="menuitem" class="nav-link" href="index.html">Inicio</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
   <main id="inicio" class="main">
     <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <h1 id="courseTitle">Revizto Básico, Intermedio y Avanzado</h1>
+          <h1 id="courseTitle">Automatización con Revit API · Nivel Básico</h1>
           <p id="courseSubtitle" class="muted">
-            Básico, Intermedio y Avanzado.
+            C#, Python y fundamentos para automatizar Revit desde cero.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#curso">Ver temario</a>
@@ -67,7 +67,9 @@
         <div class="course-grid">
           <!-- Sidebar -->
           <aside class="sidebar" aria-label="Índice de módulos" style="grid-area: sidebar">
-            <h2 id="sidebarTitle" class="sidebar-title">REVIZTO NIVEL BÁSICO, INTERMEDIO Y AVANZADO</h2>
+            <h2 id="sidebarTitle" class="sidebar-title">
+              AUTOMATIZACIÓN DE PROCESOS CON LA API DE REVIT · NIVEL BÁSICO
+            </h2>
 
             <div class="sidebar-actions">
               <div class="searchbar" role="search">
@@ -82,9 +84,7 @@
               <a id="sidebarCTA" href="https://wa.me/51968744058" target="_blank" class="btn btn-primary">Contactanos</a>
             </div>
 
-            <nav id="tree" class="tree" aria-label="Temario" role="tree">
-              <!-- Render dinámico -->
-            </nav>
+            <nav id="tree" class="tree" aria-label="Temario" role="tree"></nav>
           </aside>
 
           <!-- Reproductor -->
@@ -106,10 +106,11 @@
       </div>
     </section>
   </main>
+  
   <!-- Mismo JS, indicando curso y JSON específicos -->
   <script src="JS/reproductorCursos.js"
-          data-course="Revizto"
-          data-syllabus="CURSOS/syllabus-Revizto.json"
+          data-course="RevitAPIBasico"
+          data-syllabus="CURSOS/syllabus-RevitAPIBasico.json"
           defer></script>
 </body>
 </html>
