@@ -1,0 +1,20 @@
+[
+  {
+    "title": "REVIT",
+    "items": [
+      { "title": "Introducción", "path": "BLOG/HTML/RevitIntroduccion.html" }
+    ]
+  },
+  {
+    "title": "DYNAMO",
+    "items": [
+      { "title": "Intrododucción", "path": "BLOG/HTML/DynamoIntroduccion.html" }
+    ]
+  },
+  {
+    "title": "API DE REVIT CON C#",
+    "items": [
+      { "title": "Introducción", "path": "BLOG/HTML/RevitApiIntroducción.html" }
+    ]
+  }
+]

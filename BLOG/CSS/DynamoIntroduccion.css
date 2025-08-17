@@ -1,0 +1,129 @@
+:root{
+  /* Fallback si el contenedor no define variables */
+  --bg:#0b0e12;
+  --elev:#10151b;
+  --card:#141b23;
+  --text:#e8edf5;
+  --muted:#9fb1c9;
+  --brand:#4fa3ff;
+  --brand2:#19c5aa;
+  --border:#223243;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Reset mínimo */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:transparent;   /* se integra con el reader */
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;
+  line-height:1.6;
+  overflow-x:hidden;        /* sin scroll horizontal */
+}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+
+/* Contenedor: ocupa TODO el ancho del frame */
+.revit-wrap{
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0 16px 18px;   /* respiración lateral */
+}
+
+.revit-title{
+  margin:8px 0 0;
+  font-size:1.9rem;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+.revit-subtitle{
+  margin:.25rem 0 12px;
+  color:var(--muted);
+}
+
+/* Tarjeta de contenido principal */
+.revit-article{
+  width:100%;
+  max-width:100%;             /* sin límite de ancho */
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+
+/* Tipografía y elementos */
+.lead{font-size:1.05rem;color:#d7deea;margin-top:0}
+.revit-article h2{font-size:1.35rem;margin:1.2rem 0 .6rem}
+.revit-article h3{font-size:1.05rem;margin:1rem 0 .4rem;color:#fff}
+.muted{color:var(--muted)}
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr;         /* una sola columna */
+  gap:12px;
+  margin:.6rem 0;
+}
+.card{
+  background:var(--elev);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.35rem .6rem;border-radius:999px;
+  background:var(--elev);border:1px solid var(--border);
+  font-weight:600
+}
+
+.kbd{
+  display:inline-block;padding:2px 6px;border:1px solid var(--border);
+  border-bottom-width:2px;border-radius:6px;background:var(--elev);
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.95em
+}
+
+details{
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--elev);
+  padding:10px
+}
+details+details{margin-top:8px}
+details>summary{cursor:pointer;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+
+table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:.6rem 0}
+th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
+thead th{background:color-mix(in oklab,var(--brand)18%,transparent)}
+
+/* Nota */
+.note{
+  border-left:4px solid var(--brand2);
+  padding:10px;border-radius:8px;
+  background:rgba(25,197,170,.06)
+}
+
+/* Enlaces ancla con desplazamiento suave (JS) */
+:target{scroll-margin-top:12px}
+
+/* Scrollbar del documento dentro del iframe */
+html{scrollbar-color:color-mix(in oklab,var(--brand)70%,var(--brand2)) var(--elev);scrollbar-width:thin}
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-track{background:var(--elev);border-left:1px solid var(--border)}
+*::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,var(--brand),var(--brand2));
+  border-radius:10px;border:2px solid var(--elev)
+}
+
+/* Responsivo fino */
+@media (max-width:760px){
+  .revit-title{font-size:1.55rem}
+  .revit-article{padding:14px}
+}

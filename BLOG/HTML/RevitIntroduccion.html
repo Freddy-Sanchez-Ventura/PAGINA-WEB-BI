@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Revit — Introducción completa</title>
+  <meta name="description" content="Qué es Autodesk Revit, ediciones, versiones y compatibilidad, flujo de proyecto BIM, familias y LOD, parámetros y datos, vistas y documentación, colaboración, rendimiento, integraciones (Dynamo, API .NET, APS), interoperabilidad (IFC/BCF), requisitos de hardware, atajos y recursos." />
+  <link rel="stylesheet" href="../CSS/RevitIntroduccion.css" />
+</head>
+<body>
+  <main class="revit-wrap">
+    <h1 class="revit-title">Revit — Introducción completa</h1>
+    <p class="revit-subtitle">Qué es, ediciones, versiones, flujo BIM, familias y LOD, parámetros, vistas, colaboración, rendimiento, integraciones, interoperabilidad y más.</p>
+
+    <article class="revit-article">
+
+      <p class="lead">
+        <strong>Autodesk Revit</strong> es una plataforma BIM (Building Information Modeling) para diseñar, coordinar y documentar proyectos de arquitectura, estructuras y MEP.
+        A diferencia del CAD 2D, Revit opera con <em>objetos paramétricos</em> y relaciones entre elementos (niveles, anfitriones, uniones), de modo que cualquier cambio en el modelo se propaga a las vistas, tablas y planos.
+      </p>
+
+      <!-- Qué es -->
+      <section id="que-es">
+        <h2>¿Qué es Revit?</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Disciplinas</h3>
+            <ul>
+              <li>Arquitectura</li>
+              <li>Estructuras</li>
+              <li>MEP: Mecánica, Eléctrica e Hidrosanitaria</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Formatos clave</h3>
+            <ul>
+              <li><strong>RVT</strong>: modelo de proyecto</li>
+              <li><strong>RFA</strong>: familia cargable</li>
+              <li><strong>RTE</strong>: plantilla de proyecto</li>
+              <li><strong>IFC</strong>: interoperabilidad abierta</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Casos de uso</h3>
+            <ul>
+              <li>Diseño y documentación coordinada</li>
+              <li>Cómputos y presupuestos desde modelo</li>
+              <li>Coordinación interdisciplinaria y clash</li>
+              <li>Automatización con Dynamo/API</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ediciones y licenciamiento -->
+      <section id="ediciones">
+        <h2>Ediciones y licenciamiento</h2>
+        <ul>
+          <li><strong>Revit</strong> (completo): trabajo colaborativo, API, Dynamo, análisis y todas las disciplinas.</li>
+          <li><strong>Revit LT</strong>: funcionalidad reducida (sin worksharing ni API), orientado a estudio individual.</li>
+        </ul>
+        <p>El licenciamiento es por suscripción (individual, equipos o educación). Valida siempre los términos regionales vigentes.</p>
+      </section>
+
+      <!-- Versiones y compatibilidad -->
+      <section id="versiones">
+        <h2>Versiones y compatibilidad</h2>
+        <p>Revit lanza una versión <strong>anual</strong> (2023, 2024, 2025, …) y <em>updates</em> trimestrales. Los archivos <strong>no son retrocompatibles</strong>: un RVT guardado en Revit 2025 no abre en 2024.</p>
+        <details>
+          <summary>Buenas prácticas con versiones</summary>
+          <ul>
+            <li>Define y congela la versión al inicio del proyecto.</li>
+            <li>Unifica <em>builds</em> (update) en todo el equipo para evitar errores sutiles.</li>
+            <li>Si colaboras en ACC (BIM 360), todos deben coincidir en <em>versión y build</em>.</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- Flujo BIM -->
+      <section id="flujo">
+        <h2>Flujo de proyecto BIM en Revit</h2>
+        <ol>
+          <li><strong>Plantilla</strong>: unidades, niveles, estilos, materiales, familias de anotación, parámetros compartidos.</li>
+          <li><strong>Modelado</strong> por disciplinas y fases; define categorías y niveles de detalle.</li>
+          <li><strong>Vistas</strong>: plantillas de vista, filtros gráficos por parámetros, sobreescrituras controladas.</li>
+          <li><strong>Coordinación</strong>: vínculos RVT/IFC, ubicación compartida, clash en Navisworks o en ACC.</li>
+          <li><strong>Datos</strong>: tablas de planificación, parámetros calculados, claves, exportación a Excel/Power BI.</li>
+          <li><strong>Documentación</strong>: hojas, cajetines, revisiones, publicación (PDF/DWG/IFC/NWC).</li>
+        </ol>
+      </section>
+
+      <!-- Familias & LOD -->
+      <section id="familias">
+        <h2>Familias y LOD</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Tipos de familias</h3>
+            <ul>
+              <li><strong>Cargables (RFA)</strong>: puertas, equipos, mobiliario.</li>
+              <li><strong>De sistema</strong>: muros, cubiertas, suelos, escaleras.</li>
+              <li><strong>In situ</strong>: casos puntuales; evita abusos por mantenimiento.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>LOD/LOI</h3>
+            <ul>
+              <li><strong>LOD</strong>: nivel de detalle geométrico.</li>
+              <li><strong>LOI</strong>: nivel de información (parámetros).</li>
+              <li>Define LOD/LOI por fase para evitar <em>overmodeling</em>.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Buenas prácticas</h3>
+            <ul>
+              <li>Usa <em>subcategorías</em> y <em>materiales</em> consistentes.</li>
+              <li>Evita geometría excesiva; prioriza representación por materiales y máscaras.</li>
+              <li>Controla visibilidad por <em>niveles de detalle</em> (Coarse/Medium/Fine).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Parámetros y datos -->
+      <section id="parametros">
+        <h2>Parámetros y gestión de datos</h2>
+        <ul>
+          <li><strong>Instancia vs. Tipo</strong>: define qué varía por elemento y qué heredas del tipo.</li>
+          <li><strong>Parámetros compartidos</strong>: base para etiquetas, filtros y exportaciones confiables.</li>
+          <li><strong>Tablas de planificación</strong>: orden, filtros, parámetros calculados y claves.</li>
+          <li><strong>Control de calidad</strong>: validaciones con filtros, reglas y vistas dedicadas a QA/QC.</li>
+        </ul>
+        <p class="note">Si usarás datos externamente, acuerda <em>nomenclaturas</em>, <em>unidades</em> y <em>mapping</em> de parámetros desde el inicio.</p>
+      </section>
+
+      <!-- Vistas y documentación -->
+      <section id="vistas">
+        <h2>Vistas y documentación</h2>
+        <ul>
+          <li>Plantillas de vista para control gráfico homogéneo.</li>
+          <li>Filtros por parámetros para resaltar estados, fases, sistemas o responsabilidades.</li>
+          <li>Detalles, leyendas y vistas de dibujo para constructivo.</li>
+          <li>Hojas con revisiones y emisiones controladas por <em>Issue/Revision</em>.</li>
+        </ul>
+      </section>
+
+      <!-- Colaboración -->
+      <section id="colaboracion">
+        <h2>Colaboración y coordinación</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Worksharing</h3>
+            <p>Modelo central con <em>worksets</em>, publicación y recepción de cambios. Usa normas de nombrado y horarios de sincronización.</p>
+          </div>
+          <div class="card">
+            <h3>ACC (BIM 360)</h3>
+            <p>Colaboración en la nube, control de versiones, revisiones y <em>Design Collaboration</em> por paquetes.</p>
+          </div>
+          <div class="card">
+            <h3>Vínculos</h3>
+            <p>Coordina por <strong>Shared Coordinates</strong>, define responsables por disciplina y gestiona <em>clashes</em>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rendimiento -->
+      <section id="rendimiento">
+        <h2>Rendimiento y mantenimiento</h2>
+        <ul>
+          <li>Limita LOD y número de vistas con alto costo (detalladas, con sombras o patrones densos).</li>
+          <li>Evita familias pesadas; usa parámetros y materiales en vez de geometría compleja.</li>
+          <li>Purga, compacta y audita en hitos; controla vínculos y texturas externas.</li>
+          <li>Divide el proyecto por disciplinas o zonas si el archivo crece demasiado.</li>
+        </ul>
+      </section>
+
+      <!-- Integraciones -->
+      <section id="integraciones">
+        <h2>Integraciones</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Dynamo</h3>
+            <p>Programación visual para automatizar tareas repetitivas, generar geometría y gestionar datos (DesignScript/Python).</p>
+          </div>
+          <div class="card">
+            <h3>API de Revit (.NET)</h3>
+            <p>Desarrollo de complementos en C# (comandos, paneles WPF, filtros, exportaciones, validaciones, etc.).</p>
+          </div>
+          <div class="card">
+            <h3>Autodesk Platform Services (APS)</h3>
+            <p>Traducción y visualización web de RVT/IFC, dashboards de datos, coordinación con servicios en la nube.</p>
+          </div>
+          <div class="card">
+            <h3>IFC / BCF</h3>
+            <p>Intercambio abierto y comunicación de incidencias. Cuida el mapeo de propiedades y categorías.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interoperabilidad -->
+      <section id="interoperabilidad">
+        <h2>Interoperabilidad y publicación</h2>
+        <table>
+          <thead>
+            <tr><th>Salida</th><th>Uso</th><th>Notas</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>PDF</td><td>Planos oficiales</td><td>Controla calidad, capas y tamaños de hoja.</td></tr>
+            <tr><td>DWG</td><td>Intercambio 2D</td><td>Define exportaciones por capas, fuentes y unidades.</td></tr>
+            <tr><td>IFC</td><td>Colaboración abierta</td><td>Revisa versión IFC y mapeos; valida con visor.</td></tr>
+            <tr><td>NWC/NWD</td><td>Coordinación</td><td>Navisworks para clash y 4D/5D.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Requisitos -->
+      <section id="requisitos">
+        <h2>Requisitos de hardware (orientativos)</h2>
+        <ul>
+          <li><strong>CPU</strong>: alto rendimiento por núcleo (4–8 núcleos rápidos).</li>
+          <li><strong>RAM</strong>: 16–32 GB (proyectos grandes: +48 GB).</li>
+          <li><strong>GPU</strong>: compatible con DirectX 11/12; prioriza drivers estables.</li>
+          <li><strong>Almacenamiento</strong>: SSD NVMe; usa red rápida si trabajas con ACC.</li>
+        </ul>
+        <p class="note">Ajusta niveles de detalle, sombras, antialias y tamaño de texturas para balancear calidad y rendimiento.</p>
+      </section>
+
+      <!-- Atajos -->
+      <section id="atajos">
+        <h2>Atajos útiles</h2>
+        <div class="chips">
+          <span class="chip"><b>VV/VG</b> · Visibilidad/Gráficos</span>
+          <span class="chip"><b>TL</b> · Líneas finas</span>
+          <span class="chip"><b>WT</b> · Mosaico de ventanas</span>
+          <span class="chip"><b>WA</b> · Muro</span>
+          <span class="chip"><b>DR</b> · Puerta</span>
+          <span class="chip"><b>CM</b> · Componente</span>
+        </div>
+      </section>
+
+      <!-- Recursos -->
+      <section id="recursos">
+        <h2>Recursos recomendados</h2>
+        <ul>
+          <li>Documentación oficial de Autodesk y notas de versión.</li>
+          <li>Guías IFC, foros de Dynamo y API de Revit.</li>
+          <li>Comunidades BIM, repositorios de familias y ejemplos de estándares.</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+
+  <script src="../JS/RevitIntroduccion.js"></script>
+</body>
+</html>
