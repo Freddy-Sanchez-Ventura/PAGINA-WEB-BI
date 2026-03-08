@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IFC Viewer – Múltiples modelos con propiedades</title>
+  <link rel="stylesheet" href="./exploradorIFC.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">IFC</span>
+      <span class="title">Visor IFC (Multi-archivo)</span>
+    </div>
+
+    <div class="actions">
+      <label for="file-input" class="btn primary">Cargar IFC</label>
+      <input id="file-input" type="file" accept=".ifc" multiple />
+      <button id="btn-fit" class="btn">Enfocar (Fit)</button>
+      <button id="btn-isolate" class="btn">Aislar selección</button>
+      <button id="btn-clear-iso" class="btn">Limpiar aislamiento</button>
+      <button id="btn-clear" class="btn danger">Limpiar selección</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel left">
+      <section class="card">
+        <h3>Modelos cargados</h3>
+        <div id="models-list" class="models-list"></div>
+        <div class="hint">Arrastra y suelta archivos IFC aquí o usa “Cargar IFC”.</div>
+      </section>
+
+      <section class="card tree">
+        <h3>Estructura (Proyecto/Sitio/Edificio)</h3>
+        <div id="tree"></div>
+      </section>
+    </aside>
+
+    <section class="viewer" id="drop-zone">
+      <canvas id="three-canvas"></canvas>
+      <div class="overlay-tip">Arrastra aquí tus archivos .IFC</div>
+    </section>
+
+    <aside class="panel right">
+      <section class="card">
+        <h3>Propiedades</h3>
+        <div id="props" class="props">
+          <div class="empty">Selecciona un elemento para ver sus propiedades.</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Acciones del elemento</h3>
+        <div class="actions-col">
+          <button id="btn-hide-selected" class="btn">Ocultar elemento</button>
+          <button id="btn-show-all" class="btn">Mostrar todo</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <!-- ÚNICO script de tu app -->
+  <script type="module" src="./exploradorIFC.js"></script>
+</body>
+</html>
