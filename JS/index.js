@@ -17,6 +17,7 @@ function openMenu(){
   navPanel.classList.add("open");
   navToggle?.setAttribute("aria-expanded","true");
 }
+
 function closeMenu(){
   document.body.classList.remove("menu-open");
   navMenu.classList.remove("open");
@@ -49,7 +50,9 @@ $$('a[href^="#"]').forEach(a => {
 });
 
 // ===== Resalta el enlace de sección activa =====
-const sections = ["home","cursos","servicios","contacto"].map(id => document.getElementById(id)).filter(Boolean);
+const sections = ["home","cursos","complementos","contacto"]
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
 const navLinks = $$("#navMenu .nav-link").filter(a => a.getAttribute("href")?.startsWith("#"));
 
 if (sections.length && navLinks.length){
@@ -65,7 +68,84 @@ if (sections.length && navLinks.length){
   sections.forEach(s => obs.observe(s));
 }
 
-/* NOTA:
-   Eliminamos el bloque que forzaba aspect-ratio/height en las imágenes de cursos.
-   Ahora cada póster usa height:auto y se ve COMPLETO, sin bandas negras.
-*/
+// ===== Complementos dinámicos =====
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function getAddonImageMarkup(addon){
+  if (addon?.image){
+    return `<img class="addon-icon-image" src="${escapeHtml(addon.image)}" alt="Icono de ${escapeHtml(addon.title || "complemento")}" loading="lazy" decoding="async" />`;
+  }
+  return `<span class="addon-icon-fallback">${escapeHtml(addon?.icon || "BI")}</span>`;
+}
+
+function renderAddons(addons){
+  const grid = $("#addonsGrid");
+  if (!grid) return;
+
+  if (!Array.isArray(addons) || !addons.length){
+    grid.innerHTML = `
+      <article class="addon-card addon-card--empty">
+        <h3 class="addon-title">Próximamente más complementos</h3>
+        <p class="addon-copy">Estamos preparando nuevas páginas de producto para mostrar cada herramienta con más detalle.</p>
+      </article>`;
+    return;
+  }
+
+  grid.innerHTML = addons.map(addon => {
+    const meta = Array.isArray(addon.meta) ? addon.meta : [];
+    const url = addon.url || "#";
+    const statusClass = addon.statusType === "ready" ? "addon-status--ready" : "";
+
+    return `
+      <a class="addon-card addon-card-link" href="${escapeHtml(url)}" aria-label="Abrir ${escapeHtml(addon.title || "complemento")}">
+        <div class="addon-header">
+          <div class="addon-icon addon-icon--image">${getAddonImageMarkup(addon)}</div>
+          <div class="addon-headline">
+            <span class="addon-badge">${escapeHtml(addon.badge || "Complemento Revit")}</span>
+            <h3 class="addon-title">${escapeHtml(addon.title || "Complemento")}</h3>
+          </div>
+        </div>
+
+        <p class="addon-copy">${escapeHtml(addon.description || "")}</p>
+
+        <div class="addon-meta">
+          ${meta.map(item => `<span class="addon-chip">${escapeHtml(item)}</span>`).join("")}
+        </div>
+
+        <div class="addon-footer">
+          <span class="addon-status ${statusClass}">${escapeHtml(addon.status || "Disponible")}</span>
+          <span class="addon-link addon-link--inline">Abrir página</span>
+        </div>
+      </a>
+    `;
+  }).join("");
+}
+
+async function initAddons(){
+  const grid = $("#addonsGrid");
+  if (!grid) return;
+
+  try {
+    const res = await fetch("DATA/addons.json?v=3", { cache: "no-store" });
+    if (!res.ok) throw new Error("No se pudo cargar el listado de complementos.");
+
+    const data = await res.json();
+    renderAddons(data.addons || []);
+  } catch (error) {
+    console.error(error);
+    grid.innerHTML = `
+      <article class="addon-card addon-card--empty">
+        <h3 class="addon-title">No fue posible cargar los complementos</h3>
+        <p class="addon-copy">Verifica la ruta del archivo de datos o vuelve a intentar más tarde.</p>
+      </article>`;
+  }
+}
+
+initAddons();

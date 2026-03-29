@@ -1,6 +1,4 @@
 :root{
-  /* Si el contenedor padre define variables, heredamos.
-     Estos valores sirven de fallback. */
   --bg:#0b0e12;
   --elev:#10151b;
   --card:#141b23;
@@ -9,117 +7,78 @@
   --brand:#4fa3ff;
   --brand2:#19c5aa;
   --border:#223243;
-  --radius:14px;
+  --radius:16px;
   --shadow:0 10px 30px rgba(0,0,0,.35);
 }
-
-/* Reset mínimo */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  background:transparent;   /* se integra con el fondo del reader */
+  background:transparent;
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;
-  line-height:1.6;
+  line-height:1.68;
 }
 img{max-width:100%;display:block;height:auto}
 a{color:inherit;text-decoration:none}
-
-/* Contenedor: ocupa TODO el ancho del frame */
-.revit-wrap{
-  width:100%;
-  max-width:100%;
-  margin:0;
-  padding:0 16px 18px;   /* respiración lateral */
+.revit-wrap{width:100%;max-width:100%;margin:0;padding:0 16px 18px}
+.hero-banner{
+  margin:10px 0 14px;
+  padding:24px 18px;
+  border-radius:24px;
+  border:1px solid var(--border);
+  background:
+    radial-gradient(circle at top right, rgba(79,163,255,.2), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(25,197,170,.18), transparent 35%),
+    linear-gradient(180deg, rgba(20,27,35,.98), rgba(11,14,18,.98));
+  box-shadow:var(--shadow);
 }
-
-.revit-title{
-  margin:8px 0 0;
-  font-size:1.9rem;
-  font-weight:900;
-  letter-spacing:.5px;
-}
-.revit-subtitle{
-  margin:.25rem 0 12px;
-  color:var(--muted);
-}
-
-/* Tarjeta de contenido principal */
+.hero-label{font-size:.82rem;font-weight:900;letter-spacing:.14em;color:var(--brand2);text-transform:uppercase;margin-bottom:10px}
+.revit-title{margin:0;font-size:clamp(1.95rem,4vw,2.9rem);font-weight:900;letter-spacing:.3px;line-height:1.08}
+.revit-subtitle{margin:.5rem 0 0;color:#d5deea;max-width:980px}
 .revit-article{
   width:100%;
-  max-width:100%;             /* sin límite de ancho */
+  max-width:100%;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:18px;
+  padding:20px;
 }
-
-/* Tipografía y elementos */
-.lead{font-size:1.05rem;color:#d7deea;margin-top:0}
-.revit-article h2{font-size:1.35rem;margin:1.2rem 0 .6rem}
-.revit-article h3{font-size:1.05rem;margin:1rem 0 .4rem;color:#fff}
+.lead{font-size:1.08rem;color:#d7deea;margin-top:0}
+.revit-article h2{font-size:1.42rem;margin:1.35rem 0 .65rem;line-height:1.2}
+.revit-article h3{font-size:1.04rem;margin:.1rem 0 .45rem;color:#fff}
 .muted{color:var(--muted)}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:12px;
-  margin:.6rem 0;
-}
-.card{
-  background:var(--elev);
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:.7rem 0}
+.card{background:linear-gradient(180deg, rgba(16,21,27,.96), rgba(11,14,18,.96));border:1px solid var(--border);border-radius:14px;padding:13px}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.38rem .65rem;border-radius:999px;background:rgba(16,21,27,.86);border:1px solid var(--border);font-weight:700}
+.toc,details{
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:12px;
-}
-
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{
-  display:inline-flex;align-items:center;gap:.35rem;
-  padding:.35rem .6rem;border-radius:999px;
-  background:var(--elev);border:1px solid var(--border);
-  font-weight:600
-}
-
-.kbd{
-  display:inline-block;padding:2px 6px;border:1px solid var(--border);
-  border-bottom-width:2px;border-radius:6px;background:var(--elev);
-  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.95em
-}
-
-details{
-  border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:14px;
   background:var(--elev);
-  padding:10px
+  padding:12px 14px;
 }
-details+details{margin-top:8px}
-details>summary{cursor:pointer;font-weight:700;list-style:none}
+.toc summary,details>summary{cursor:pointer;font-weight:800;list-style:none}
 details>summary::-webkit-details-marker{display:none}
-
-table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:.6rem 0}
-th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
+ul,ol{padding-left:1.25rem}
+li+li{margin-top:.26rem}
+.highlight,.note,.closing{border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:.95rem 0}
+.highlight{background:linear-gradient(90deg, rgba(79,163,255,.12), rgba(25,197,170,.08));font-weight:700}
+.note{border-left:4px solid var(--brand2);background:rgba(25,197,170,.08)}
+.closing{background:rgba(79,163,255,.1);font-weight:800}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:.7rem 0}
+th,td{padding:11px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
 thead th{background:color-mix(in oklab,var(--brand)18%,transparent)}
-
-.note{
-  border-left:4px solid var(--brand2);
-  padding:10px;border-radius:8px;
-  background:rgba(25,197,170,.06)
-}
-
-/* Scrollbar del documento dentro del iframe */
 html{scrollbar-color:color-mix(in oklab,var(--brand)70%,var(--brand2)) var(--elev);scrollbar-width:thin}
 *::-webkit-scrollbar{width:10px;height:10px}
 *::-webkit-scrollbar-track{background:var(--elev);border-left:1px solid var(--border)}
-*::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,var(--brand),var(--brand2));
-  border-radius:10px;border:2px solid var(--elev)
-}
-
-/* Responsivo fino */
-@media (max-width: 760px){
-  .revit-title{font-size:1.55rem}
-  .revit-article{padding:14px}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--brand),var(--brand2));border-radius:10px;border:2px solid var(--elev)}
+@media (max-width:760px){
+  .revit-title{font-size:1.62rem}
+  .hero-banner{padding:20px 14px;border-radius:20px}
+  .revit-wrap{padding:0 12px 18px}
+  .revit-article{padding:15px}
 }

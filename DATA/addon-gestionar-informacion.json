@@ -1,0 +1,116 @@
+{
+  "title": "Gestionar Información",
+  "subtitle": "Complemento para Revit orientado a consultar, clasificar, editar y actualizar información del modelo desde una interfaz centralizada.",
+  "badge": "Complemento Revit · Gestión de datos BIM",
+  "offerChip": "COMPLEMENTO PROFESIONAL",
+  "summaryTitle": "Equipos BIM que necesitan controlar información con más velocidad y claridad",
+  "summaryProblem": "Reduce el tiempo invertido en navegar datos dispersos, revisar parámetros repetitivos y coordinar cambios entre modelo y tablas externas.",
+  "price": "Precio a consultar",
+  "priceNote": "Solicita cotización según licencia, versión de Revit y alcance de implementación.",
+  "ctaLabel": "Solicitar demostración",
+  "ctaUrl": "https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20complemento%20Gestionar%20Informaci%C3%B3n.",
+  "videoNote": "Cada tema puede cargar su propio video de YouTube desde el JSON del complemento.",
+  "benefitsIntro": "El complemento está orientado a mejorar la gestión de datos dentro de Revit con un flujo más ordenado, visual y escalable para proyectos reales.",
+  "heroBenefits": [
+    "Consolida categorías, parámetros y vínculos en un mismo flujo de trabajo.",
+    "Permite editar información en tabla y mantener control sobre grandes volúmenes de datos.",
+    "Integra exportación e importación con Excel para revisión y actualización masiva.",
+    "Facilita la lectura visual mediante navegación jerárquica, filtros y modos de color."
+  ],
+  "highlights": [
+    "Edición de datos",
+    "Excel",
+    "Vínculos Revit",
+    "Filtros visuales"
+  ],
+  "benefits": [
+    {
+      "title": "Unifica la información del modelo",
+      "text": "Reúne categorías, parámetros y elementos vinculados en una sola interfaz para reducir cambios de ventana y acelerar la revisión del modelo."
+    },
+    {
+      "title": "Clasificación flexible",
+      "text": "Permite agrupar la información en varios niveles para organizar datos por disciplina, nivel, tipo, sistema o cualquier parámetro común."
+    },
+    {
+      "title": "Trabajo más seguro con Excel",
+      "text": "Exporta, revisa e importa información de manera más controlada, ideal para auditorías, validaciones y actualizaciones masivas."
+    },
+    {
+      "title": "Mejor lectura visual",
+      "text": "Incluye navegación por árbol, filtros por columna y modos visuales que ayudan a ubicar conjuntos de elementos con mayor rapidez."
+    },
+    {
+      "title": "Compatible con flujos BIM colaborativos",
+      "text": "Está pensado para proyectos donde intervienen múltiples categorías y modelos vinculados, facilitando el control de información compartida."
+    },
+    {
+      "title": "Configuraciones reutilizables",
+      "text": "Favorece guardar criterios de trabajo para repetir procesos entre sesiones o proyectos similares."
+    }
+  ],
+  "workflow": [
+    {
+      "step": "01",
+      "title": "Define alcance",
+      "text": "Selecciona vínculos y categorías para delimitar con claridad qué información quieres analizar."
+    },
+    {
+      "step": "02",
+      "title": "Arma la estructura",
+      "text": "Elige parámetros comunes y construye agrupaciones jerárquicas para navegar la información con lógica BIM."
+    },
+    {
+      "step": "03",
+      "title": "Revisa y edita",
+      "text": "Trabaja en tabla con filtros, búsqueda y navegación para identificar inconsistencias y corregir datos."
+    },
+    {
+      "step": "04",
+      "title": "Exporta o actualiza",
+      "text": "Lleva la información a Excel o reimporta cambios para mantener el modelo alineado con tus entregables."
+    }
+  ],
+  "videos": [
+    {
+      "title": "Tipos de Visualización",
+      "description": "Se cuenta con 03 tipos de visualización, Estandar, Color y Transparente, cada una con sus propias características para facilitar la lectura de la información.",
+      "duration": "Demo en video",
+      "embedUrl": "https://youtu.be/SI18xVYSl2Q?si=umD1Mqsb2Ex0n4U7" 
+    },
+    {
+      "title": "Tabla de Datos",
+      "description": "Maneja la información en una tabla con filtros, búsqueda y navegación para revisar datos con mayor velocidad y precisión.",
+      "duration": "Demo en video",
+      "embedUrl": "https://youtu.be/I_H-1HR0K1E?si=umD1Mqsb2Ex0n4U7"
+    },
+    {
+      "title": "Exportar e Importar con Excel",
+      "description": "Exportar e Importar información con Excel para revisar datos externamente y actualizar el modelo con mayor control.",
+      "duration": "Demo en video",
+      "embedUrl": "https://youtu.be/npXTYLEdQ3E?si=umD1Mqsb2Ex0n4U7"
+    }
+  ],
+  "pricing": {
+    "label": "Oferta individual del complemento",
+    "note": "Licencia individual para este complemento. Solicita activación según versión de Revit y vigencia elegida.",
+    "ctaLabel": "Solicitar este complemento",
+    "plans": [
+      {
+        "term": "1 mes",
+        "price": "US$ 5",
+        "copy": "Acceso individual por 30 días."
+      },
+      {
+        "term": "6 meses",
+        "price": "US$ 10",
+        "copy": "Más tiempo de uso para equipos en producción."
+      },
+      {
+        "term": "1 año",
+        "price": "US$ 20",
+        "copy": "La opción más completa para trabajo continuo."
+      }
+    ]
+  }
+}

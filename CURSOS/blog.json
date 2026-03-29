@@ -1,20 +1,130 @@
 [
   {
+    "title": "METODOLOGÍA BIM",
+    "items": [
+      {
+        "title": "1. Qué es BIM realmente",
+        "path": "BLOG/HTML/BIM_01_QueEsRealmente.html"
+      },
+      {
+        "title": "2. Objetivos BIM y usos",
+        "path": "BLOG/HTML/BIM_02_ObjetivosYUsos.html"
+      },
+      {
+        "title": "3. Roles BIM",
+        "path": "BLOG/HTML/BIM_03_RolesBIM.html"
+      },
+      {
+        "title": "4. BEP: Plan de Ejecución BIM",
+        "path": "BLOG/HTML/BIM_04_BEP.html"
+      },
+      {
+        "title": "5. CDE y gestión documental",
+        "path": "BLOG/HTML/BIM_05_CDE.html"
+      },
+      {
+        "title": "6. Nomenclaturas y clasificación",
+        "path": "BLOG/HTML/BIM_06_NomenclaturasYClasificacion.html"
+      },
+      {
+        "title": "7. Modelado BIM con criterio real",
+        "path": "BLOG/HTML/BIM_07_ModeladoConCriterioReal.html"
+      },
+      {
+        "title": "8. Coordinación y clash detection",
+        "path": "BLOG/HTML/BIM_08_CoordinacionYClash.html"
+      },
+      {
+        "title": "9. QA/QC del modelo",
+        "path": "BLOG/HTML/BIM_09_QAQC.html"
+      },
+      {
+        "title": "10. 4D, 5D y explotación de datos",
+        "path": "BLOG/HTML/BIM_10_4D5D.html"
+      },
+      {
+        "title": "11. BIM durante la construcción",
+        "path": "BLOG/HTML/BIM_11_Construccion.html"
+      },
+      {
+        "title": "12. Entrega, operación y mantenimiento",
+        "path": "BLOG/HTML/BIM_12_OperacionYMantenimiento.html"
+      },
+      {
+        "title": "13. Errores frecuentes y ruta recomendada",
+        "path": "BLOG/HTML/BIM_13_ErroresYRuta.html"
+      }
+    ]
+  },
+  {
     "title": "REVIT",
     "items": [
-      { "title": "Introducción", "path": "BLOG/HTML/RevitIntroduccion.html" }
+      {
+        "title": "1. Qué es Revit realmente",
+        "path": "BLOG/HTML/REVIT_01_QueEsRevit.html"
+      },
+      {
+        "title": "2. Cómo funciona Revit",
+        "path": "BLOG/HTML/REVIT_02_ComoFunciona.html"
+      },
+      {
+        "title": "3. Estructura del modelo",
+        "path": "BLOG/HTML/REVIT_03_EstructuraDelModelo.html"
+      },
+      {
+        "title": "4. Familias en Revit",
+        "path": "BLOG/HTML/REVIT_04_FamiliasEnRevit.html"
+      },
+      {
+        "title": "5. Parámetros y datos",
+        "path": "BLOG/HTML/REVIT_05_ParametrosYDatos.html"
+      },
+      {
+        "title": "6. Plantillas y estandarización",
+        "path": "BLOG/HTML/REVIT_06_PlantillasYEstandares.html"
+      },
+      {
+        "title": "7. Documentación y tablas",
+        "path": "BLOG/HTML/REVIT_07_DocumentacionYTablas.html"
+      },
+      {
+        "title": "8. Trabajo colaborativo",
+        "path": "BLOG/HTML/REVIT_08_TrabajoColaborativo.html"
+      },
+      {
+        "title": "9. Modelado profesional",
+        "path": "BLOG/HTML/REVIT_09_ModeladoProfesional.html"
+      },
+      {
+        "title": "10. Metrados y planificación",
+        "path": "BLOG/HTML/REVIT_10_MetradosYPlanificacion.html"
+      },
+      {
+        "title": "11. Errores comunes",
+        "path": "BLOG/HTML/REVIT_11_ErroresComunes.html"
+      },
+      {
+        "title": "12. Revit + Dynamo + API",
+        "path": "BLOG/HTML/REVIT_12_RevitConDynamoYAPI.html"
+      }
     ]
   },
   {
     "title": "DYNAMO",
     "items": [
-      { "title": "Intrododucción", "path": "BLOG/HTML/DynamoIntroduccion.html" }
+      {
+        "title": "Introducción técnica",
+        "path": "BLOG/HTML/DynamoIntroduccion.html"
+      }
     ]
   },
   {
     "title": "API DE REVIT CON C#",
     "items": [
-      { "title": "Introducción", "path": "BLOG/HTML/RevitApiIntroducción.html" }
+      {
+        "title": "Introducción",
+        "path": "BLOG/HTML/RevitApiIntroduccion.html"
+      }
     ]
   }
 ]

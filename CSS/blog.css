@@ -130,3 +130,18 @@ html{scrollbar-color:color-mix(in oklab,var(--brand)70%,var(--brand2)) var(--ele
 .article-meta{margin:0}
 
 /* (scrollbars ya están unificados arriba) */
+
+
+/* === Árbol jerárquico mejorado === */
+.tree-node{display:grid;gap:.25rem}
+.tree-caret{transition:transform .2s ease}
+.tree-section[aria-expanded="true"] .tree-caret{transform:rotate(90deg)}
+.tree-section.depth-0{font-size:1.02rem;font-weight:800;border-radius:12px;padding:.72rem .8rem}
+.tree-section.depth-1,.tree-section.depth-2{background:rgba(16,21,27,.92);border-style:dashed;font-size:.94rem;padding:.55rem .7rem;margin-left:.25rem}
+.tree-section.depth-2{margin-left:.6rem;font-size:.9rem}
+.tree-list.depth-1{margin-left:.4rem;padding-left:.55rem}
+.tree-list.depth-2{margin-left:.85rem;padding-left:.7rem;border-left:1px dashed rgba(79,163,255,.35)}
+.tree-list.depth-3{margin-left:1.25rem;padding-left:.8rem;border-left:1px dashed rgba(25,197,170,.35)}
+.tree-item.depth-1{font-size:1rem;font-weight:650}
+.tree-item.depth-2{font-size:.94rem;margin-left:.15rem;color:#d9e6f8}
+.tree-item.depth-3{font-size:.9rem;margin-left:.35rem;color:#c6d7ee}

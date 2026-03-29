@@ -1,0 +1,104 @@
+{
+  "title": "Tablas de Planificación",
+  "subtitle": "Complemento para revisar, abrir, contar, exportar, importar y aplicar filtros a tablas de planificación con una interfaz más operativa.",
+  "badge": "Complemento Revit · Schedules y Excel",
+  "offerChip": "COMPLEMENTO PROFESIONAL",
+  "summaryTitle": "Equipos BIM que trabajan intensamente con schedules y necesitan un flujo más ágil con Excel",
+  "summaryProblem": "Evita saltos entre múltiples ventanas y convierte las tablas de planificación en un espacio mucho más útil para control, depuración y actualización de datos.",
+  "price": "Precio a consultar",
+  "priceNote": "Solicita cotización según licencia, versión de Revit y alcance de implementación.",
+  "ctaLabel": "Solicitar demostración",
+  "ctaUrl": "https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20complemento%20Tablas%20de%20Planificaci%C3%B3n.",
+  "videoNote": "Cada tema puede cargar su propio video de YouTube desde el JSON del complemento.",
+  "benefitsIntro": "Conoce cómo Tablas de Planificación puede integrarse a tus flujos BIM y mejorar el trabajo con schedules dentro de Revit.",
+  "heroBenefits": [
+    "Centraliza el listado de tablas de planificación en un árbol navegable.",
+    "Permite contar elementos, abrir tablas y trabajar con distintos tipos de exportación.",
+    "Incluye importación desde Excel para devolver cambios al modelo.",
+    "Ayuda a traducir filtros de schedules a filtros visibles dentro de la vista activa."
+  ],
+  "highlights": [
+    "Schedules",
+    "Excel",
+    "Importación",
+    "Filtros"
+  ],
+  "benefits": [
+    {
+      "title": "Exploración de schedules más rápida",
+      "text": "Presenta las tablas en una estructura navegable para abrirlas, revisarlas y organizarlas con menos fricción."
+    },
+    {
+      "title": "Exportación orientada a control",
+      "text": "Genera salidas a Excel tanto en formato de tabla como en formato orientado a edición masiva de parámetros."
+    },
+    {
+      "title": "Importación más segura",
+      "text": "Lee archivos Excel preparados para volver a aplicar cambios solo en parámetros modificables y solo cuando el valor cambia."
+    },
+    {
+      "title": "Conteo y validación",
+      "text": "Permite calcular cantidades sobre la tabla y usar esa información como apoyo para revisión rápida del contenido."
+    },
+    {
+      "title": "Filtros llevados a la vista",
+      "text": "Aprovecha la lógica de filtros de las tablas para crear filtros visibles en la vista activa y reforzar la lectura gráfica."
+    },
+    {
+      "title": "Mejor base para auditorías BIM",
+      "text": "Sirve como apoyo para revisar parámetros, inconsistencias y preparación de entregables apoyados en datos reales del modelo."
+    }
+  ],
+  "workflow": [
+    {
+      "step": "01",
+      "title": "Ubica la tabla",
+      "text": "Navega el árbol y localiza la tabla de planificación con la que deseas trabajar."
+    },
+    {
+      "step": "02",
+      "title": "Define la acción",
+      "text": "Abre, cuenta, exporta o prepara la tabla según el objetivo del flujo."
+    },
+    {
+      "step": "03",
+      "title": "Trabaja en Excel o revisa filtros",
+      "text": "Usa el archivo exportado para depurar datos o transforma la lógica de la tabla en filtros visuales."
+    },
+    {
+      "step": "04",
+      "title": "Reimporta cambios",
+      "text": "Devuelve información al modelo de manera controlada y con enfoque en parámetros válidos."
+    }
+  ],
+  "videos": [
+    {
+      "title": "Tablas de planificación",
+      "description":  "Exporta e importa información de tablas de planificación generadas en Revit, genera filtros y costata el contenido de tus tablas de planificación.",
+      "duration": "Demo en video",
+      "embedUrl": "https://youtu.be/JM9V19csyuQ?si=umD1Mqsb2Ex0n4U7"
+    }
+  ],
+  "pricing": {
+    "label": "Oferta individual del complemento",
+    "note": "Licencia individual para este complemento. Solicita activación según versión de Revit y vigencia elegida.",
+    "ctaLabel": "Solicitar este complemento",
+    "plans": [
+      {
+        "term": "1 mes",
+        "price": "US$ 5",
+        "copy": "Acceso individual por 30 días."
+      },
+      {
+        "term": "6 meses",
+        "price": "US$ 10",
+        "copy": "Más tiempo de uso para equipos en producción."
+      },
+      {
+        "term": "1 año",
+        "price": "US$ 20",
+        "copy": "La opción más completa para trabajo continuo."
+      }
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "addons": [
+    {
+      "slug": "gestionar-informacion",
+      "title": "Gestionar Información",
+      "badge": "Complemento Revit",
+      "icon": "GI",
+      "description": "Centraliza la exploración, edición, clasificación y actualización de datos del modelo en una sola interfaz pensada para equipos BIM que necesitan trabajar con rapidez y control.",
+      "meta": [
+        "Parámetros",
+        "Excel",
+        "Vínculos",
+        "Clasificación"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-gestionar-informacion.html",
+      "image": "img/addons/gestionar-informacion.png"
+    },
+    {
+      "slug": "tablas-planificacion",
+      "title": "Tablas de Planificación",
+      "badge": "Complemento Revit",
+      "icon": "TB",
+      "description": "Explora, cuenta, exporta, importa y aplica filtros sobre tablas de planificación en una interfaz enfocada en control, revisión masiva y conexión con Excel.",
+      "meta": [
+        "Schedules",
+        "Excel",
+        "Importación",
+        "Filtros"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-tablas-planificacion.html",
+      "image": "img/addons/tablas-planificacion.png"
+    },
+    {
+      "slug": "acabados",
+      "title": "Acabados",
+      "badge": "Complemento Revit",
+      "icon": "AC",
+      "description": "Genera muros y suelos de acabado a partir de caras seleccionadas, con control sobre tipos, cortes, geometría compleja y parámetros compartidos.",
+      "meta": [
+        "Muros",
+        "Suelos",
+        "Caras",
+        "Parámetros"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-acabados.html",
+      "image": "img/addons/acabados.png"
+    },
+    {
+      "slug": "rename",
+      "title": "Limpiar",
+      "badge": "Complemento Revit",
+      "icon": "RN",
+      "description": "Administra filtros de vista, plantillas, parámetros y familias desde una sola ventana para limpiar, revisar uso y aplicar cambios con más orden.",
+      "meta": [
+        "Filtros",
+        "Plantillas",
+        "Parámetros",
+        "Familias"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-limpiar.html",
+      "image": "img/addons/limpiar.png"
+    },
+    {
+      "slug": "cambiar-familia",
+      "title": "Cambiar Familia",
+      "badge": "Complemento Revit",
+      "icon": "CF",
+      "description": "Reemplaza familias y tipos de elementos MEP de forma masiva con una matriz clara de equivalencias, control de progreso y soporte de importación desde Excel.",
+      "meta": [
+        "MEP",
+        "Tipos",
+        "Excel",
+        "Reemplazo"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-cambiar-familia.html",
+      "image": "img/addons/cambiar-familia.png"
+    },
+    {
+      "slug": "conectar-desconectar",
+      "title": "Conectar y Desconectar",
+      "badge": "Complemento Revit",
+      "icon": "CD",
+      "description": "Conecta accesorios con el conector más cercano y desconecta elementos con un flujo seguro, ideal para ajustes rápidos en redes MEP.",
+      "meta": [
+        "Conectores",
+        "MEP",
+        "Accesorios",
+        "Ajustes"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-conectar-desconectar.html",
+      "image": "img/addons/conectar-desconectar.png"
+    },
+    {
+      "slug": "purge-assemblies",
+      "title": "Purge Assemblies",
+      "badge": "Complemento Revit",
+      "icon": "PA",
+      "description": "Localiza y purga ensamblados de forma más controlada, apoyándote en configuración externa para mantener modelos más limpios y ligeros.",
+      "meta": [
+        "Assemblies",
+        "Limpieza",
+        "Configuración",
+        "Modelo"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-purge-assemblies.html",
+      "image": "img/addons/purge-assemblies.png"
+    },
+    {
+      "slug": "ia-chat",
+      "title": "IA Chat",
+      "badge": "Complemento Revit",
+      "icon": "IA",
+      "description": "Integra un panel con accesos a distintas IAs dentro de Revit mediante WebView para consultar, comparar y centralizar herramientas de asistencia.",
+      "meta": [
+        "IA",
+        "Panel web",
+        "WebView2",
+        "Productividad"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complemento-webview.html",
+      "image": "img/addons/webview.png"
+    }
+  ]
+}

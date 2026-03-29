@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Revit API & C# · Introducción técnica</title>
+  <meta name="description" content="Guía técnica para ingenieros BIM: fundamentos de la API de Revit con C#, patrones, transacciones, filtros, parámetros, geometría y buenas prácticas." />
+
+  <!-- Estilos del módulo -->
+  <link rel="stylesheet" href="../CSS/RevitApiIntroducción.css" />
+</head>
+<body>
+  <main class="article" id="top">
+    <header class="article__header">
+      <p class="eyebrow">BIM · Revit API · C#</p>
+      <h1 class="article__title">Introducción completa a la API de Revit con C#</h1>
+      <p class="article__lead">Base sólida para crear complementos profesionales: arquitectura, ciclo de vida, transacciones, filtros, parámetros, geometría y flujo de trabajo.
+      </p>
+
+      <div class="chip-row" role="navigation" aria-label="Atajos a secciones">
+        <button class="chip" data-target="#arranque">Arranque</button>
+        <button class="chip" data-target="#arquitectura">Arquitectura</button>
+        <button class="chip" data-target="#transacciones">Transacciones</button>
+        <button class="chip" data-target="#busqueda">Búsqueda</button>
+        <button class="chip" data-target="#parametros">Parámetros</button>
+        <button class="chip" data-target="#familias">Familias</button>
+        <button class="chip" data-target="#geometria">Geometría</button>
+        <button class="chip" data-target="#vistas">Vistas/Planos</button>
+        <button class="chip" data-target="#ui">UI & Selección</button>
+        <button class="chip" data-target="#eventos">Eventos</button>
+        <button class="chip" data-target="#fallos">Manejo de fallos</button>
+        <button class="chip" data-target="#rendimiento">Rendimiento</button>
+        <button class="chip" data-target="#versionado">Versionado</button>
+        <button class="chip" data-target="#recursos">Recursos</button>
+      </div>
+    </header>
+
+    <!-- Tabla resumen clave -->
+    <section class="card" aria-labelledby="resumen-clave">
+      <h2 id="resumen-clave" class="h2">Mapa rápido de conceptos</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Área</th>
+              <th>Clase/Patrón</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Acceso</td>
+              <td><code>UIApplication</code>, <code>UIDocument</code>, <code>Document</code></td>
+              <td>Puente UI &rarr; modelo, documento activo y transacciones.</td>
+            </tr>
+            <tr>
+              <td>Transacciones</td>
+              <td><code>Transaction</code>, <code>SubTransaction</code>, <code>TransactionGroup</code></td>
+              <td>Modificar modelo solo dentro de transacciones.</td>
+            </tr>
+            <tr>
+              <td>Búsqueda</td>
+              <td><code>FilteredElementCollector</code>, <code>ElementCategoryFilter</code></td>
+              <td>Filtrado eficiente por categoría, clase, parámetros.</td>
+            </tr>
+            <tr>
+              <td>Parámetros</td>
+              <td><code>Parameter</code>, <code>BuiltInParameter</code>, <code>ParameterElement</code></td>
+              <td>Leer/escribir conociendo <em>StorageType</em>.</td>
+            </tr>
+            <tr>
+              <td>Geometría</td>
+              <td><code>Options</code>, <code>GeometryElement</code>, <code>Solid</code>, <code>Face</code></td>
+              <td>Controlar <em>ComputeReferences</em> y <em>DetailLevel</em>.</td>
+            </tr>
+            <tr>
+              <td>Vistas</td>
+              <td><code>View</code>, <code>ViewPlan</code>, <code>ViewSheet</code></td>
+              <td>Crear, configurar y colocar en planos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="divider"></section>
+
+    <section class="card" id="arranque" aria-labelledby="arranque-h">
+      <h2 id="arranque-h" class="h2">Arranque del desarrollo</h2>
+      <p>
+        Un complemento básico se compone de una clase que implementa <code>IExternalCommand</code> (acción manual) o
+        <code>IExternalApplication</code> (ciclo de vida de la app: <code>OnStartup</code>/<code>OnShutdown</code>), más su archivo
+        <code>.addin</code> en la carpeta de Addins de Revit.
+      </p>
+      <pre class="code"><code class="language-cs">[Transaction(TransactionMode.Manual)]
+[Regeneration(RegenerationOption.Manual)]
+public class HelloCommand : IExternalCommand
+{
+  public Result Execute(ExternalCommandData data, ref string msg, ElementSet set)
+  {
+    UIDocument uiDoc = data.Application.ActiveUIDocument;
+    Document doc = uiDoc.Document;
+    TaskDialog.Show("Hello", $"Documento: {doc.Title}");
+    return Result.Succeeded;
+  }
+}</code></pre>
+      <ul class="list">
+        <li>Usa <strong>.NET 8</strong> o <strong>.NET Framework 4.8.1</strong> según la versión de Revit objetivo.</li>
+        <li>Estructura recomendada: <em>Core</em> (lógica), <em>UI</em> (WPF), <em>Services</em> (Revit utils), <em>Infrastructure</em> (IO, config).</li>
+        <li>Distribución: firma Authenticode opcional + ZIP con DLL, .addin y dependencias.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="arquitectura">
+      <h2 class="h2">Arquitectura mínima y ciclo de vida</h2>
+      <p>
+        En <code>IExternalApplication</code> registra paneles y botones de la Ribbon, suscriptores a eventos y servicios
+        de inicio. En comandos, mantén clases delgadas que deleguen en servicios probables (p. ej. <code>ViewService</code>,
+        <code>FilterService</code>, <code>ParameterService</code>).
+      </p>
+      <pre class="code"><code class="language-cs">public class App : IExternalApplication
+{
+  public Result OnStartup(UIControlledApplication a)
+  {
+    // Crear pestaña, panel y botón
+    return Result.Succeeded;
+  }
+  public Result OnShutdown(UIControlledApplication a) => Result.Succeeded;
+}</code></pre>
+    </section>
+
+    <section class="card" id="transacciones">
+      <h2 class="h2">Transacciones: reglas de oro</h2>
+      <ol class="list">
+        <li>Solo modifica el modelo dentro de <code>Transaction</code>.</li>
+        <li>Valida y agrupa con <code>TransactionGroup</code>; usa <code>SubTransaction</code> para operaciones parciales.</li>
+        <li>En WPF usa <em>ExternalEvent</em> para invocar cambios desde el hilo UI de Revit.</li>
+      </ol>
+      <pre class="code"><code class="language-cs">using (var t = new Transaction(doc, "Crear nivel"))
+{
+  t.Start();
+  Level lvl = Level.Create(doc, 0.0);
+  lvl.Name = "NIVEL 00";
+  t.Commit();
+}</code></pre>
+    </section>
+
+    <section class="card" id="busqueda">
+      <h2 class="h2">Búsqueda de elementos con <code>FilteredElementCollector</code></h2>
+      <p>La ruta eficiente: delimitar por vista o documento, filtrar por clase/categoría, y luego por parámetros.</p>
+      <pre class="code"><code class="language-cs">var walls = new FilteredElementCollector(doc)
+  .OfClass(typeof(Wall))
+  .WhereElementIsNotElementType()
+  .Cast&lt;Wall&gt;()
+  .ToList();
+
+var conParametro = walls.Where(w => w.LookupParameter("Comentarios")?.AsString()?.Contains("EJE") == true);
+</code></pre>
+      <div class="note">Tip: Evita traer todo el documento; acota el ámbito (vista o categoría).</div>
+    </section>
+
+    <section class="card" id="parametros">
+      <h2 class="h2">Parámetros: lectura/escritura segura</h2>
+      <ul class="list">
+        <li>Identifica <em>BuiltInParameter</em> cuando exista; es más robusto que el nombre.</li>
+        <li>Lee <em>StorageType</em> para convertir correctamente: <code>Integer</code>, <code>Double</code>, <code>String</code>, <code>ElementId</code>.</li>
+        <li>Respeta <em>IsReadOnly</em> y el contexto (tipo/instancia).</li>
+      </ul>
+      <pre class="code"><code class="language-cs">Parameter p = elem.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS);
+if (p != null && !p.IsReadOnly && p.StorageType == StorageType.String)
+{
+  using (var t = new Transaction(doc, "Escribir parámetro"))
+  {
+    t.Start();
+    p.Set("Texto de ejemplo");
+    t.Commit();
+  }
+}</code></pre>
+    </section>
+
+    <section class="card" id="familias">
+      <h2 class="h2">Familias y Tipos</h2>
+      <p>Para crear/duplicar tipos usa <code>ElementType.Duplicate</code>; para cargar familias usa <code>LoadFamily</code>.</p>
+      <pre class="code"><code class="language-cs">FamilySymbol sym = new FilteredElementCollector(doc)
+  .OfClass(typeof(FamilySymbol))
+  .Cast&lt;FamilySymbol&gt;()
+  .First(s =&gt; s.FamilyName == "MiFamilia" && s.Name == "Tipo A");
+
+if (!sym.IsActive)
+{
+  using (var t = new Transaction(doc, "Activar símbolo"))
+  { t.Start(); sym.Activate(); t.Commit(); }
+}
+</code></pre>
+    </section>
+
+    <section class="card" id="geometria">
+      <h2 class="h2">Geometría</h2>
+      <p>Usa <code>Options</code> para controlar el nivel de detalle, referencias y manejo de vínculos.</p>
+      <pre class="code"><code class="language-cs">Options opt = new Options { ComputeReferences = true, DetailLevel = ViewDetailLevel.Fine };
+GeometryElement geo = elem.get_Geometry(opt);
+foreach (GeometryObject g in geo)
+{
+  if (g is Solid s && s.Volume &gt; 1e-9) { /* ... */ }
+}
+</code></pre>
+    </section>
+
+    <section class="card" id="vistas">
+      <h2 class="h2">Vistas y Planos</h2>
+      <ul class="list">
+        <li>Crear vista: <code>ViewPlan.Create</code> con <code>LevelId</code> y <code>ViewFamilyType</code>.</li>
+        <li>Crear plano: <code>ViewSheet.Create</code> y colocar vistas con <code>Viewport.Create</code>.</li>
+      </ul>
+      <pre class="code"><code class="language-cs">ViewSheet sheet;
+using (var t = new Transaction(doc, "Plano"))
+{
+  t.Start();
+  sheet = ViewSheet.Create(doc, ElementId.InvalidElementId);
+  sheet.Name = "COORDINACIÓN";
+  t.Commit();
+}
+</code></pre>
+    </section>
+
+    <section class="card" id="ui">
+      <h2 class="h2">UI, Selección y WPF</h2>
+      <p>Para seleccionar: <code>UIDocument.Selection.PickObject(s)</code>. Para WPF: usa <em>ExternalEvent</em> para
+        ejecutar cambios en el documento desde la ventana.</p>
+    </section>
+
+    <section class="card" id="eventos">
+      <h2 class="h2">Eventos</h2>
+      <p>Útiles: <code>Application.DocumentOpened</code>, <code>ViewActivated</code>, <code>FailuresProcessing</code>.
+      Maneja el performance: desuscríbete cuando no los uses.</p>
+    </section>
+
+    <section class="card" id="fallos">
+      <h2 class="h2">Manejo de fallos (Failures)</h2>
+      <p>Implementa <code>IFailuresPreprocessor</code> para interceptar avisos/errores y decidir continuar o abortar.</p>
+    </section>
+
+    <section class="card" id="rendimiento">
+      <h2 class="h2">Rendimiento y buenas prácticas</h2>
+      <ul class="list">
+        <li>Minimiza colecciones globales: trabaja por lotes y por vista.</li>
+        <li>Evita transacciones por elemento; agrupa operaciones.</li>
+        <li>Usa <em>Id</em> y <em>BuiltInParameter</em> para referencias estables.</li>
+        <li>Loguea tiempos y errores; agrega <em>try/catch</em> con mensajes claros.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="versionado">
+      <h2 class="h2">Versionado y compatibilidad</h2>
+      <p>Mantén proyectos por versión de Revit. Compila con los <em>RevitAPI.dll</em> de la versión objetivo y ajusta
+        <em>TargetFramework</em>. Considera <em>multi-targeting</em> y directivas de compilación.</p>
+    </section>
+
+    <section class="card" id="recursos">
+      <h2 class="h2">Recursos y siguientes pasos</h2>
+      <ul class="list">
+        <li>SDK de Revit (samples): imprescindible para patrones correctos.</li>
+        <li>Foros de Autodesk, The Building Coder, GitHub de la comunidad.</li>
+        <li>Ejercicios: crear una herramienta de filtros, exportar parámetros, generar planos.</li>
+      </ul>
+    </section>
+
+    <footer class="article__footer">
+      <a class="to-top" href="#top" aria-label="Volver al inicio">↑ Subir</a>
+    </footer>
+  </main>
+
+  <script src="../JS/RevitApiIntroducción.js" defer></script>
+</body>
+</html>

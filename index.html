@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-PE">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BIM INGENIEROS · Arquitectura, Ingeniería y Construcción</title>
-  <meta name="description" content="BIM Ingenieros: Cursos, servicios y proyectos en arquitectura, ingeniería y construcción." />
+
+  <title>Cursos de Revit API, Dynamo y Complementos Revit | BIM Ingenieros</title>
+  <meta name="description" content="Cursos de Revit API y Dynamo, además de complementos para Revit orientados a automatización BIM, productividad y desarrollo aplicado en proyectos reales." />
+  <meta name="keywords" content="Revit API, Dynamo para Revit, complementos Revit, plugins Revit, addins Revit, automatización BIM, Python para Revit, cursos BIM, BIM Ingenieros" />
+  <meta name="author" content="BIM Ingenieros" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#0b0e12" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="canonical" href="/index.html" />
+  <link rel="alternate" hreflang="es-PE" href="/index.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_PE" />
+  <meta property="og:title" content="Cursos de Revit API, Dynamo y Complementos Revit | BIM Ingenieros" />
+  <meta property="og:description" content="Aprende automatización BIM con Revit API y Dynamo, y conoce nuestros complementos para Revit enfocados en productividad y desarrollo." />
+  <meta property="og:url" content="/index.html" />
+  <meta property="og:site_name" content="BIM Ingenieros" />
+  <meta property="og:image" content="/img/Portada_Principal_00.png" />
+  <meta property="og:image:alt" content="Cursos y complementos Revit de BIM Ingenieros" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cursos de Revit API, Dynamo y Complementos Revit | BIM Ingenieros" />
+  <meta name="twitter:description" content="Formación especializada y herramientas para Revit enfocadas en automatización BIM, productividad y desarrollo aplicado." />
+  <meta name="twitter:image" content="/img/Portada_Principal_00.png" />
+
   <link rel="icon" href="img/Favicon.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/index.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/index.css?v=5" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"EducationalOrganization",
+    "name":"BIM Ingenieros",
+    "description":"Formación especializada en Revit API, Dynamo, Python y automatización BIM, además de desarrollo de complementos para Revit.",
+    "logo":"img/Logo_Letra_Blanco.png",
+    "sameAs":[
+      "https://www.facebook.com/BIM-Ingenieros-745094922494316",
+      "https://www.youtube.com/channel/UC2mmWllzLeVKGVEZsctyy2Q",
+      "https://www.instagram.com/bim_ingenieros"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"Complementos Revit BIM Ingenieros",
+    "itemListElement":[
+      { "@type":"SoftwareApplication", "position":1, "name":"Gestionar Información", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":2, "name":"Tablas de Planificación", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":3, "name":"Acabados", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":4, "name":"Rename", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":5, "name":"Cambiar Familia", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":6, "name":"Conectar y Desconectar", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":7, "name":"Purge Assemblies", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":8, "name":"IA Chat", "applicationCategory":"BusinessApplication" }
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- Cabecera fija -->
   <header class="site-header" aria-label="Cabecera principal">
     <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="Ir a Inicio">
-        <img src="img/Logo_Letra_Blanco.png" alt="BIM Ingenieros" class="brand-logo" />
+      <a class="brand" href="#home" aria-label="Ir a inicio">
+        <img
+          src="img/Logo_Letra_Blanco.png"
+          alt="BIM Ingenieros"
+          class="brand-logo"
+          loading="eager"
+          decoding="async"
+        />
       </a>
 
       <nav class="nav" aria-label="Navegación principal">
@@ -25,170 +87,312 @@
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
+
         <div class="nav-panel" id="navPanel" aria-hidden="true"></div>
-        <ul class="nav-menu" id="navMenu" role="menu">
-          <li role="none"><a role="menuitem" class="nav-link" href="#home">Inicio</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="#cursos">Cursos</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="#servicios">Servicios</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="blog.html">Blog</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="#contacto">Contacto</a></li>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a class="nav-link" href="#home">Inicio</a></li>
+          <li><a class="nav-link" href="#cursos">Cursos</a></li>
+          <li><a class="nav-link" href="#complementos">Complementos</a></li>
+          <li><a class="nav-link" href="blog.html">Blog</a></li>
+          <li><a class="nav-link" href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="home" class="main">
-    <!-- Hero / Portada -->
-    <section class="hero" aria-label="Portada principal">
-      <img id="imagen-front" class="hero-bg" src="img/Portada_Principal_00.png" alt="Imagen de Portada"/>
+    <section class="hero" aria-label="Portada principal de cursos BIM y complementos Revit">
+      <img
+        id="imagen-front"
+        class="hero-bg"
+        src="img/Portada_Principal_00.png"
+        alt="Cursos de Revit API, Dynamo y complementos para Revit"
+        loading="eager"
+        decoding="async"
+      />
+
       <div class="hero-overlay"></div>
+
       <div class="container hero-content">
-        <h1 class="hero-title">BIM INGENIEROS</h1>
-        <p class="hero-subtitle">Arquitectura, Ingeniería y Construcción</p>
-        <a class="btn btn-primary" href="https://wa.me/51968744058" target="_blank" rel="noopener">Contáctanos</a>
+        <span class="hero-kicker">Automatización BIM y desarrollo para Revit</span>
+
+        <h1 class="hero-title">
+          Cursos de Revit API, Dynamo y complementos para Revit
+        </h1>
+
+        <p class="hero-subtitle">
+          Aprende <strong>Revit API</strong>, <strong>Dynamo</strong> y conoce herramientas pensadas para mejorar la productividad, automatizar tareas repetitivas y potenciar tus flujos de trabajo BIM.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-cta" href="https://wa.me/51968744058" target="_blank" rel="noopener">
+            Solicitar información por WhatsApp
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- Cursos: SOLO esta sección fue ajustada -->
-    <section id="cursos" class="section-padded" aria-label="Especialización y cursos">
+    <section id="cursos" class="section-padded" aria-label="Cursos de Revit API y Dynamo">
       <div class="container">
-        <h2 class="section-title">ESPECIALIZACIÓN EN NUEVAS TECNOLOGÍAS</h2>
+        <h2 class="section-title">Cursos especializados en Revit API y Dynamo</h2>
+        <p class="section-intro">
+          Formación orientada a <strong>automatización BIM</strong>, <strong>desarrollo para Revit</strong> y optimización de procesos con herramientas aplicadas a proyectos reales.
+        </p>
 
         <div class="courses-grid">
-          <!-- Curso 1 -->
-          <a href="CursoRevitAPIIntermedio.html" class="course-card">
-            <figure class="course-figure">
-              <img src="img/Cursos Certificados/Revit Api Intermedio/Revit API Intermedio.png" alt="Curso Automatización de Procesos con la API de REVIT - Nivel Intermedio" />
-            </figure>
+          <article class="course-card">
+            <a href="CursoRevitAPIIntermedio.html" class="course-media-link" aria-label="Ver curso de Revit API nivel intermedio">
+              <figure class="course-figure">
+                <img
+                  src="img/Cursos Certificados/Revit Api Intermedio/Revit API Intermedio.png"
+                  alt="Curso de Automatización con Revit API nivel intermedio"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </a>
+
             <div class="course-info">
               <h3 class="course-title">Automatización con Revit API · Nivel Intermedio</h3>
-              <span class="course-cta">Contáctanos</span>
-            </div>
-          </a>
+              <p class="course-copy">
+                Desarrolla soluciones en Revit API para automatizar tareas, mejorar productividad y crear herramientas BIM aplicadas.
+              </p>
 
-          <!-- Curso 2 -->
-          <a href="CursoRevitAPIBasico.html" class="course-card">
-            <figure class="course-figure">
-              <img src="img/Cursos Certificados/Revit Api/Revit API Nivel Básico.png" alt="Curso Automatización de Procesos con la API de REVIT - Nivel Básico" />
-            </figure>
-            <div class="course-info">
-              <h3 class="course-title">Automatización con Revit API · Nivel Básico</h3>
-              <span class="course-cta course-free">Gratuito</span>
-            </div>
-          </a>
+              <div class="course-actions">
+                <a href="CursoRevitAPIIntermedio.html" class="course-btn course-btn-view" aria-label="Ver detalles del curso de Revit API nivel intermedio">
+                  VER
+                </a>
 
-          <!-- Curso 3 -->
-          <a href="CursoDynamoNivelIV.html" class="course-card">
-            <figure class="course-figure">
-              <img src="img/Cursos Certificados/Dynamo Nivel IV/Dynamo Nivel IV__.png" alt="Curso Dynamo para Revit Nivel IV - Python y la API de Revit" />
-            </figure>
+                <a href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20inscribirme%20en%20el%20curso%20Automatizaci%C3%B3n%20con%20Revit%20API%20Nivel%20Intermedio." class="course-btn course-btn-buy" target="_blank" rel="noopener" title="Inscribirme al curso de Revit API Intermedio">
+                  
+                  <span class="course-btn-buy-prices">
+                    <span class="course-price-old">Antes: US$ 80</span>
+                    <span class="course-price-new">Ahora: US$ 40</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <a href="CursoDynamoNivelIV.html" class="course-media-link" aria-label="Ver curso de Dynamo para Revit nivel IV con Python">
+              <figure class="course-figure">
+                <img
+                  src="img/Cursos Certificados/Dynamo Nivel IV/Dynamo Nivel IV__.png"
+                  alt="Curso de Dynamo para Revit nivel IV con Python"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </a>
+
             <div class="course-info">
               <h3 class="course-title">Dynamo para Revit · Nivel IV (Python)</h3>
-              <span class="course-cta">Contáctanos</span>
-            </div>
-          </a>
+              <p class="course-copy">
+                Aprende Dynamo avanzado con Python para automatizar flujos BIM, optimizar procesos y ampliar tus capacidades en Revit.
+              </p>
 
-          <!-- Curso 4 -->
-          <a href="CursoDynamoNivelIII.html" class="course-card">
-            <figure class="course-figure">
-              <img src="img/Cursos Certificados/Dynamo Nivel III/Dynamo Nivel III_.png" alt="Curso Dynamo Nivel III - Design Script" />
-            </figure>
-            <div class="course-info">
-              <h3 class="course-title">Dynamo para Revit · Nivel III (DesignScript)</h3>
-              <span class="course-cta">Contáctanos</span>
-            </div>
-          </a>
+              <div class="course-actions">
+                <a href="CursoDynamoNivelIV.html" class="course-btn course-btn-view" aria-label="Ver detalles del curso de Dynamo para Revit nivel IV con Python">
+                  VER
+                </a>
 
-          <!-- Curso 5 -->
-          <a href="CursoDynamoNivelII.html" class="course-card">
-            <figure class="course-figure">
-              <img src="img/Cursos/Dynamo Para Revit Nivel II - Intermedio.jpg" alt="Curso Dynamo Para Revit Nivel II - Intermedio" />
-            </figure>
-            <div class="course-info">
-              <h3 class="course-title">Dynamo para Revit · Nivel II</h3>
-              <span class="course-cta course-free">Gratuito</span>
+                <a href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20inscribirme%20en%20el%20curso%20Dynamo%20para%20Revit%20Nivel%20IV%20con%20Python." class="course-btn course-btn-buy" target="_blank" rel="noopener" title="Inscribirme al curso de Dynamo para Revit Nivel IV">
+                  <span class="course-btn-buy-prices">
+                    <span class="course-price-old">Antes: US$ 50</span>
+                    <span class="course-price-new">Ahora: US$ 25</span>
+                  </span>
+                </a>
+              </div>
             </div>
-          </a>
-
-          <!-- Curso 6 -->
-          <a href="CursoDynamoNivelI.html" class="course-card">
-            <figure class="course-figure">
-              <img src="img/Cursos/Dynamo Para Revit Nivel I - Basico.jpg" alt="Curso Dynamo Para Revit Nivel I - Básico" />
-            </figure>
-            <div class="course-info">
-              <h3 class="course-title">Dynamo para Revit · Nivel I</h3>
-              <span class="course-cta course-free">Gratuito</span>
-            </div>
-          </a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Servicios / Modelado 3D (SIN cambios) -->
-    <section id="servicios" class="section-padded" aria-label="Servicios de modelado 3D">
+    <section id="complementos" class="section-padded" aria-label="Complementos para Revit">
       <div class="container">
-        <h2 class="section-title accent-blue">MODELADO 3D</h2>
+        <h2 class="section-title">Complementos para Revit</h2>
+        <p class="section-intro">
+          Explora nuestros <strong>complementos Revit</strong> enfocados en automatización, gestión de información, conectividad y productividad para proyectos BIM.  
+          Este bloque queda listo para que después cada complemento abra su propia página con descripción completa, precio o descarga.
+        </p>
 
-        <div class="gallery-grid">
-          <figure class="gallery-item">
-            <img loading="lazy" src="img/Servicios/nacimiento.png" alt="Nacimiento Peruano" />
-            <figcaption class="gallery-caption">Nacimiento Peruano</figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img loading="lazy" src="img/Servicios/Parque.png" alt="Parque Acobamba Pueblo Nuevo" />
-            <figcaption class="gallery-caption">Parque</figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img loading="lazy" src="img/Servicios/santa_rosa_modelado.png" alt="Santa Rosa Huancavelica" />
-            <figcaption class="gallery-caption">Centro Turístico</figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img loading="lazy" src="img/Servicios/Parque_Acobamba.png" alt="Parque Acobamba Pueblo Nuevo" />
-            <figcaption class="gallery-caption">Parque</figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img loading="lazy" src="img/Servicios/estadio.png" alt="Estadio de Huando Huancavelica" />
-            <figcaption class="gallery-caption">Estadio</figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img loading="lazy" src="img/Servicios/iglesia_ascension.png" alt="Iglesia Ascensión Huancavelica" />
-            <figcaption class="gallery-caption">Iglesia</figcaption>
-          </figure>
+        <div id="addonsGrid" class="addons-grid" aria-live="polite">
+          <article class="addon-card addon-card--loading">
+            <div class="addon-skeleton addon-skeleton--title"></div>
+            <div class="addon-skeleton addon-skeleton--text"></div>
+            <div class="addon-skeleton addon-skeleton--text short"></div>
+          </article>
+          <article class="addon-card addon-card--loading">
+            <div class="addon-skeleton addon-skeleton--title"></div>
+            <div class="addon-skeleton addon-skeleton--text"></div>
+            <div class="addon-skeleton addon-skeleton--text short"></div>
+          </article>
+          <article class="addon-card addon-card--loading">
+            <div class="addon-skeleton addon-skeleton--title"></div>
+            <div class="addon-skeleton addon-skeleton--text"></div>
+            <div class="addon-skeleton addon-skeleton--text short"></div>
+          </article>
+        </div>
+        <p class="addons-note">Estamos incorporando más complementos. Por ahora ya puedes explorar <strong>Gestionar Información</strong>.</p>
+      </div>
+    </section>
+
+    <section class="section-padded section-soft" aria-label="Planes para adquirir todos los complementos de BIM Ingenieros">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">Planes BIM Ingenieros</span>
+          <h2 class="section-title">Adquiere todos los complementos con una sola suscripción</h2>
+          <p class="section-intro">
+            Elige el periodo que mejor se ajuste a tu equipo y accede a <strong>todos los complementos</strong> de BIM Ingenieros junto con las actualizaciones disponibles durante la vigencia de tu plan.
+          </p>
+        </div>
+
+        <div class="bundle-pricing-grid" aria-label="Planes para todos los complementos">
+          <article class="bundle-plan-card">
+            <span class="bundle-plan-chip">Plan mensual</span>
+            <h3>1 mes</h3>
+            <p class="bundle-plan-price">US$ 15</p>
+            <p class="bundle-plan-copy">Incluye acceso a todos los complementos y a las actualizaciones publicadas durante el mes.</p>
+            <ul class="bundle-plan-features">
+              <li>Todos los complementos BIM Ingenieros</li>
+              <li>Actualizaciones durante la vigencia</li>
+              <li>Ideal para pruebas o proyectos cortos</li>
+            </ul>
+            <a class="btn btn-ghost bundle-plan-btn" href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20adquirir%20el%20plan%20de%201%20mes%20para%20todos%20los%20complementos." target="_blank" rel="noopener">Solicitar plan</a>
+          </article>
+
+          <article class="bundle-plan-card bundle-plan-card--featured">
+            <span class="bundle-plan-chip">Más elegido</span>
+            <h3>6 meses</h3>
+            <p class="bundle-plan-price">US$ 25</p>
+            <p class="bundle-plan-copy">Una opción equilibrada para equipos que quieren continuidad, soporte operativo y acceso extendido a nuevas mejoras.</p>
+            <ul class="bundle-plan-features">
+              <li>Todos los complementos BIM Ingenieros</li>
+              <li>Actualizaciones durante 6 meses</li>
+              <li>Mejor relación entre tiempo y costo</li>
+            </ul>
+            <a class="btn btn-cta bundle-plan-btn" href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20adquirir%20el%20plan%20de%206%20meses%20para%20todos%20los%20complementos." target="_blank" rel="noopener">Solicitar plan</a>
+          </article>
+
+          <article class="bundle-plan-card">
+            <span class="bundle-plan-chip">Plan anual</span>
+            <h3>1 año</h3>
+            <p class="bundle-plan-price">US$ 40</p>
+            <p class="bundle-plan-copy">Pensado para oficinas y equipos BIM que quieren estabilidad, mejoras continuas y el costo más eficiente por periodo.</p>
+            <ul class="bundle-plan-features">
+              <li>Todos los complementos BIM Ingenieros</li>
+              <li>Actualizaciones durante 12 meses</li>
+              <li>Mejor costo por mes</li>
+            </ul>
+            <a class="btn btn-ghost bundle-plan-btn" href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20adquirir%20el%20plan%20de%201%20a%C3%B1o%20para%20todos%20los%20complementos." target="_blank" rel="noopener">Solicitar plan</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Tecnologías (SIN cambios) -->
-    <section class="section-padded" aria-label="Tecnologías utilizadas">
+    <section class="section-padded" aria-label="Ventajas de los cursos BIM y complementos Revit">
       <div class="container">
-        <h2 class="section-title">IMPLEMENTACIÓN DE NUEVAS TECNOLOGÍAS</h2>
+        <h2 class="section-title">¿Por qué elegir BIM Ingenieros?</h2>
+
+        <div class="seo-grid">
+          <article class="seo-card">
+            <h3>Enfoque aplicado a proyectos reales</h3>
+            <p>
+              Nuestros cursos y herramientas están orientados a resolver tareas concretas de modelado, automatización y coordinación BIM en entornos profesionales.
+            </p>
+          </article>
+
+          <article class="seo-card">
+            <h3>Especialización en Revit API y Dynamo</h3>
+            <p>
+              Formación práctica en <strong>Revit API</strong>, <strong>Dynamo</strong> y automatización con Python para mejorar productividad y reducir tareas repetitivas.
+            </p>
+          </article>
+
+          <article class="seo-card">
+            <h3>Complementos diseñados para productividad</h3>
+            <p>
+              Desarrollamos complementos para Revit enfocados en gestión de información, limpieza de modelos y optimización de flujos de trabajo.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padded" aria-label="Tecnologías y herramientas utilizadas">
+      <div class="container">
+        <h2 class="section-title">Tecnologías que usamos</h2>
+        <p class="section-intro">
+          Trabajamos con tecnologías orientadas a desarrollo BIM, automatización y visualización de datos en ecosistemas de ingeniería y construcción.
+        </p>
+
         <div class="tech-logos-grid">
-          <img src="img/Front/Revit Logo.png" alt="Logo Revit" />
-          <img src="img/Front/Dynamo Logo.png" alt="Logo Dynamo" />
-          <img src="img/Front/Desing Script Logo.png" alt="Logo Design Script" />
-          <img src="img/Front/IronPython Logo.png" alt="Logo Iron Python" />
-          <img src="img/Front/Python Logo.png" alt="Logo Python" />
-          <img src="img/Front/C_Logo.png" alt="Logo C#" />
-          <img src="img/Front/IFCjs.png" alt="Logo IFC.js" />
-          <img src="img/Front/ThreeJs.png" alt="Logo Three.js" />
-          <img src="img/Front/sqlServer.png" alt="Logo SQL Server" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt=".NET" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy" decoding="async" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section-padded" aria-label="Preguntas frecuentes sobre cursos y complementos">
+      <div class="container">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3>¿Los cursos son en vivo o grabados?</h3>
+            <p>
+              Los cursos pueden incluir sesiones en vivo, grabaciones y material descargable, según el programa específico de cada curso.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3>¿Necesito experiencia previa para llevar los cursos?</h3>
+            <p>
+              Depende del curso. Algunos están orientados a niveles intermedios o avanzados, especialmente en temas como Revit API, Dynamo y Python.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3>¿Los complementos funcionan en distintas versiones de Revit?</h3>
+            <p>
+              Sí, pero depende del complemento. Podemos indicarte compatibilidad por versión según la herramienta de tu interés.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3>¿Puedo solicitar una asesoría personalizada?</h3>
+            <p>
+              Sí. Puedes escribirnos directamente para recibir orientación sobre cursos, automatización BIM o desarrollo de complementos personalizados.
+            </p>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer" id="contacto" aria-label="Información de contacto">
+  <footer id="contacto" class="site-footer" aria-label="Pie de página">
     <div class="container footer-inner">
+      <p>© 2025 BIM Ingenieros · Automatización BIM, Revit API, Dynamo y complementos para Revit</p>
+
       <div class="footer-social">
-        <a href="https://www.facebook.com/BIM-Ingenieros-745094922494316" target="_blank" rel="noopener" class="social-link">Facebook</a>
-        <a href="https://www.youtube.com/channel/UC2mmWllzLeVKGVEZsctyy2Q" target="_blank" rel="noopener" class="social-link">YouTube</a>
-        <a href="https://www.instagram.com/bim_ingenieros" target="_blank" rel="noopener" class="social-link">Instagram</a>
-        <a href="https://wa.me/51968744058" target="_blank" rel="noopener" class="social-link">+51 968 744 058</a>
+        <a class="social-link" href="https://wa.me/51968744058" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="social-link" href="https://www.tiktok.com/@freddysv_revitaddins" target="_blank" rel="noopener">Tiktok</a>
+        <a class="social-link" href="https://www.instagram.com/bim_ingenieros" target="_blank" rel="noopener">Instagram</a>
+        <a class="social-link" href="https://www.youtube.com/@freddysanchezventura" target="_blank" rel="noopener">YouTube</a>
       </div>
-      <small class="muted">© 2021–<span id="year"></span> · BIM INGENIEROS</small>
     </div>
   </footer>
 
-  <script src="JS/index.js" defer></script>
+  <script src="JS/index.js?v=4" defer></script>
 </body>
 </html>
