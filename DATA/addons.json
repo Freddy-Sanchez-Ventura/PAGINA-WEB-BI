@@ -121,7 +121,7 @@
     },
     {
       "slug": "ia-chat",
-      "title": "IA Chat",
+      "title": "Web",
       "badge": "Complemento Revit",
       "icon": "IA",
       "description": "Integra un panel con accesos a distintas IAs dentro de Revit mediante WebView para consultar, comparar y centralizar herramientas de asistencia.",
