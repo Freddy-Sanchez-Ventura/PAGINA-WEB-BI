@@ -115,6 +115,10 @@
       {
         "title": "Introducción técnica",
         "path": "BLOG/HTML/DynamoIntroduccion.html"
+      },
+      {
+        "title": "Automatización de Filtros de Vista",
+        "path": "BLOG/HTML/Dynamo_FiltrosVista.html"
       }
     ]
   },
