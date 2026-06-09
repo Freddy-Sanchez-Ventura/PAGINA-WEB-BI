@@ -4,55 +4,55 @@
     "items": [
       {
         "title": "1. Qué es BIM realmente",
-        "path": "BLOG/HTML/BIM_01_QueEsRealmente.html"
+        "path": "articulos/bim-01-que-es-realmente/"
       },
       {
         "title": "2. Objetivos BIM y usos",
-        "path": "BLOG/HTML/BIM_02_ObjetivosYUsos.html"
+        "path": "articulos/bim-02-objetivos-yusos/"
       },
       {
         "title": "3. Roles BIM",
-        "path": "BLOG/HTML/BIM_03_RolesBIM.html"
+        "path": "articulos/bim-03-roles-bim/"
       },
       {
         "title": "4. BEP: Plan de Ejecución BIM",
-        "path": "BLOG/HTML/BIM_04_BEP.html"
+        "path": "articulos/bim-04-bep/"
       },
       {
         "title": "5. CDE y gestión documental",
-        "path": "BLOG/HTML/BIM_05_CDE.html"
+        "path": "articulos/bim-05-cde/"
       },
       {
         "title": "6. Nomenclaturas y clasificación",
-        "path": "BLOG/HTML/BIM_06_NomenclaturasYClasificacion.html"
+        "path": "articulos/bim-06-nomenclaturas-yclasificacion/"
       },
       {
         "title": "7. Modelado BIM con criterio real",
-        "path": "BLOG/HTML/BIM_07_ModeladoConCriterioReal.html"
+        "path": "articulos/bim-07-modelado-con-criterio-real/"
       },
       {
         "title": "8. Coordinación y clash detection",
-        "path": "BLOG/HTML/BIM_08_CoordinacionYClash.html"
+        "path": "articulos/bim-08-coordinacion-yclash/"
       },
       {
         "title": "9. QA/QC del modelo",
-        "path": "BLOG/HTML/BIM_09_QAQC.html"
+        "path": "articulos/bim-09-qaqc/"
       },
       {
         "title": "10. 4D, 5D y explotación de datos",
-        "path": "BLOG/HTML/BIM_10_4D5D.html"
+        "path": "articulos/bim-10-4d5d/"
       },
       {
         "title": "11. BIM durante la construcción",
-        "path": "BLOG/HTML/BIM_11_Construccion.html"
+        "path": "articulos/bim-11-construccion/"
       },
       {
         "title": "12. Entrega, operación y mantenimiento",
-        "path": "BLOG/HTML/BIM_12_OperacionYMantenimiento.html"
+        "path": "articulos/bim-12-operacion-ymantenimiento/"
       },
       {
         "title": "13. Errores frecuentes y ruta recomendada",
-        "path": "BLOG/HTML/BIM_13_ErroresYRuta.html"
+        "path": "articulos/bim-13-errores-yruta/"
       }
     ]
   },
@@ -61,51 +61,51 @@
     "items": [
       {
         "title": "1. Qué es Revit realmente",
-        "path": "BLOG/HTML/REVIT_01_QueEsRevit.html"
+        "path": "articulos/revit-01-que-es-revit/"
       },
       {
         "title": "2. Cómo funciona Revit",
-        "path": "BLOG/HTML/REVIT_02_ComoFunciona.html"
+        "path": "articulos/revit-02-como-funciona/"
       },
       {
         "title": "3. Estructura del modelo",
-        "path": "BLOG/HTML/REVIT_03_EstructuraDelModelo.html"
+        "path": "articulos/revit-03-estructura-del-modelo/"
       },
       {
         "title": "4. Familias en Revit",
-        "path": "BLOG/HTML/REVIT_04_FamiliasEnRevit.html"
+        "path": "articulos/revit-04-familias-en-revit/"
       },
       {
         "title": "5. Parámetros y datos",
-        "path": "BLOG/HTML/REVIT_05_ParametrosYDatos.html"
+        "path": "articulos/revit-05-parametros-ydatos/"
       },
       {
         "title": "6. Plantillas y estandarización",
-        "path": "BLOG/HTML/REVIT_06_PlantillasYEstandares.html"
+        "path": "articulos/revit-06-plantillas-yestandares/"
       },
       {
         "title": "7. Documentación y tablas",
-        "path": "BLOG/HTML/REVIT_07_DocumentacionYTablas.html"
+        "path": "articulos/revit-07-documentacion-ytablas/"
       },
       {
         "title": "8. Trabajo colaborativo",
-        "path": "BLOG/HTML/REVIT_08_TrabajoColaborativo.html"
+        "path": "articulos/revit-08-trabajo-colaborativo/"
       },
       {
         "title": "9. Modelado profesional",
-        "path": "BLOG/HTML/REVIT_09_ModeladoProfesional.html"
+        "path": "articulos/revit-09-modelado-profesional/"
       },
       {
         "title": "10. Metrados y planificación",
-        "path": "BLOG/HTML/REVIT_10_MetradosYPlanificacion.html"
+        "path": "articulos/revit-10-metrados-yplanificacion/"
       },
       {
         "title": "11. Errores comunes",
-        "path": "BLOG/HTML/REVIT_11_ErroresComunes.html"
+        "path": "articulos/revit-11-errores-comunes/"
       },
       {
         "title": "12. Revit + Dynamo + API",
-        "path": "BLOG/HTML/REVIT_12_RevitConDynamoYAPI.html"
+        "path": "articulos/revit-12-revit-con-dynamo-yapi/"
       }
     ]
   },
@@ -114,11 +114,11 @@
     "items": [
       {
         "title": "Introducción técnica",
-        "path": "BLOG/HTML/DynamoIntroduccion.html"
+        "path": "articulos/dynamo-introduccion/"
       },
       {
         "title": "Automatización de Filtros de Vista",
-        "path": "BLOG/HTML/Dynamo_FiltrosVista.html"
+        "path": "articulos/dynamo-filtros-vista/"
       }
     ]
   },
@@ -127,7 +127,7 @@
     "items": [
       {
         "title": "Introducción",
-        "path": "BLOG/HTML/RevitApiIntroduccion.html"
+        "path": "articulos/revit-api-introduccion/"
       }
     ]
   }

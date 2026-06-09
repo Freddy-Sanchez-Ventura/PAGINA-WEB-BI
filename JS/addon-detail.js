@@ -1,28 +1,6 @@
 const $  = (s, c=document) => c.querySelector(s);
 const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
 
-const navToggle = $("#navToggle");
-const navMenu   = $("#navMenu");
-const navPanel  = $("#navPanel");
-
-function openMenu(){
-  document.body.classList.add("menu-open");
-  navMenu?.classList.add("open");
-  navPanel?.classList.add("open");
-  navToggle?.setAttribute("aria-expanded", "true");
-}
-
-function closeMenu(){
-  document.body.classList.remove("menu-open");
-  navMenu?.classList.remove("open");
-  navPanel?.classList.remove("open");
-  navToggle?.setAttribute("aria-expanded", "false");
-}
-
-navToggle?.addEventListener("click", () => navMenu.classList.contains("open") ? closeMenu() : openMenu());
-navPanel?.addEventListener("click", closeMenu);
-navMenu?.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(); });
-
 const currentScript = document.currentScript || document.querySelector("script[data-source]");
 const source = currentScript?.dataset?.source;
 
@@ -104,11 +82,16 @@ function renderPricing(data){
 }
 
 function renderHero(data){
+  document.title = `${data.title || "Complemento"} | Complemento Revit | BIM Ingenieros`;
   $("#heroBadge").textContent = data.badge || "Complemento Revit";
   $("#addonTitle").textContent = data.title || "Complemento";
   $("#benefitsTitleSuffix").textContent = data.title || "este complemento";
   $("#addonSubtitle").textContent = data.subtitle || "";
   $("#benefitsIntro").textContent = data.benefitsIntro || "Conoce cómo este complemento puede integrarse a tus flujos BIM y reducir trabajo manual dentro de Revit.";
+  $("#offerChip").textContent = data.offerChip || "COMPLEMENTO PROFESIONAL";
+  $("#summaryTitle").textContent = data.summaryTitle || "Equipos BIM que buscan más control y productividad dentro de Revit";
+  $("#summaryProblem").textContent = data.summaryProblem || "Reduce tareas manuales y mejora el control de procesos repetitivos dentro de Revit.";
+  $("#videoNote").textContent = data.videoNote || "Cada tema puede enlazar su propio video de YouTube desde el JSON del complemento.";
 
   const heroBenefits = $("#heroBenefits");
   if (heroBenefits){
@@ -190,6 +173,8 @@ function setVideo(video, fallbackHref){
   const stage = $("#videoStage");
   if (!stage) return;
   stage.innerHTML = buildVideoMarkup(video, fallbackHref);
+  const duration = $("#videoDuration");
+  if (duration) duration.textContent = video?.duration || "Demo en video";
 }
 
 function renderPlaylist(data){

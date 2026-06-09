@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía práctica para automatizar filtros de vista en Revit mediante Dynamo y mejorar la estandarización gráfica del proyecto.">
+  <link rel="canonical" href="https://bimingenieros.online/articulos/dynamo-filtros-vista/" />
+  <title>Automatización de Filtros de Vista con Dynamo</title>
+  <link rel="stylesheet" href="../../BLOG/CSS/DynamoIntroduccion.css">
+</head>
+<body>
+  <main class="blog-wrap">
+    <section class="blog-hero">
+      <div class="blog-eyebrow">DYNAMO · REVIT · AUTOMATIZACIÓN TÉCNICA</div>
+      <h1 class="blog-title">Automatización de Filtros de Vista con Dynamo</h1>
+      <p class="blog-subtitle">
+        En este artículo documentamos una rutina de Dynamo enfocada en la creación de filtros de vista en Revit.
+        El objetivo no es solo explicar qué hace el script, sino mostrar con claridad el proceso lógico que sigue
+        para transformar categorías, reglas y parámetros en filtros reutilizables que mejoran la lectura del modelo.
+      </p>
+
+      <div class="hero-grid">
+        <div class="panel">
+          <div class="chips">
+            <span class="chip">Estandarización visual</span>
+            <span class="chip">Automatización BIM</span>
+            <span class="chip">Flujo repetible</span>
+            <span class="chip">Escalable por proyecto</span>
+          </div>
+          <p style="margin:16px 0 0;color:var(--muted);">
+            Este tipo de solución es especialmente útil cuando el equipo necesita aplicar criterios consistentes
+            de visualización en múltiples vistas, disciplinas o etapas del proyecto sin reconstruir manualmente
+            los filtros una y otra vez.
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-k">Tipo de contenido</span>
+              <span class="meta-v">Guía técnica de implementación</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-k">Herramientas</span>
+              <span class="meta-v">Revit + Dynamo</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-k">Aplicación</span>
+              <span class="meta-v">Filtros de vista</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-k">Resultado</span>
+              <span class="meta-v">Mayor control y velocidad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="article">
+      <article class="card video-card">
+        <h2 class="section-title">Video de apoyo</h2>
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/ZcypupEAxJo"
+            title="Automatización de Filtros de Vista con Dynamo"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 class="section-title">¿Qué resuelve esta rutina?</h2>
+        <p class="section-intro">
+          En entornos BIM, los filtros de vista son fundamentales para comunicar información gráfica con precisión.
+          Sin embargo, cuando su configuración se hace de forma manual, aparecen problemas recurrentes: diferencias
+          entre vistas, errores de criterio, pérdida de tiempo y poca trazabilidad del proceso. Esta rutina de Dynamo
+          centraliza la lógica de creación del filtro y la vuelve repetible.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <h3>Consistencia visual</h3>
+            <p>Permite aplicar las mismas reglas a distintas vistas manteniendo criterios uniformes en todo el modelo.</p>
+          </div>
+          <div class="info-box">
+            <h3>Reducción de trabajo manual</h3>
+            <p>Evita construir filtro por filtro desde la interfaz de Revit, acelerando tareas repetitivas.</p>
+          </div>
+          <div class="info-box">
+            <h3>Mayor control técnico</h3>
+            <p>La lógica queda explícita en nodos, parámetros y reglas, facilitando mantenimiento y revisión.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 class="section-title">Flujo completo para generar los filtros</h2>
+        <div class="steps">
+          <section class="step">
+            <div class="step-number">01</div>
+            <div>
+              <h3>Selección de categorías</h3>
+              <p>
+                El punto de partida consiste en definir sobre qué categorías actuará el filtro. En esta etapa la rutina
+                identifica los elementos o categorías objetivo y establece la base sobre la cual Revit evaluará las reglas.
+              </p>
+              <ul>
+                <li>Se determina la categoría o conjunto de categorías que participarán en el filtro.</li>
+                <li>Se relaciona la categoría con los elementos del modelo que deben ser evaluados.</li>
+                <li>Se limita el alcance del filtro para evitar reglas aplicadas sobre información no relevante.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number">02</div>
+            <div>
+              <h3>Lectura y definición de parámetros</h3>
+              <p>
+                Una vez definida la categoría, el script trabaja con parámetros del modelo. Estos parámetros son los que
+                permiten construir la lógica del filtro: nombres, tipos, códigos, estados o valores numéricos.
+              </p>
+              <ul>
+                <li>Se seleccionan los parámetros que realmente describen la condición buscada.</li>
+                <li>Se evalúa si el dato es de texto, número, entero o una condición booleana.</li>
+                <li>Se preparan los valores que usarán las reglas para comparar información dentro del modelo.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number">03</div>
+            <div>
+              <h3>Construcción de reglas</h3>
+              <p>
+                En esta fase la rutina arma las reglas de comparación. Aquí se define si un parámetro debe ser igual,
+                contener cierto texto, ser mayor que un valor o cumplir una condición específica.
+              </p>
+              <ul>
+                <li>Se establecen operadores de comparación según el tipo de dato.</li>
+                <li>Se estructuran reglas individuales para cada condición necesaria.</li>
+                <li>Se prepara la lógica para combinar varias reglas en un único filtro robusto.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number">04</div>
+            <div>
+              <h3>Ensamblaje del filtro en Revit</h3>
+              <p>
+                Con categorías y reglas ya definidas, Dynamo utiliza nodos y funciones vinculadas a la API de Revit para
+                construir el filtro como un objeto válido dentro del proyecto.
+              </p>
+              <ul>
+                <li>Se vinculan categorías compatibles con las reglas creadas.</li>
+                <li>Se genera el filtro con una estructura reutilizable.</li>
+                <li>Se reduce la intervención manual en la ventana nativa de filtros de Revit.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number">05</div>
+            <div>
+              <h3>Aplicación del filtro a vistas</h3>
+              <p>
+                Una vez creado, el filtro puede asignarse a una o varias vistas del proyecto. Esta etapa permite llevar
+                la lógica al resultado visible, mejorando lectura gráfica, control documental y revisión técnica.
+              </p>
+              <ul>
+                <li>Se identifica la vista o conjunto de vistas destino.</li>
+                <li>Se aplica el filtro a dichas vistas de forma automatizada.</li>
+                <li>Se deja listo el escenario para complementar con overrides gráficos si el flujo lo requiere.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number">06</div>
+            <div>
+              <h3>Validación y reutilización</h3>
+              <p>
+                El valor de una rutina como esta no está solo en crear un filtro, sino en permitir que el mismo criterio
+                pueda repetirse, revisarse y ajustarse con rapidez en otros proyectos o plantillas.
+              </p>
+              <ul>
+                <li>Se comprueba que la selección visual responda al criterio esperado.</li>
+                <li>Se revisan posibles cambios de nombres, parámetros o categorías en nuevos modelos.</li>
+                <li>Se documenta el flujo para convertirlo en un estándar interno de trabajo.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 class="section-title">Lógica técnica del proceso</h2>
+        <p class="section-intro">
+          Aunque la interfaz de Dynamo se compone de nodos, detrás de cada bloque existe una secuencia lógica muy clara.
+          La rutina sigue una estructura típica de automatización BIM:
+        </p>
+
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>Etapa</th>
+              <th>Qué hace</th>
+              <th>Impacto en el modelo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Entrada</td>
+              <td>Recibe categorías, nombres, valores y condiciones que definen el comportamiento del filtro.</td>
+              <td>Hace que la rutina sea flexible y configurable.</td>
+            </tr>
+            <tr>
+              <td>Procesamiento</td>
+              <td>Transforma los datos de entrada en reglas válidas para Revit.</td>
+              <td>Evita errores al crear filtros manualmente.</td>
+            </tr>
+            <tr>
+              <td>Salida</td>
+              <td>Crea y/o aplica filtros de vista listos para usarse dentro del proyecto.</td>
+              <td>Genera un resultado operativo inmediato para el equipo.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note" style="margin-top:16px;">
+          La fortaleza de este flujo está en su capacidad de convertir una operación repetitiva y propensa a errores
+          en un procedimiento documentado, auditable y escalable.
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 class="section-title">Buenas prácticas para este tipo de scripts</h2>
+        <ul class="list-clean">
+          <li>Usar nombres claros para filtros, entradas y grupos de nodos.</li>
+          <li>Separar visualmente entradas, lógica de reglas y salidas para facilitar mantenimiento.</li>
+          <li>Validar previamente que los parámetros existan en todas las categorías previstas.</li>
+          <li>Documentar qué vistas reciben el filtro y con qué propósito gráfico o documental.</li>
+          <li>Preparar la rutina para crecer: más categorías, nuevas reglas o futuras plantillas BIM.</li>
+        </ul>
+      </article>
+
+      <article class="cta">
+        <div class="cta-copy">
+          <h3>Descargar script y documentación</h3>
+          <p>
+            Accede a los archivos de soporte para ejecutar la rutina, revisar la documentación asociada y utilizar este
+            flujo como base para futuras automatizaciones de filtros de vista en Dynamo.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://drive.google.com/file/d/1gvtuK7GcopKGmmnNyGxzKmnCajcDumg8/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+            Descargar documentación
+          </a>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BIM INGENIEROS · Dynamo para Revit — Introducción Técnica</title>
+  <meta name="description" content="Introducción técnica a Dynamo para Revit: arquitectura, nodos, Python, buenas prácticas, rendimiento y casos de uso para ingenieros BIM." />
+  <link rel="canonical" href="https://bimingenieros.online/articulos/dynamo-introduccion/" />
+  <link rel="icon" href="../../img/Favicon.png" type="image/png" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="stylesheet" href="../../BLOG/CSS/DynamoIntroduccion.css" />
+</head>
+
+<body>
+  <div class="revit-wrap">
+    <h1 class="revit-title">Dynamo para Revit — Introducción Técnica</h1>
+    <p class="revit-subtitle">Fundamentos, flujo profesional y mejores prácticas para ingeniería BIM.</p>
+
+    <!-- Chips -->
+    <div class="chips" aria-label="Etiquetas">
+      <span class="chip">Dynamo</span>
+      <span class="chip">Revit</span>
+      <span class="chip">BIM</span>
+      <span class="chip">Automatización</span>
+      <span class="chip">Python</span>
+      <span class="chip">Paquetes</span>
+    </div>
+
+    <article class="revit-article" role="article" aria-label="Artículo: Dynamo para Revit">
+      <p class="lead">
+        Dynamo es un entorno de programación visual integrado en Revit que permite automatizar procesos,
+        validar información y generar contenido paramétrico. Esta guía resume lo esencial para trabajar
+        con enfoque profesional, incluyendo Python y Revit API cuando haga falta.
+      </p>
+
+      <!-- TOC (una sola columna) -->
+      <details open>
+        <summary>Contenido</summary>
+        <nav aria-label="Tabla de contenidos">
+          <ol>
+            <li><a href="#que-es">¿Qué es Dynamo para Revit?</a></li>
+            <li><a href="#arquitectura">Arquitectura y versiones</a></li>
+            <li><a href="#instalacion">Instalación & compatibilidad</a></li>
+            <li><a href="#nodos-datos">Nodos, tipos de datos y librerías</a></li>
+            <li><a href="#flujo">Flujo de trabajo profesional</a></li>
+            <li><a href="#python-api">Python & Revit API</a></li>
+            <li><a href="#rendimiento">Rendimiento y escalabilidad</a></li>
+            <li><a href="#buenas-practicas">Buenas prácticas BIM</a></li>
+            <li><a href="#paquetes">Paquetes y versionado</a></li>
+            <li><a href="#seguridad">Seguridad y robustez</a></li>
+            <li><a href="#casos">Casos de uso</a></li>
+            <li><a href="#comparativa">Tabla comparativa</a></li>
+            <li><a href="#debug">Troubleshooting</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+          </ol>
+        </nav>
+      </details>
+
+      <!-- Secciones -->
+      <section id="que-es">
+        <h2>¿Qué es Dynamo para Revit?</h2>
+        <p>
+          Es un sistema de nodos y conexiones (cables) que ejecuta lógica para leer/escribir parámetros,
+          crear/editar elementos, y analizar datos del modelo. Para ingeniería BIM, es clave para
+          <strong>automatizar</strong> tareas repetitivas y <strong>estandarizar</strong> información.
+        </p>
+        <div class="cards">
+          <div class="card">
+            <h3>Beneficios</h3>
+            <ul>
+              <li>Automatización reproducible y auditable.</li>
+              <li>Interoperabilidad (Excel/CSV/JSON/IFC).</li>
+              <li>Iteración rápida y validación de reglas.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Limitaciones</h3>
+            <ul>
+              <li>Dependencia de paquetes y versiones.</li>
+              <li>Rendimiento inferior a C# en flujos masivos.</li>
+              <li>Curva de aprendizaje con listas/levels.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="arquitectura">
+        <h2>Arquitectura y versiones</h2>
+        <p>
+          Dynamo corre embebido en Revit. Incluye <em>Workspace</em>, librerías de nodos, motor de geometría
+          (Shape Manager) y puente a Revit API. Las versiones de Dynamo se acoplan a la versión de Revit.
+        </p>
+        <div class="note">
+          Fija una versión de Dynamo para el proyecto y evita mezclar paquetes entre equipos. Mantén un repositorio
+          compartido de paquetes con versiones bloqueadas.
+        </div>
+      </section>
+
+      <section id="instalacion">
+        <h2>Instalación & compatibilidad</h2>
+        <p>
+          En Revit 2021–2025, Dynamo viene incluido. Verifica versión desde <span class="kbd">Manage → Dynamo</span>.
+          Para ambientes controlados (obra/producción), define rutas de paquetes centralizadas.
+        </p>
+        <details>
+          <summary>Rutas sugeridas de paquetes</summary>
+          <ul class="muted">
+            <li>Red compartida (solo lectura en producción).</li>
+            <li>Repositorio Git para custom nodes.</li>
+          </ul>
+        </details>
+      </section>
+
+      <section id="nodos-datos">
+        <h2>Nodos, tipos de datos y librerías</h2>
+        <p>
+          Conoce bien <code>string</code>, <code>number</code>, <code>boolean</code>, <code>list</code>,
+          <code>dictionary</code> y tipos Revit (Element, Category, Parameter). Evita errores de niveles con
+          <code>List.Map</code> y el control de <em>lacing</em>.
+        </p>
+        <div class="cards">
+          <div class="card">
+            <h3>Conversión típica</h3>
+            <p><strong>Element</strong> ⇄ <strong>ElementId</strong>, unidades internas (pies) vs unidades de proyecto.</p>
+          </div>
+          <div class="card">
+            <h3>Bibliotecas clave</h3>
+            <p>Core, Revit, Geometry, List, Math; y paquetes según necesidad.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="flujo">
+        <h2>Flujo de trabajo profesional</h2>
+        <ol>
+          <li><strong>Definir objetivo:</strong> regla/validación/extracción/generación.</li>
+          <li><strong>Entradas:</strong> categorías, filtros, parámetros, Excel/JSON.</li>
+          <li><strong>Proceso:</strong> transformar, validar, limpiar duplicados.</li>
+          <li><strong>Salida:</strong> escribir parámetros, crear/editar elementos, reportes.</li>
+          <li><strong>Registro:</strong> log de cambios y tiempos por etapa.</li>
+        </ol>
+      </section>
+
+      <section id="python-api">
+        <h2>Python &amp; Revit API</h2>
+        <p>
+          El nodo Python permite operaciones transaccionales complejas, recorridos MEP, y control preciso de filtros.
+          Úsalo para lotes grandes, manejo de excepciones y rendimiento.
+        </p>
+        <div class="note">
+          Agrupa escrituras en una sola transacción y captura excepciones con <code>try/finally</code>.
+        </div>
+      </section>
+
+      <section id="rendimiento">
+        <h2>Rendimiento y escalabilidad</h2>
+        <ul>
+          <li>Evita recálculos con nodos <em>Freeze</em> y booleans de activación.</li>
+          <li>Usa <em>FilteredElementCollector</em> en Python con filtros por categoría/param.</li>
+          <li>Divide grandes lotes (chunking) y registra a archivo en vez de usar <em>Watch</em> pesados.</li>
+        </ul>
+      </section>
+
+      <section id="buenas-practicas">
+        <h2>Buenas prácticas BIM</h2>
+        <ul>
+          <li>Nombres claros y grupos por etapa; colores de guía.</li>
+          <li>Validación previa antes de modificar el modelo.</li>
+          <li>Subgrafos / custom nodes por responsabilidad única.</li>
+          <li>Encabezado del grafo con objetivo, alcance y versión.</li>
+        </ul>
+      </section>
+
+      <section id="paquetes">
+        <h2>Paquetes y versionado</h2>
+        <p>
+          Recomendados: <strong>Clockwork</strong>, <strong>Data-Shapes</strong>, <strong>Genius Loci</strong>,
+          <strong>SteamNodes</strong>, <strong>Orchid</strong> (según compatibilidad de tu Revit).
+        </p>
+      </section>
+
+      <section id="seguridad">
+        <h2>Seguridad y robustez</h2>
+        <ul>
+          <li>Valida tipos/rangos de entrada antes de escribir.</li>
+          <li>Transacciones controladas y reversibles.</li>
+          <li>Backups y pruebas en vistas/elementos duplicados cuando sea viable.</li>
+        </ul>
+      </section>
+
+      <section id="casos">
+        <h2>Casos de uso</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Normalización de parámetros</h3>
+            <p>Estandariza nombres/tipos/valores; reporta cumplimiento.</p>
+          </div>
+          <div class="card">
+            <h3>Auditoría MEP</h3>
+            <p>Conectividad, detección de elementos desconectados, verificación de pendientes.</p>
+          </div>
+          <div class="card">
+            <h3>Generación paramétrica</h3>
+            <p>Creación y acomodación masiva de elementos bajo reglas.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="comparativa">
+        <h2>Tabla comparativa</h2>
+        <div style="overflow:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Aspecto</th>
+                <th>Dynamo (Nodos)</th>
+                <th>Dynamo (Python)</th>
+                <th>C# Add-in</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Velocidad</td><td>Media</td><td>Media–Alta</td><td>Alta</td></tr>
+              <tr><td>Mantenimiento</td><td>Visual</td><td>Medio</td><td>Formal/IDE</td></tr>
+              <tr><td>Acceso a API</td><td>Indirecto</td><td>Directo</td><td>Directo</td></tr>
+              <tr><td>Despliegue</td><td>Script</td><td>Script</td><td>ADDIN/Instalador</td></tr>
+              <tr><td>Casos ideales</td><td>Rápidos</td><td>Avanzados puntuales</td><td>Soluciones robustas</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="debug">
+        <h2>Troubleshooting</h2>
+        <ul>
+          <li><strong>List levels:</strong> alinea profundidades con <code>List.Map</code> y lacing.</li>
+          <li><strong>Unidades:</strong> confirma conversiones (pies internos ↔ proyecto).</li>
+          <li><strong>Paquetes:</strong> congela versiones; si falla un nodo crítico, reemplázalo por Python.</li>
+        </ul>
+      </section>
+
+      <section id="recursos">
+        <h2>Recursos</h2>
+        <ul class="muted">
+          <li>Documentación oficial de Dynamo.</li>
+          <li>Foros de Revit API.</li>
+          <li>Repos de ejemplo y guías internas de tu organización.</li>
+        </ul>
+      </section>
+    </article>
+  </div>
+
+  <script src="../../BLOG/JS/DynamoIntroduccion.js" defer></script>
+</body>
+</html>

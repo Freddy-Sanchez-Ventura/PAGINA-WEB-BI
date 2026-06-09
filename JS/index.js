@@ -2,40 +2,14 @@
 const $  = (s, c=document) => c.querySelector(s);
 const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
 
-// Año en el pie
-const y = $("#year");
-if (y) y.textContent = new Date().getFullYear();
-
-// ===== Menú responsive =====
-const navToggle = $("#navToggle");
-const navMenu   = $("#navMenu");
-const navPanel  = $("#navPanel");
-
-function openMenu(){
-  document.body.classList.add("menu-open");
-  navMenu.classList.add("open");
-  navPanel.classList.add("open");
-  navToggle?.setAttribute("aria-expanded","true");
-}
-
-function closeMenu(){
-  document.body.classList.remove("menu-open");
-  navMenu.classList.remove("open");
-  navPanel.classList.remove("open");
-  navToggle?.setAttribute("aria-expanded","false");
-}
-
-navToggle?.addEventListener("click", () => navMenu.classList.contains("open") ? closeMenu() : openMenu());
-navPanel?.addEventListener("click", closeMenu);
-navMenu?.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(); });
-
 // ===== Scroll suave con compensación por header fijo =====
 function smoothScrollTo(hash){
   const target = document.getElementById(hash.replace("#",""));
   if (!target) return;
   const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 64;
   const y = target.getBoundingClientRect().top + window.scrollY - headerH + 1;
-  window.scrollTo({ top: y, behavior: "smooth" });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
 }
 
 $$('a[href^="#"]').forEach(a => {

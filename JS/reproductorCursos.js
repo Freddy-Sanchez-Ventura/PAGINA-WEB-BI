@@ -47,46 +47,9 @@ const ACTIVE_KEY = `bim:${COURSE_KEY}:lastVideo`;
 const EXPANDED_KEY = `bim:${COURSE_KEY}:expanded`;
 const SCROLL_KEY = `bim:${COURSE_KEY}:sidebarScroll`;
 
-const navToggle = $("#navToggle");
-const navMenu = $("#navMenu");
-const navPanel = $("#navPanel");
-
-function openMenu() {
-  document.body.classList.add("menu-open");
-  navMenu?.classList.add("open");
-  navPanel?.classList.add("open");
-  navPanel?.setAttribute("aria-hidden", "false");
-  navToggle?.setAttribute("aria-expanded", "true");
-  navMenu?.querySelector("a")?.focus();
-}
-
-function closeMenu() {
-  document.body.classList.remove("menu-open");
-  navMenu?.classList.remove("open");
-  navPanel?.classList.remove("open");
-  navPanel?.setAttribute("aria-hidden", "true");
-  navToggle?.setAttribute("aria-expanded", "false");
-}
-
-navToggle?.addEventListener("click", () => {
-  if (navMenu?.classList.contains("open")) closeMenu();
-  else openMenu();
-});
-
-navPanel?.addEventListener("click", closeMenu);
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && navMenu?.classList.contains("open")) {
-    closeMenu();
-  }
-});
-
-navMenu?.addEventListener("click", (e) => {
-  if (e.target.closest("a")) closeMenu();
-});
-
 let META = {};
 let SYLLABUS = [];
+let courseLoadError = "";
 
 const treeRoot = $("#tree");
 const titleEl = $("#videoTitle");
@@ -542,22 +505,13 @@ async function loadCourse() {
     SYLLABUS = Array.isArray(data.syllabus) ? data.syllabus : [];
   } catch (e) {
     console.warn(e.message);
+    courseLoadError = "No fue posible cargar el temario. Recarga la página o contacta con BIM Ingenieros.";
     META = {
       title: COURSE_KEY,
       price: "",
       metaLine: "YouTube · Curso"
     };
-    SYLLABUS = [
-      {
-        title: "Módulo demo",
-        items: [
-          {
-            title: "1.1 Lección demo",
-            url: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-          }
-        ]
-      }
-    ];
+    SYLLABUS = [];
   }
 }
 
@@ -593,6 +547,13 @@ async function init() {
 
   await loadCourse();
   applyMeta();
+
+  if (courseLoadError) {
+    if (treeRoot) treeRoot.innerHTML = `<p class="muted">${courseLoadError}</p>`;
+    if (titleEl) titleEl.textContent = "Temario no disponible";
+    if (metaEl) metaEl.textContent = courseLoadError;
+    return;
+  }
 
   renderTree();
   restoreInitialVideo();

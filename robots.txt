@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bimingenieros.online/sitemap.xml

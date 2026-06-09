@@ -5,32 +5,10 @@ const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
 const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
 const load = (k,d) => { try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch{ return d; }};
 
-const navToggle = $("#navToggle");
-const navMenu   = $("#navMenu");
-const navPanel  = $("#navPanel");
-
-function openMenu(){
-  document.body.classList.add("menu-open");
-  navMenu.classList.add("open");
-  navPanel.classList.add("open");
-  navToggle?.setAttribute("aria-expanded","true");
-}
-function closeMenu(){
-  document.body.classList.remove("menu-open");
-  navMenu.classList.remove("open");
-  navPanel.classList.remove("open");
-  navToggle?.setAttribute("aria-expanded","false");
-}
-navToggle?.addEventListener("click", () =>
-  navMenu.classList.contains("open") ? closeMenu() : openMenu()
-);
-navPanel?.addEventListener("click", closeMenu);
-navMenu?.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(); });
-
 const BLOG_KEY = "bim:blog";
 const LAST_KEY = `${BLOG_KEY}:lastArticle`;
 const EXP_KEY  = `${BLOG_KEY}:expandedNodes`;
-const TOC_JSON_PATH = "CURSOS/blog.json";
+const TOC_JSON_PATH = "../CURSOS/blog.json";
 
 const TOC_FALLBACK = [
   {
@@ -95,7 +73,7 @@ const metaEl   = $("#articleMeta");
 const frameEl  = $("#readerFrame");
 
 function isValidPath(raw){
-  return /^((\.?\/)?BLOG\/HTML\/[^?#]+\.(html?|htm)(#[^?]+)?|\/?PAGINA-WEB-BI\/BLOG\/HTML\/[^?#]+\.(html?|htm)(#[^?]+)?)$/i.test(raw || "");
+  return /^(articulos\/[a-z0-9áéíóúñ-]+\/?|(\.?\/)?BLOG\/HTML\/[^?#]+\.(html?|htm))(#[^?]+)?$/i.test(raw || "");
 }
 
 function ensureExpandedPath(nodeId, expandedSet){
@@ -179,7 +157,9 @@ function openArticle(node, rowEl){
   if (!isValidPath(raw)) return;
 
   let normalized = raw.startsWith("/PAGINA-WEB-BI/") ? raw.slice(1) : raw;
-  const finalURL = new URL(normalized, window.location.href).href;
+  const finalURL = normalized.startsWith("/")
+    ? new URL(normalized, window.location.origin).href
+    : new URL(`../${normalized}`, window.location.href).href;
 
   frameEl.src = finalURL;
   titleEl.textContent = node.title || "Artículo";

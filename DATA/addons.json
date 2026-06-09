@@ -14,7 +14,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-gestionar-informacion.html",
+      "url": "complementos/gestionar-informacion/",
       "image": "img/addons/gestionar-informacion.png"
     },
     {
@@ -31,7 +31,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-tablas-planificacion.html",
+      "url": "complementos/tablas-planificacion/",
       "image": "img/addons/tablas-planificacion.png"
     },
     {
@@ -48,7 +48,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-acabados.html",
+      "url": "complementos/acabados/",
       "image": "img/addons/acabados.png"
     },
     {
@@ -65,7 +65,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-limpiar.html",
+      "url": "complementos/limpiar/",
       "image": "img/addons/limpiar.png"
     },
     {
@@ -82,7 +82,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-cambiar-familia.html",
+      "url": "complementos/cambiar-familia/",
       "image": "img/addons/cambiar-familia.png"
     },
     {
@@ -99,7 +99,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-conectar-desconectar.html",
+      "url": "complementos/conectar-desconectar/",
       "image": "img/addons/conectar-desconectar.png"
     },
     {
@@ -116,7 +116,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-purge-assemblies.html",
+      "url": "complementos/purge-assemblies/",
       "image": "img/addons/purge-assemblies.png"
     },
     {
@@ -133,7 +133,7 @@
       ],
       "status": "Disponible para demostración",
       "statusType": "ready",
-      "url": "complemento-webview.html",
+      "url": "complementos/webview/",
       "image": "img/addons/webview.png"
     }
   ]
