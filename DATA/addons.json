@@ -18,6 +18,23 @@
       "image": "img/addons/gestionar-informacion.png"
     },
     {
+      "slug": "aceros-refuerzo",
+      "title": "Aceros de Refuerzo",
+      "badge": "Complemento Revit",
+      "icon": "AR",
+      "description": "Agiliza el modelado y la organización de aceros de refuerzo en elementos estructurales, reduciendo tareas repetitivas y mejorando el control del armado dentro de Revit.",
+      "meta": [
+        "Estructuras",
+        "Armaduras",
+        "Modelado",
+        "Productividad"
+      ],
+      "status": "Disponible para demostración",
+      "statusType": "ready",
+      "url": "complementos/aceros-refuerzo/",
+      "image": "img/addons/aceros-refuerzo.png"
+    },
+    {
       "slug": "tablas-planificacion",
       "title": "Tablas de Planificación",
       "badge": "Complemento Revit",

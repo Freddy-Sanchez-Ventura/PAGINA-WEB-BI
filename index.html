@@ -32,7 +32,7 @@
   <link rel="icon" href="img/Favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="CSS/index.css?v=5" />
+  <link rel="stylesheet" href="CSS/index.css?v=6" />
 
   <script type="application/ld+json">
   {
@@ -56,13 +56,14 @@
     "name":"Complementos Revit BIM Ingenieros",
     "itemListElement":[
       { "@type":"SoftwareApplication", "position":1, "name":"Gestionar Información", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":2, "name":"Tablas de Planificación", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":3, "name":"Acabados", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":4, "name":"Rename", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":5, "name":"Cambiar Familia", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":6, "name":"Conectar y Desconectar", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":7, "name":"Purge Assemblies", "applicationCategory":"BusinessApplication" },
-      { "@type":"SoftwareApplication", "position":8, "name":"IA Chat", "applicationCategory":"BusinessApplication" }
+      { "@type":"SoftwareApplication", "position":2, "name":"Aceros de Refuerzo", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":3, "name":"Tablas de Planificación", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":4, "name":"Acabados", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":5, "name":"Limpiar", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":6, "name":"Cambiar Familia", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":7, "name":"Conectar y Desconectar", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":8, "name":"Purge Assemblies", "applicationCategory":"BusinessApplication" },
+      { "@type":"SoftwareApplication", "position":9, "name":"Web", "applicationCategory":"BusinessApplication" }
     ]
   }
   </script>
@@ -95,7 +96,7 @@
           <li><a class="nav-link" href="#cursos">Cursos</a></li>
           <li><a class="nav-link" href="#complementos">Complementos</a></li>
           <li><a class="nav-link" href="blog-tecnico/">Blog</a></li>
-          <li><a class="nav-link" href="#contacto">Contacto</a></li>
+          <li><a class="nav-link" href="contacto/">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -171,8 +172,7 @@
                 <a href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20inscribirme%20en%20el%20curso%20Automatizaci%C3%B3n%20con%20Revit%20API%20Nivel%20Intermedio." class="course-btn course-btn-buy" target="_blank" rel="noopener" title="Inscribirme al curso de Revit API Intermedio">
                   
                   <span class="course-btn-buy-prices">
-                    <span class="course-price-old">Antes: US$ 80</span>
-                    <span class="course-price-new">Ahora: US$ 40</span>
+                    <span class="course-price-new">US$ 60</span>
                   </span>
                 </a>
               </div>
@@ -206,8 +206,7 @@
 
                 <a href="https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20inscribirme%20en%20el%20curso%20Dynamo%20para%20Revit%20Nivel%20IV%20con%20Python." class="course-btn course-btn-buy" target="_blank" rel="noopener" title="Inscribirme al curso de Dynamo para Revit Nivel IV">
                   <span class="course-btn-buy-prices">
-                    <span class="course-price-old">Antes: US$ 50</span>
-                    <span class="course-price-new">Ahora: US$ 25</span>
+                    <span class="course-price-new">US$ 35</span>
                   </span>
                 </a>
               </div>
@@ -224,6 +223,35 @@
           Explora nuestros <strong>complementos Revit</strong> enfocados en automatización, gestión de información, conectividad y productividad para proyectos BIM.  
           Este bloque queda listo para que después cada complemento abra su propia página con descripción completa, precio o descarga.
         </p>
+
+        <section class="addon-installation" aria-labelledby="addonInstallationTitle">
+          <div class="addon-installation-copy">
+            <span class="addon-installation-kicker">Guía de instalación</span>
+            <h3 id="addonInstallationTitle">Instala los complementos de BIM Ingenieros</h3>
+            <p>
+              Revisa el proceso completo de instalación y descarga el instalador para comenzar a utilizar nuestros complementos en Revit.
+            </p>
+          </div>
+
+          <div class="addon-installation-video">
+            <iframe
+              src="https://www.youtube.com/embed/Mpn_OeX6Ess?rel=0"
+              title="Proceso de instalación de los complementos Revit de BIM Ingenieros"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <a
+            class="btn btn-cta addon-installation-download"
+            href="https://www.mediafire.com/file/dz440g0ncqvns2q/InstaladorBI_v2.rar/file"
+            target="_blank"
+            rel="noopener noreferrer">
+            Descargar instalador
+          </a>
+        </section>
 
         <div id="addonsGrid" class="addons-grid" aria-live="polite">
           <article class="addon-card addon-card--loading">
@@ -242,7 +270,7 @@
             <div class="addon-skeleton addon-skeleton--text short"></div>
           </article>
         </div>
-        <p class="addons-note">Estamos incorporando más complementos. Por ahora ya puedes explorar <strong>Gestionar Información</strong>.</p>
+        <p class="addons-note">Explora cada complemento para conocer sus beneficios, flujo de trabajo, demostraciones y opciones de licencia.</p>
       </div>
     </section>
 
@@ -260,7 +288,7 @@
           <article class="bundle-plan-card">
             <span class="bundle-plan-chip">Plan mensual</span>
             <h3>1 mes</h3>
-            <p class="bundle-plan-price">US$ 6</p>
+            <p class="bundle-plan-price">US$ 10</p>
             <p class="bundle-plan-copy">Incluye acceso a todos los complementos y a las actualizaciones publicadas durante el mes.</p>
             <ul class="bundle-plan-features">
               <li>Todos los complementos BIM Ingenieros</li>
@@ -273,7 +301,7 @@
           <article class="bundle-plan-card bundle-plan-card--featured">
             <span class="bundle-plan-chip">Más elegido</span>
             <h3>6 meses</h3>
-            <p class="bundle-plan-price">US$ 20</p>
+            <p class="bundle-plan-price">US$ 50</p>
             <p class="bundle-plan-copy">Una opción equilibrada para equipos que quieren continuidad, soporte operativo y acceso extendido a nuevas mejoras.</p>
             <ul class="bundle-plan-features">
               <li>Todos los complementos BIM Ingenieros</li>
@@ -286,7 +314,7 @@
           <article class="bundle-plan-card">
             <span class="bundle-plan-chip">Plan anual</span>
             <h3>1 año</h3>
-            <p class="bundle-plan-price">US$ 30</p>
+            <p class="bundle-plan-price">US$ 90</p>
             <p class="bundle-plan-copy">Pensado para oficinas y equipos BIM que quieren estabilidad, mejoras continuas y el costo más eficiente por periodo.</p>
             <ul class="bundle-plan-features">
               <li>Todos los complementos BIM Ingenieros</li>

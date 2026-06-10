@@ -8,9 +8,9 @@
   "price": "Precio a consultar",
   "priceNote": "Solicita cotización según licencia, versión de Revit y alcance de implementación.",
   "ctaLabel": "Solicitar demostración",
-  "ctaUrl": "https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20complemento%20Rename.",
+  "ctaUrl": "https://wa.me/51968744058?text=Hola%20BIM%20Ingenieros%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20complemento%20Limpiar.",
   "videoNote": "Cada tema puede cargar su propio video de YouTube desde el JSON del complemento.",
-  "benefitsIntro": "Conoce cómo Rename puede integrarse a tus flujos BIM y mejorar el mantenimiento del proyecto dentro de Revit.",
+  "benefitsIntro": "Conoce cómo Limpiar puede integrarse a tus flujos BIM y mejorar el mantenimiento del proyecto dentro de Revit.",
   "heroBenefits": [
     "Integra distintas áreas del proyecto en una sola interfaz.",
     "Permite revisar uso antes de eliminar o aplicar cambios.",
@@ -92,10 +92,25 @@
     }
   ],
   "pricing": {
-    "isFree": true,
-    "label": "Complemento gratuito",
-    "title": "Disponible sin costo",
-    "note": "Este complemento puede solicitarse sin costo. Escríbenos para recibir acceso, guía de uso o demostración.",
-    "ctaLabel": "Solicitar acceso"
+    "label": "Oferta individual del complemento",
+    "note": "Licencia individual para este complemento. Solicita activación según versión de Revit y vigencia elegida.",
+    "ctaLabel": "Solicitar este complemento",
+    "plans": [
+      {
+        "term": "1 mes",
+        "price": "US$ 3",
+        "copy": "Acceso individual por 30 días."
+      },
+      {
+        "term": "6 meses",
+        "price": "US$ 10",
+        "copy": "Más tiempo de uso para equipos en producción."
+      },
+      {
+        "term": "1 año",
+        "price": "US$ 20",
+        "copy": "La opción más completa para trabajo continuo."
+      }
+    ]
   }
 }

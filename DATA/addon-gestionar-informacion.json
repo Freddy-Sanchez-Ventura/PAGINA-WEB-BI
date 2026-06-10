@@ -98,17 +98,17 @@
     "plans": [
       {
         "term": "1 mes",
-        "price": "US$ 3",
+        "price": "US$ 6",
         "copy": "Acceso individual por 30 días."
       },
       {
         "term": "6 meses",
-        "price": "US$ 10",
+        "price": "US$ 25",
         "copy": "Más tiempo de uso para equipos en producción."
       },
       {
         "term": "1 año",
-        "price": "US$ 20",
+        "price": "US$ 35",
         "copy": "La opción más completa para trabajo continuo."
       }
     ]
