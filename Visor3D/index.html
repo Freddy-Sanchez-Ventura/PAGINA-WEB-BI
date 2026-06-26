@@ -1,4 +1,4 @@
-<!doctype html> <html lang="es"> <head> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width,initial-scale=1"/> <title>Visor 3D | BIM Ingenieros</title> <meta name="description" content="Visor 3D de BIM Ingenieros para consultar modelos BIM exportados desde el navegador."/> <link rel="canonical" href="https://bimingenieros.online/Visor3D/"/> <link rel="stylesheet" href="assets/css/styles.css?v=bin2"/> <link rel="stylesheet" href="assets/css/dataPanel.css?v=bin2"/> <style> @media (max-width: 768px), (pointer: coarse) and (max-width: 1100px) {
+<!doctype html> <html lang="es"> <head> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width,initial-scale=1"/> <title>Visor 3D | BIM Ingenieros</title> <meta name="description" content="Visor 3D de BIM Ingenieros para consultar modelos BIM exportados desde el navegador."/> <link rel="canonical" href="https://bimingenieros.online/Visor3D/"/> <link rel="stylesheet" href="assets/css/styles.css?v=bin3"/> <link rel="stylesheet" href="assets/css/dataPanel.css?v=bin2"/> <style> @media (max-width: 768px), (pointer: coarse) and (max-width: 1100px) {
       .view-cube {
         width: 64px !important;
         height: 64px !important;
@@ -2246,6 +2246,332 @@
       align-items: center;
       gap: 18px;
       min-width: 0;
+      position: relative;
+      z-index: 2147483200;
+    }
+
+    .top-header {
+      position: relative;
+      z-index: 2147483100;
+      overflow: visible;
+    }
+
+    .general-settings-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      z-index: 2147483201;
+    }
+
+    .general-settings-button {
+      width: 36px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: linear-gradient(180deg, rgba(30,41,59,0.98), rgba(15,23,42,0.96));
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.26);
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      user-select: none;
+    }
+
+    .general-settings-button:hover,
+    .general-settings-button.active {
+      background: linear-gradient(180deg, #1d4ed8 0%, #0f172a 100%);
+      border-color: rgba(147, 197, 253, 0.92);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.34);
+    }
+
+    .general-settings-panel {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      width: min(560px, calc(100vw - 24px));
+      max-height: min(78vh, 720px);
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(15, 23, 42, 0.98);
+      box-shadow: 0 24px 54px rgba(2, 6, 23, 0.46);
+      z-index: 2147483202;
+      color: #e2e8f0;
+      overflow: auto;
+    }
+
+    .general-settings-panel.hidden {
+      display: none !important;
+    }
+
+    .general-settings-header {
+      position: sticky;
+      top: -14px;
+      z-index: 2147483203;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 12px;
+      margin: -14px -14px 12px;
+      padding: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px 16px 0 0;
+      background: rgba(15, 23, 42, 0.99);
+      backdrop-filter: blur(8px);
+    }
+
+    .general-settings-title {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .general-settings-title strong {
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .general-settings-title span {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.35;
+    }
+
+    .general-settings-section {
+      display: grid;
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .general-settings-section:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .general-settings-section-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: #bfdbfe;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .general-settings-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    .general-settings-row input[type="color"] {
+      width: 44px;
+      height: 32px;
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      border-radius: 8px;
+      background: #0f172a;
+      padding: 2px;
+      cursor: pointer;
+    }
+
+    .general-settings-row select {
+      min-width: 210px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(2, 6, 23, 0.72);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 0 8px;
+      outline: none;
+    }
+
+    .general-settings-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #0b7de3;
+      justify-self: end;
+      cursor: pointer;
+    }
+
+    .general-settings-row.is-disabled {
+      opacity: 0.48;
+    }
+
+    .general-settings-row.is-disabled span {
+      color: #64748b;
+    }
+
+    .general-settings-row select:disabled,
+    .general-settings-row input:disabled {
+      cursor: not-allowed;
+      color: #64748b;
+      border-color: rgba(100, 116, 139, 0.22);
+      background: rgba(15, 23, 42, 0.46);
+      filter: grayscale(0.35);
+    }
+
+    .general-settings-note {
+      margin: -2px 0 0;
+      color: #94a3b8;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .general-settings-range-wrap {
+      display: grid;
+      grid-template-columns: 1fr 46px;
+      align-items: center;
+      gap: 8px;
+      min-width: 190px;
+    }
+
+    .general-settings-range-wrap input[type="range"] {
+      width: 100%;
+    }
+
+    .general-settings-range-wrap span {
+      text-align: right;
+      color: #e2e8f0;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .general-settings-colors-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .general-settings-color-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      max-height: 260px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .general-settings-color-row {
+      display: grid;
+      grid-template-columns: 34px minmax(96px, 1fr) 28px 28px 28px;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.62);
+    }
+
+    .general-settings-color-input {
+      width: 30px !important;
+      height: 28px !important;
+      border-radius: 7px !important;
+    }
+
+    .general-settings-hex-input {
+      width: 100%;
+      min-width: 0;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(2, 6, 23, 0.54);
+      color: #e2e8f0;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 0 7px;
+      text-transform: uppercase;
+    }
+
+    .general-settings-mini-button,
+    .general-settings-secondary,
+    .general-settings-accept {
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(51, 65, 85, 0.9);
+      color: #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .general-settings-mini-button {
+      width: 28px;
+      height: 26px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .general-settings-mini-button:hover,
+    .general-settings-secondary:hover {
+      background: #334155;
+      color: #ffffff;
+    }
+
+    .general-settings-mini-button.danger:hover {
+      background: #dc2626;
+      border-color: #ef4444;
+    }
+
+    .general-settings-secondary,
+    .general-settings-accept {
+      min-height: 30px;
+      padding: 0 12px;
+      font-size: 12px;
+    }
+
+    .general-settings-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    .general-settings-accept {
+      background: linear-gradient(180deg, #0b7de3 0%, #005eb8 100%);
+      color: #ffffff;
+      border-color: rgba(96, 165, 250, 0.75);
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.25);
+    }
+
+    .general-settings-accept:hover {
+      background: linear-gradient(180deg, #148cf5 0%, #0066cc 100%);
+      border-color: rgba(147, 197, 253, 0.95);
+    }
+
+    @media (max-width: 760px) {
+      .top-left-actions {
+        gap: 8px;
+      }
+      .general-settings-panel {
+        left: -72px;
+        width: min(480px, calc(100vw - 18px));
+      }
+      .general-settings-header {
+        grid-template-columns: 1fr;
+      }
+      .general-settings-actions {
+        justify-content: flex-start;
+      }
+      .general-settings-color-list {
+        grid-template-columns: 1fr;
+      }
     }
 
     .fullscreen-toggle-button {
@@ -2255,30 +2581,30 @@
       min-height: 34px;
       padding: 0 14px;
       border-radius: 10px;
-      border: 1px solid rgba(96, 165, 250, 0.75);
-      background: linear-gradient(180deg, #0b7de3 0%, #005eb8 100%);
+      border: 1px solid rgba(148, 163, 184, 0.85);
+      background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
       color: #ffffff;
       font-weight: 800;
       font-size: 13px;
       line-height: 1;
       letter-spacing: 0.1px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.28);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.32);
       transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       white-space: nowrap;
       user-select: none;
     }
 
     .fullscreen-toggle-button:hover {
-      background: linear-gradient(180deg, #148cf5 0%, #0066cc 100%);
-      border-color: rgba(147, 197, 253, 0.95);
-      box-shadow: 0 10px 24px rgba(0, 102, 204, 0.36);
+      background: linear-gradient(180deg, #273449 0%, #182235 100%);
+      border-color: rgba(203, 213, 225, 0.95);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
       transform: translateY(-1px);
     }
 
     .fullscreen-toggle-button:active {
       transform: translateY(0);
-      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.28);
     }
 
     .fullscreen-toggle-button:focus-visible {
@@ -2287,9 +2613,19 @@
     }
 
     .fullscreen-toggle-button.is-fullscreen {
-      background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
-      border-color: rgba(148, 163, 184, 0.85);
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.32);
+      background: linear-gradient(180deg, #0b7de3 0%, #005eb8 100%);
+      border-color: rgba(96, 165, 250, 0.75);
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.28);
+    }
+
+    .fullscreen-toggle-button.is-fullscreen:hover {
+      background: linear-gradient(180deg, #148cf5 0%, #0066cc 100%);
+      border-color: rgba(147, 197, 253, 0.95);
+      box-shadow: 0 10px 24px rgba(0, 102, 204, 0.36);
+    }
+
+    .fullscreen-toggle-button.is-fullscreen:active {
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
     }
 
     body.viewer-pseudo-fullscreen {
@@ -2493,7 +2829,7 @@
         max-height: none !important;
         overflow: visible !important;
       }
-    } </style> </head> <body> <div class="app-shell"> <header class="top-header"> <div class="top-left-actions"> <a class="top-brand" href="../" aria-label="Volver a la página principal de BIM Ingenieros"> <img src="../img/Logo_Letra_Blanco.png" alt="BIM Ingenieros"/> </a> <button id="fullscreenToggleButton" class="fullscreen-toggle-button" type="button" aria-label="Entrar en pantalla completa"> Pantalla Completa </button> </div> <div class="top-actions"> <span id="loadStatus" class="header-status">Esperando carpeta matriz...</span> <label class="upload-button header-upload"> Cargar carpeta <input id="folderInput" type="file" webkitdirectory directory multiple/> </label> </div> </header> <div class="app" id="appLayout"> <aside class="sidebar" id="sidebar"> <div class="sidebar-toggle-row"> <span>Panel de control</span> </div> <section class="panel tree-panel project-panel"> <div class="panel-header"> <h2>Proyectos</h2> </div> <div id="projectTree" class="tree-list empty">Sin proyectos cargados</div> </section> <div id="sidebarRowSplitter" class="row-splitter" title="Arrastra para cambiar el alto"></div> <section class="panel tree-panel category-panel"> <div class="panel-header stacked"> <h2>Categorías</h2> <input id="categorySearchInput" class="tree-search" type="text" placeholder="Filtrar categorías..."/> <div class="tree-actions"> <button id="showAllCategories" class="small-button">Seleccionar todo</button> <button id="hideAllCategories" class="small-button">Ninguno</button> </div> </div> <div id="categoryList" class="tree-list empty">Sin datos</div> </section> </aside> <div id="columnSplitter" class="column-splitter" title="Arrastra para cambiar el ancho"></div> <main class="viewer-column"> <div class="viewer-card"> <canvas id="viewerCanvas"></canvas> <div id="viewCube" class="view-cube" title="ViewCube"> <canvas id="viewCubeCanvas"></canvas> </div> <div class="mobile-panel-buttons" aria-label="Paneles desplegables"> <button id="mobileLeftPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="sidebar">☰ Proyectos</button> <button id="mobileDataPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="massInfoPanel">Datos</button> <button id="mobilePropertiesButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="propertiesContent">Propiedades</button> <button id="mobileClashPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="clashPanel">Interferencias</button> <button id="mobileWorksPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="worksPanel">Obras</button> </div> <div class="viewer-actions floating-actions"> <button id="gridButton" title="Mostrar / ocultar cuadrícula nivel 00">▦</button> <button id="fitButton" title="Ajustar vista">⛶</button> <button id="isolateButton" title="Aislar selección"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/></svg></button> <button id="hideSelectedButton" title="Ocultar selección"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/><path d="M4 20 20 4"/></svg></button> <button id="fadeUnselectedButton" title="Transparentar no seleccionados">◑</button> <button id="sectionBoxButton" title="Caja de corte"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8.5 12 5l6 3.5v7L12 19l-6-3.5z"/><path d="M6 8.5 12 12l6-3.5"/><path d="M12 12v7"/></svg></button> <button id="measureButton" title="Medir"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 17 4l3 3L7 20z"/><path d="M8 16l-2-2"/><path d="M11 13l-2-2"/><path d="M14 10l-2-2"/><path d="M17 7l-2-2"/></svg></button> <button id="measureAddButton" class="measure-mini-button hidden" title="Agregar medida">+</button> <button id="measureRemoveButton" class="measure-mini-button hidden" title="Quitar última medida">−</button> <button id="elevationButton" title="Consultar elevación"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h14"/><path d="M7 7h10l-5 8z"/><path d="M12 15v5"/></svg></button> <button id="elevationAddButton" class="measure-mini-button hidden" title="Agregar elevación">+</button> <button id="elevationRemoveButton" class="measure-mini-button hidden" title="Quitar última elevación">−</button> <button id="resetButton" title="Restablecer">↺</button> </div> <div id="viewerOverlay" class="viewer-overlay"> <strong>ExportModel Viewer</strong> <span>Carga la carpeta matriz para visualizar los modelos exportados.</span> </div> <div id="loadingPanel" class="loading-panel hidden"> <div class="loading-card"> <strong id="loadingTitle">Cargando modelo...</strong> <span id="loadingDetail">Preparando información.</span> <div class="loading-bar"> <div id="loadingBar" class="loading-bar-fill"></div> </div> <small id="loadingPercent">0%</small> <button id="loadingCancelButton" class="loading-cancel-button hidden" type="button">Cancelar</button> </div> </div> </div> <div id="viewerRowSplitter" class="viewer-row-splitter" title="Arrastra para cambiar el alto del visor y Data"></div> <section id="massInfoPanel" class="mass-info-panel"> <div id="savedConfigBar" class="saved-config-bar"> <button id="savedConfigSaveButton" class="saved-config-save-button" title="Guardar configuración">💾</button> <input id="savedConfigNameInput" class="saved-config-name-input" type="text" placeholder="Nombre de configuración"/> <select id="savedConfigSelect" class="saved-config-select" title="Configuraciones guardadas"> <option value="">&#60;Ninguno&#62;</option> </select> <button id="savedConfigDeleteButton" class="saved-config-delete-button" title="Eliminar configuración activa">Eliminar</button> </div> <div id="massConfigPanel" class="mass-column config-column"></div> <div id="massColumnSplitter" class="mass-column-splitter" title="Arrastra para cambiar el ancho"></div> <div id="massDataPanel" class="mass-column data-column"></div> </section> </main> <div id="propertiesSplitter" class="column-splitter properties-splitter" title="Arrastra para cambiar el ancho"></div> <aside class="properties-column"> <section class="panel properties-panel"> <div class="properties-header"> <h2>Propiedades</h2> <input id="propertiesSearchInput" class="properties-search" type="text" placeholder="Filtrar propiedades..."/> </div> <div id="propertiesContent" class="properties-content empty">Selecciona un elemento.</div> </section> </aside> <div id="clashSplitter" class="column-splitter clash-splitter hidden" title="Panel Interferencias"></div> <aside id="clashPanel" class="clash-column hidden"> <section class="panel clash-panel"> <div id="clashElementsSection" class="clash-section"> <button id="clashElementsToggle" class="clash-section-toggle" type="button" aria-expanded="true"> <span class="clash-section-title"><span class="clash-section-caret">▶</span><span>Configurar Interferencias</span><small id="clashStatus">Sin evaluación</small></span> </button> <div id="clashElementsBody" class="clash-section-body clash-config-row"> <div class="clash-groups"> <div class="clash-group"> <h3>Grupo A</h3> <div id="clashGroupATree" class="clash-tree empty">Sin proyectos</div> <div class="gi-section clash-filter-section"> <button type="button" class="gi-section-header">▼ Filtros (Elementos no considerados)</button> <div class="gi-filter-toolbar"> <span class="gi-search-icon">⌕</span> <input id="clashGroupAFilterSearch" class="gi-input" type="text" placeholder=""/> <button id="clashGroupAAddFilter" type="button" class="gi-button">Agregar filtro</button> </div> <div id="clashGroupAFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div> </div> </div> <div class="clash-group"> <h3>Grupo B</h3> <div id="clashGroupBTree" class="clash-tree empty">Sin proyectos</div> <div class="gi-section clash-filter-section"> <button type="button" class="gi-section-header">▼ Filtros (Elementos no considerados)</button> <div class="gi-filter-toolbar"> <span class="gi-search-icon">⌕</span> <input id="clashGroupBFilterSearch" class="gi-input" type="text" placeholder=""/> <button id="clashGroupBAddFilter" type="button" class="gi-button">Agregar filtro</button> </div> <div id="clashGroupBFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div> </div> </div> </div> <div class="clash-controls"> <label class="clash-field">Tolerancia mm³ <input id="clashToleranceInput" type="number" min="0" step="1" value="0"/> </label> <label class="clash-field">Nombre evaluación <input id="clashNameInput" type="text" placeholder="Interferencia 01"/> </label> <button id="detectClashesButton" type="button" class="small-button">Detectar Interferencias</button> </div> </div> </div> <div id="clashInterferencesSection" class="clash-section"> <button id="clashInterferencesToggle" class="clash-section-toggle" type="button" aria-expanded="true"> <span class="clash-section-title"><span class="clash-section-caret">▶</span><span>Interferencias</span></span> </button> <div id="clashInterferencesBody" class="clash-section-body clash-interferences-body"> <div class="clash-row clash-evaluations-row"> <h3>Evaluaciones</h3> <div id="clashEvaluationsList" class="clash-list"><div class="clash-empty">Sin evaluaciones.</div></div> </div> <div class="clash-row clash-results-row"> <div class="clash-results-titlebar"> <h3>Elementos con Interferencia</h3> <div class="clash-report-actions"> <button id="clashExcelReportButton" type="button" class="clash-report-button">Reporte Excel</button> </div> </div> <div id="clashResultsList" class="clash-list"><div class="clash-empty">Selecciona una evaluación.</div></div> </div> </div> </div> </section> </aside> <div id="worksSplitter" class="column-splitter works-splitter hidden" title="Panel Obras"></div> <aside id="worksPanel" class="works-column hidden"> <section class="panel works-panel"> <div class="properties-header"> <h2>Obras</h2> </div> <div id="worksConfigSection" class="works-section collapsed"> <button id="worksConfigToggle" type="button" class="works-section-toggle" aria-expanded="false"> <span class="works-section-caret">▶</span> <span>Configuración</span> </button> <div id="worksConfigBody" class="works-section-body"> <div class="works-config-grid"> <div class="works-config-left"> <div class="works-field-block"> <div class="works-field-label">Código de partida</div> <div id="worksCodeList" class="works-assigned-list" data-works-target="code" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Descripción de partida</div> <div id="worksDescriptionList" class="works-assigned-list" data-works-target="description" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Unidad de partida</div> <div id="worksUnitList" class="works-assigned-list" data-works-target="unit" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Mensual</div> <div id="worksMonthlyList" class="works-assigned-list works-single-list" data-works-target="monthly" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Semanal</div> <div id="worksWeeklyList" class="works-assigned-list works-single-list" data-works-target="weekly" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Diario</div> <div id="worksDailyList" class="works-assigned-list works-single-list" data-works-target="daily" tabindex="0"></div> </div> </div> <div class="works-config-right"> <label class="works-field-label" for="worksParameterSearch"> <span>Parámetros disponibles</span> <input id="worksParameterSearch" class="works-input works-parameter-search" type="text" placeholder="Filtrar parámetros..." autocomplete="off"/> </label> <div id="worksParametersList" class="works-parameter-list"></div> </div> </div> <div class="works-partidas-panel"> <div class="works-partidas-toolbar"> <strong>Estructura de partidas</strong> <span id="worksPartidasSummary" class="works-partidas-summary">Sin datos</span> </div> <div class="works-partidas-search-row"> <span class="works-partidas-search-icon">⌕</span> <input id="worksPartidasSearch" class="works-partidas-search-input" type="text" placeholder="Buscar partida..." autocomplete="off"/> </div> <div class="works-partidas-table-wrap"> <table class="works-partidas-table" aria-label="Estructura de partidas"> <thead> <tr> <th>Código</th> <th>Descripción</th> <th>Unidad</th> <th>Metrado total</th> <th>Usar</th> </tr> </thead> <tbody id="worksPartidasTableBody"> <tr><td colspan="5"><div class="works-partidas-empty">Configura los parámetros de código, descripción y unidad para recuperar las partidas.</div></td></tr> </tbody> </table> </div> </div> </div> </div> <div id="worksSummarySection" class="works-section"> <button id="worksSummaryToggle" type="button" class="works-section-toggle" aria-expanded="true"> <span class="works-section-caret">▶</span> <span>Resumen General de Obra</span> </button> <div id="worksSummaryBody" class="works-section-body"> <div id="worksSummaryContent" class="works-summary-panel"> <div class="works-summary-empty">Configura las partidas y los parámetros de avance para ver el resumen general de obra.</div> </div> </div> </div> </section> </aside> </div> </div> <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script> <script src="assets/js/debugLogger.js"></script> <script src="assets/js/cacheService.js"></script> <script src="assets/js/parseWorker.js?v=bin96"></script> <script src="assets/js/binaryGeometryLoader.js?v=bin96"></script> <script src="assets/js/bimLoader.js?v=bin96"></script> <script src="assets/js/canvasViewer.js?v=bin115"></script> <script src="assets/js/dataStore.js?v=bin3"></script> <script src="assets/js/configState.js"></script> <script src="assets/js/groupingService.js"></script> <script src="assets/js/colorFilterService.js"></script> <script src="assets/js/massInfoPanel.js?v=bin7"></script> <script src="assets/js/ui.js?v=bin110"></script> <script src="assets/js/app.js?v=bin97"></script> <script> (function () {
+    } </style> </head> <body> <div class="app-shell"> <header class="top-header"> <div class="top-left-actions"> <a class="top-brand" href="../" aria-label="Volver a la página principal de BIM Ingenieros"> <img src="../img/Logo_Letra_Blanco.png" alt="BIM Ingenieros"/> </a> <div class="general-settings-wrapper"> <button id="generalSettingsButton" class="general-settings-button" type="button" aria-label="Configuración general" aria-expanded="false" title="Configuración general">⚙</button> <div id="generalSettingsPanel" class="general-settings-panel hidden" role="dialog" aria-label="Configuración general"> <div class="general-settings-header"> <div class="general-settings-title"> <strong>Configuración general</strong> <span>Estos cambios se aplican al aceptar y se guardan para las siguientes sesiones.</span> </div> <div class="general-settings-actions"> <button id="resetGeneralSettingsButton" class="general-settings-secondary" type="button">Restablecer</button> <button id="acceptGeneralSettingsButton" class="general-settings-accept" type="button">Aceptar</button> </div> </div> <section class="general-settings-section"> <div class="general-settings-section-title">Visor 3D</div> <label class="general-settings-row"> <span>Color de fondo</span> <input id="viewerBackgroundColorInput" type="color" value="#ffffff"/> </label> <label class="general-settings-row"> <span>Tipo de proyección</span> <select id="viewerProjectionModeInput"> <option value="orthographic">Ortográfica</option> <option value="perspective">Perspectiva</option> </select> </label> <label class="general-settings-row"> <span>Tipo de navegación</span> <select id="viewerNavigationModeInput"> <option value="orbit">Orbitar</option> <option value="free">Recorrido libre</option> </select> </label> <label class="general-settings-row"> <span>Permitir atravesar elementos</span> <input id="viewerAllowWalkThroughInput" type="checkbox" checked/> </label> <label class="general-settings-row"> <span>Velocidad de recorrido</span> <select id="viewerWalkSpeedInput"> <option value="low">Baja</option> <option value="medium">Media</option> <option value="high">Alta</option> </select> </label> <p class="general-settings-note">Para recorrer interiores, usa Perspectiva + Recorrido libre. Con atravesar elementos activo, la cámara puede pasar muros y suelos.</p> </section> <section class="general-settings-section"> <div class="general-settings-section-title">Transparencia general</div> <label class="general-settings-row"> <span>Color aplicado</span> <input id="viewerTransparencyColorInput" type="color" value="#bebebe"/> </label> <label class="general-settings-row"> <span>Porcentaje de transparencia</span> <span class="general-settings-range-wrap"> <input id="viewerTransparencyPercentInput" type="range" min="0" max="100" step="5" value="90"/> <span id="viewerTransparencyPercentValue">90%</span> </span> </label> </section> <section class="general-settings-section"> <div class="general-settings-colors-header"> <div class="general-settings-section-title">Colores predefinidos</div> <button id="addPredefinedColorButton" class="general-settings-secondary" type="button">Agregar</button> </div> <div id="predefinedColorsList" class="general-settings-color-list"></div> </section> </div> </div> <button id="fullscreenToggleButton" class="fullscreen-toggle-button" type="button" aria-label="Entrar en pantalla completa"> Pantalla Completa </button> </div> <div class="top-actions"> <span id="loadStatus" class="header-status">Esperando carpeta matriz...</span> <label class="upload-button header-upload"> Cargar carpeta <input id="folderInput" type="file" webkitdirectory directory multiple/> </label> </div> </header> <div class="app" id="appLayout"> <aside class="sidebar" id="sidebar"> <div class="sidebar-toggle-row"> <span>Panel de control</span> </div> <section class="panel tree-panel project-panel"> <div class="panel-header"> <h2>Proyectos</h2> </div> <div id="projectTree" class="tree-list empty">Sin proyectos cargados</div> </section> <div id="sidebarRowSplitter" class="row-splitter" title="Arrastra para cambiar el alto"></div> <section class="panel tree-panel category-panel"> <div class="panel-header stacked"> <h2>Categorías</h2> <input id="categorySearchInput" class="tree-search" type="text" placeholder="Filtrar categorías..."/> <div class="tree-actions"> <button id="showAllCategories" class="small-button">Seleccionar todo</button> <button id="hideAllCategories" class="small-button">Ninguno</button> </div> </div> <div id="categoryList" class="tree-list empty">Sin datos</div> </section> </aside> <div id="columnSplitter" class="column-splitter" title="Arrastra para cambiar el ancho"></div> <main class="viewer-column"> <div class="viewer-card"> <canvas id="viewerCanvas"></canvas> <div id="viewCube" class="view-cube" title="ViewCube"> <canvas id="viewCubeCanvas"></canvas> </div> <div class="mobile-panel-buttons" aria-label="Paneles desplegables"> <button id="mobileLeftPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="sidebar">☰ Proyectos</button> <button id="mobileDataPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="massInfoPanel">Datos</button> <button id="mobilePropertiesButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="propertiesContent">Propiedades</button> <button id="mobileClashPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="clashPanel">Interferencias</button> <button id="mobileWorksPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="worksPanel">Obras</button> </div> <div class="viewer-actions floating-actions"> <button id="gridButton" title="Mostrar / ocultar cuadrícula nivel 00">▦</button> <button id="areaZoomButton" title="Zoom por ventana (Z+R)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6"/><path d="M7.5 10.5h6"/></svg></button> <button id="fitButton" title="Ajustar vista">⛶</button> <button id="isolateButton" title="Aislar selección"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/></svg></button> <button id="hideSelectedButton" title="Ocultar selección"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/><path d="M4 20 20 4"/></svg></button> <button id="fadeUnselectedButton" title="Transparentar no seleccionados">◑</button> <button id="sectionBoxButton" title="Caja de corte"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8.5 12 5l6 3.5v7L12 19l-6-3.5z"/><path d="M6 8.5 12 12l6-3.5"/><path d="M12 12v7"/></svg></button> <button id="measureButton" title="Medir"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 17 4l3 3L7 20z"/><path d="M8 16l-2-2"/><path d="M11 13l-2-2"/><path d="M14 10l-2-2"/><path d="M17 7l-2-2"/></svg></button> <button id="measureAddButton" class="measure-mini-button hidden" title="Agregar medida">+</button> <button id="measureRemoveButton" class="measure-mini-button hidden" title="Quitar última medida">−</button> <button id="elevationButton" title="Consultar elevación"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h14"/><path d="M7 7h10l-5 8z"/><path d="M12 15v5"/></svg></button> <button id="elevationAddButton" class="measure-mini-button hidden" title="Agregar elevación">+</button> <button id="elevationRemoveButton" class="measure-mini-button hidden" title="Quitar última elevación">−</button> <button id="resetButton" title="Restablecer">↺</button> </div> <div id="viewerOverlay" class="viewer-overlay"> <strong>ExportModel Viewer</strong> <span>Carga la carpeta matriz para visualizar los modelos exportados.</span> </div> <div id="loadingPanel" class="loading-panel hidden"> <div class="loading-card"> <strong id="loadingTitle">Cargando modelo...</strong> <span id="loadingDetail">Preparando información.</span> <div class="loading-bar"> <div id="loadingBar" class="loading-bar-fill"></div> </div> <small id="loadingPercent">0%</small> <button id="loadingCancelButton" class="loading-cancel-button hidden" type="button">Cancelar</button> </div> </div> </div> <div id="viewerRowSplitter" class="viewer-row-splitter" title="Arrastra para cambiar el alto del visor y Data"></div> <section id="massInfoPanel" class="mass-info-panel"> <div id="savedConfigBar" class="saved-config-bar"> <button id="savedConfigSaveButton" class="saved-config-save-button" title="Guardar configuración">💾</button> <input id="savedConfigNameInput" class="saved-config-name-input" type="text" placeholder="Nombre de configuración"/> <select id="savedConfigSelect" class="saved-config-select" title="Configuraciones guardadas"> <option value="">&#60;Ninguno&#62;</option> </select> <button id="savedConfigDeleteButton" class="saved-config-delete-button" title="Eliminar configuración activa">Eliminar</button> </div> <div id="massConfigPanel" class="mass-column config-column"></div> <div id="massColumnSplitter" class="mass-column-splitter" title="Arrastra para cambiar el ancho"></div> <div id="massDataPanel" class="mass-column data-column"></div> </section> </main> <div id="propertiesSplitter" class="column-splitter properties-splitter" title="Arrastra para cambiar el ancho"></div> <aside class="properties-column"> <section class="panel properties-panel"> <div class="properties-header"> <h2>Propiedades</h2> <input id="propertiesSearchInput" class="properties-search" type="text" placeholder="Filtrar propiedades..."/> </div> <div id="propertiesContent" class="properties-content empty">Selecciona un elemento.</div> </section> </aside> <div id="clashSplitter" class="column-splitter clash-splitter hidden" title="Panel Interferencias"></div> <aside id="clashPanel" class="clash-column hidden"> <section class="panel clash-panel"> <div id="clashElementsSection" class="clash-section"> <button id="clashElementsToggle" class="clash-section-toggle" type="button" aria-expanded="true"> <span class="clash-section-title"><span class="clash-section-caret">▶</span><span>Configurar Interferencias</span><small id="clashStatus">Sin evaluación</small></span> </button> <div id="clashElementsBody" class="clash-section-body clash-config-row"> <div class="clash-groups"> <div class="clash-group"> <h3>Grupo A</h3> <div id="clashGroupATree" class="clash-tree empty">Sin proyectos</div> <div class="gi-section clash-filter-section"> <button type="button" class="gi-section-header">▼ Filtros (Elementos no considerados)</button> <div class="gi-filter-toolbar"> <span class="gi-search-icon">⌕</span> <input id="clashGroupAFilterSearch" class="gi-input" type="text" placeholder=""/> <button id="clashGroupAAddFilter" type="button" class="gi-button">Agregar filtro</button> </div> <div id="clashGroupAFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div> </div> </div> <div class="clash-group"> <h3>Grupo B</h3> <div id="clashGroupBTree" class="clash-tree empty">Sin proyectos</div> <div class="gi-section clash-filter-section"> <button type="button" class="gi-section-header">▼ Filtros (Elementos no considerados)</button> <div class="gi-filter-toolbar"> <span class="gi-search-icon">⌕</span> <input id="clashGroupBFilterSearch" class="gi-input" type="text" placeholder=""/> <button id="clashGroupBAddFilter" type="button" class="gi-button">Agregar filtro</button> </div> <div id="clashGroupBFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div> </div> </div> </div> <div class="clash-controls"> <label class="clash-field">Tolerancia mm³ <input id="clashToleranceInput" type="number" min="0" step="1" value="0"/> </label> <label class="clash-field">Nombre evaluación <input id="clashNameInput" type="text" placeholder="Interferencia 01"/> </label> <button id="detectClashesButton" type="button" class="small-button">Detectar Interferencias</button> </div> </div> </div> <div id="clashInterferencesSection" class="clash-section"> <button id="clashInterferencesToggle" class="clash-section-toggle" type="button" aria-expanded="true"> <span class="clash-section-title"><span class="clash-section-caret">▶</span><span>Interferencias</span></span> </button> <div id="clashInterferencesBody" class="clash-section-body clash-interferences-body"> <div class="clash-row clash-evaluations-row"> <h3>Evaluaciones</h3> <div id="clashEvaluationsList" class="clash-list"><div class="clash-empty">Sin evaluaciones.</div></div> </div> <div class="clash-row clash-results-row"> <div class="clash-results-titlebar"> <h3>Elementos con Interferencia</h3> <div class="clash-report-actions"> <button id="clashExcelReportButton" type="button" class="clash-report-button">Reporte Excel</button> </div> </div> <div id="clashResultsList" class="clash-list"><div class="clash-empty">Selecciona una evaluación.</div></div> </div> </div> </div> </section> </aside> <div id="worksSplitter" class="column-splitter works-splitter hidden" title="Panel Obras"></div> <aside id="worksPanel" class="works-column hidden"> <section class="panel works-panel"> <div class="properties-header"> <h2>Obras</h2> </div> <div id="worksConfigSection" class="works-section collapsed"> <button id="worksConfigToggle" type="button" class="works-section-toggle" aria-expanded="false"> <span class="works-section-caret">▶</span> <span>Configuración</span> </button> <div id="worksConfigBody" class="works-section-body"> <div class="works-config-grid"> <div class="works-config-left"> <div class="works-field-block"> <div class="works-field-label">Código de partida</div> <div id="worksCodeList" class="works-assigned-list" data-works-target="code" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Descripción de partida</div> <div id="worksDescriptionList" class="works-assigned-list" data-works-target="description" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Unidad de partida</div> <div id="worksUnitList" class="works-assigned-list" data-works-target="unit" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Mensual</div> <div id="worksMonthlyList" class="works-assigned-list works-single-list" data-works-target="monthly" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Semanal</div> <div id="worksWeeklyList" class="works-assigned-list works-single-list" data-works-target="weekly" tabindex="0"></div> </div> <div class="works-field-block"> <div class="works-field-label">Diario</div> <div id="worksDailyList" class="works-assigned-list works-single-list" data-works-target="daily" tabindex="0"></div> </div> </div> <div class="works-config-right"> <label class="works-field-label" for="worksParameterSearch"> <span>Parámetros disponibles</span> <input id="worksParameterSearch" class="works-input works-parameter-search" type="text" placeholder="Filtrar parámetros..." autocomplete="off"/> </label> <div id="worksParametersList" class="works-parameter-list"></div> </div> </div> <div class="works-partidas-panel"> <div class="works-partidas-toolbar"> <strong>Estructura de partidas</strong> <span id="worksPartidasSummary" class="works-partidas-summary">Sin datos</span> </div> <div class="works-partidas-search-row"> <span class="works-partidas-search-icon">⌕</span> <input id="worksPartidasSearch" class="works-partidas-search-input" type="text" placeholder="Buscar partida..." autocomplete="off"/> </div> <div class="works-partidas-table-wrap"> <table class="works-partidas-table" aria-label="Estructura de partidas"> <thead> <tr> <th>Código</th> <th>Descripción</th> <th>Unidad</th> <th>Metrado total</th> <th>Usar</th> </tr> </thead> <tbody id="worksPartidasTableBody"> <tr><td colspan="5"><div class="works-partidas-empty">Configura los parámetros de código, descripción y unidad para recuperar las partidas.</div></td></tr> </tbody> </table> </div> </div> </div> </div> <div id="worksSummarySection" class="works-section"> <button id="worksSummaryToggle" type="button" class="works-section-toggle" aria-expanded="true"> <span class="works-section-caret">▶</span> <span>Resumen General de Obra</span> </button> <div id="worksSummaryBody" class="works-section-body"> <div id="worksSummaryContent" class="works-summary-panel"> <div class="works-summary-empty">Configura las partidas y los parámetros de avance para ver el resumen general de obra.</div> </div> </div> </div> </section> </aside> </div> </div> <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script> <script src="assets/js/debugLogger.js"></script> <script src="assets/js/cacheService.js"></script> <script src="assets/js/parseWorker.js?v=bin96"></script> <script src="assets/js/binaryGeometryLoader.js?v=bin96"></script> <script src="assets/js/bimLoader.js?v=bin96"></script> <script src="assets/js/generalSettings.js?v=bin3"></script> <script src="assets/js/canvasViewer.js?v=bin125"></script> <script src="assets/js/dataStore.js?v=bin4"></script> <script src="assets/js/configState.js"></script> <script src="assets/js/groupingService.js"></script> <script src="assets/js/colorFilterService.js"></script> <script src="assets/js/massInfoPanel.js?v=bin8"></script> <script src="assets/js/ui.js?v=bin112"></script> <script src="assets/js/app.js?v=bin97"></script> <script> (function () {
       function getFullscreenElement() {
         return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || null;
       }
