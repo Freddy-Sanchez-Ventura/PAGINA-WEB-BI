@@ -1,0 +1,1 @@
+document.addEventListener('click',(_0x72830)=>{const _0x72831=_0x72830 .target.closest('a[href^="#"]');if(!_0x72831)return;const _0x72832=_0x72831 .getAttribute('href').slice(1);const _0x72833=document.getElementById(_0x72832);if(_0x72833){_0x72830 .preventDefault();_0x72833 .scrollIntoView({behavior:'smooth',block:'start'});}});
