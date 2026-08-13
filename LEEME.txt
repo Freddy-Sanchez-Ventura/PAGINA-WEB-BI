@@ -1,0 +1,15 @@
+ACTUALIZACIÓN: COMPLEMENTO EXPORTAR MODELO
+
+Esta carpeta conserva la estructura del proyecto.
+Copia su contenido sobre la raíz de tu sitio y permite reemplazar los archivos existentes.
+
+Corrección más reciente:
+- En la modalidad "Trabajo en la nube" se mantiene únicamente la tarjeta de cotización personalizada.
+- Se retiraron las viñetas inferiores y los textos repetitivos señalados en la captura.
+- Los precios y beneficios del plan de trabajo local se mantienen sin cambios.
+
+Archivos principales:
+- DATA/addon-exportar-modelo.json
+- complementos/exportar-modelo/index.html
+- JS/addon-detail.js
+- CSS/addon-detail.css

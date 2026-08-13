@@ -1,1 +1,0 @@
-document.addEventListener('click',(_0x5da20)=>{const _0x5da21=_0x5da20 .target.closest("\x61\x5b\x68\x72\x65\x66\x5e\x3d\x22\x23\x22\x5d");if(!_0x5da21)return;const _0x5da22=_0x5da21 .getAttribute('href').slice(1);const _0x5da23=document.getElementById(_0x5da22);if(_0x5da23){_0x5da20 .preventDefault();_0x5da23 .scrollIntoView({behavior:'smooth',block:'start'});}});

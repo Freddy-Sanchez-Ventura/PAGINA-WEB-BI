@@ -1,10 +1,8 @@
-<!DOCTYPE html> <html lang="es"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="Introducción al desarrollo con Revit API, sus conceptos principales y aplicaciones para automatizar procesos BIM." /> <title>API de Revit · Introducción</title> <link rel="stylesheet" href="../CSS/a82b0292ad4a9698e.css" /> </head> <body> <article class="doc"> <header class="doc-header"> <h1>API de Revit · Introducción y Arquitectura</h1> <p class="muted">Última actualización: <time id="updated"></time></p> </header> <section> <h2>¿Qué es la API de Revit?</h2> <p>
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content="Introducción al desarrollo con Revit API, sus conceptos principales y aplicaciones para automatizar procesos BIM." /><title>API de Revit · Introducción</title><link rel="stylesheet" href="../CSS/RevitAPI.css" /></head><body><article class="doc"><header class="doc-header"><h1>API de Revit · Introducción y Arquitectura</h1><p class="muted">Última actualización: <time id="updated"></time></p></header><section><h2>¿Qué es la API de Revit?</h2><p>
         La API de Autodesk Revit permite automatizar flujos, crear comandos personalizados y
         extender el comportamiento del software mediante <strong>.NET (C#)</strong>.
         Provee acceso a documentos, elementos, parámetros, transacciones y eventos.
-      </p> </section> <section> <h2>Arquitectura básica</h2> <ul> <li><strong>IExternalCommand</strong>: comandos que el usuario ejecuta desde Revit.</li> <li><strong>IExternalApplication</strong>: add-ins que gestionan ciclo de vida (arranque/cierre), pestañas y botones.</li> <li><strong>Transacciones</strong>: bloque de cambios atómicos dentro del documento.</li> </ul> </section> <section> <h2>Ejemplo mínimo de <code>IExternalCommand</code></h2>
-
-      <pre class="code"><code class="language-csharp">
+      </p></section><section><h2>Arquitectura básica</h2><ul><li><strong>IExternalCommand</strong>: comandos que el usuario ejecuta desde Revit.</li><li><strong>IExternalApplication</strong>: add-ins que gestionan ciclo de vida (arranque/cierre), pestañas y botones.</li><li><strong>Transacciones</strong>: bloque de cambios atómicos dentro del documento.</li></ul></section><section><h2>Ejemplo mínimo de <code>IExternalCommand</code></h2><pre class="code"><code class="language-csharp">
 // Attribute para ejecutar en Revit
 [Transaction(TransactionMode.Manual)]
 public class HelloRevit : IExternalCommand
@@ -15,9 +13,4 @@ public class HelloRevit : IExternalCommand
     return Result.Succeeded;
   }
 }
-      </code></pre>
-
-      <p class="tip">Compílalo como <em>Class Library</em>, crea el archivo <code>.addin</code> y colócalo en la carpeta de Addins de tu versión de Revit.</p> </section> <section> <h2>Recursos recomendados</h2> <ol> <li>Revit API Docs</li> <li>The Building Coder</li> <li>Ejemplos oficiales de Autodesk</li> </ol> </section> <footer class="doc-footer"> <button class="copy-btn" data-copy="#copyTarget">Copiar ruta de Addins</button> <code id="copyTarget">%PROGRAMDATA%\Autodesk\Revit\Addins\2024</code> </footer> </article>
-
-  <script src="../JS/a3723d22c7f5ebd30.js"></script>
-</body> </html>
+      </code></pre><p class="tip">Compílalo como <em>Class Library</em>, crea el archivo <code>.addin</code> y colócalo en la carpeta de Addins de tu versión de Revit.</p></section><section><h2>Recursos recomendados</h2><ol><li>Revit API Docs</li><li>The Building Coder</li><li>Ejemplos oficiales de Autodesk</li></ol></section><footer class="doc-footer"><button class="copy-btn" data-copy="#copyTarget">Copiar ruta de Addins</button><code id="copyTarget">%PROGRAMDATA%\Autodesk\Revit\Addins\2024</code></footer></article><script src="../JS/RevitAPI.js"></script></body></html>

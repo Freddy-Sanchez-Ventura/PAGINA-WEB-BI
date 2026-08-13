@@ -1,0 +1,1 @@
+document.addEventListener('\x63\x6c\x69\x63\x6b',(_B)=>{const _C=_B.target.closest('\x61\x5b\x68\x72\x65\x66\x5e\x3d\x22\x23\x22\x5d');if(!_C)return;const _D=_C.getAttribute('\x68\x72\x65\x66').slice(1);const _E=document.getElementById(_D);if(_E){_B.preventDefault();_E.scrollIntoView({behavior:'\x73\x6d\x6f\x6f\x74\x68',block:'\x73\x74\x61\x72\x74'});}});
