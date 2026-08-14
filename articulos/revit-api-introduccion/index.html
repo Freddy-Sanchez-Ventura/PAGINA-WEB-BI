@@ -37,6 +37,7 @@ public class HelloCommand : IExternalCommand
   .WhereElementIsNotElementType()
   .Cast&lt;Wall&gt;()
   .ToList();
+
 var conParametro = walls.Where(w => w.LookupParameter("Comentarios")?.AsString()?.Contains("EJE") == true);
 </code></pre><div class="note">Tip: Evita traer todo el documento; acota el ámbito (vista o categoría).</div></section><section class="card" id="parametros"><h2 class="h2">Parámetros: lectura/escritura segura</h2><ul class="list"><li>Identifica <em>BuiltInParameter</em> cuando exista; es más robusto que el nombre.</li><li>Lee <em>StorageType</em> para convertir correctamente: <code>Integer</code>, <code>Double</code>, <code>String</code>, <code>ElementId</code>.</li><li>Respeta <em>IsReadOnly</em> y el contexto (tipo/instancia).</li></ul><pre class="code"><code class="language-cs">Parameter p = elem.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS);
 if (p != null && !p.IsReadOnly && p.StorageType == StorageType.String)
@@ -51,6 +52,7 @@ if (p != null && !p.IsReadOnly && p.StorageType == StorageType.String)
   .OfClass(typeof(FamilySymbol))
   .Cast&lt;FamilySymbol&gt;()
   .First(s =&gt; s.FamilyName == "MiFamilia" && s.Name == "Tipo A");
+
 if (!sym.IsActive)
 {
   using (var t = new Transaction(doc, "Activar símbolo"))

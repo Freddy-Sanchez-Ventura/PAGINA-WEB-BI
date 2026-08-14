@@ -1,1 +1,10 @@
-document.addEventListener('\x63\x6c\x69\x63\x6b',(_g)=>{const _h=_g.target.closest('\x61\x5b\x68\x72\x65\x66\x5e\x3d\x22\x23\x22\x5d');if(!_h)return;const _i=_h.getAttribute('\x68\x72\x65\x66').slice(1);const _j=document.getElementById(_i);if(_j){_g.preventDefault();_j.scrollIntoView({behavior:'\x73\x6d\x6f\x6f\x74\x68',block:'\x73\x74\x61\x72\x74'});}});
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  const id = link.getAttribute('href').slice(1);
+  const target = document.getElementById(id);
+  if (target) {
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});

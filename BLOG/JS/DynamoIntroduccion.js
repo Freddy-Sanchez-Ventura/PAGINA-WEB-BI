@@ -1,1 +1,23 @@
-(function(){const _a=window.matchMedia("\x28\x70\x72\x65\x66\x65\x72\x73\x2d\x72\x65\x64\x75\x63\x65\x64\x2d\x6d\x6f\x74\x69\x6f\x6e\x3a\x20\x72\x65\x64\x75\x63\x65\x29").matches;if(!_a){document.querySelectorAll('\x61\x5b\x68\x72\x65\x66\x5e\x3d\x22\x23\x22\x5d').forEach(_b=>{_b.addEventListener('\x63\x6c\x69\x63\x6b',(_c)=>{const _d=_b.getAttribute('\x68\x72\x65\x66').slice(1);const _e=document.getElementById(_d);if(_e){_c.preventDefault();_e.scrollIntoView({behavior:'\x73\x6d\x6f\x6f\x74\x68',block:'\x73\x74\x61\x72\x74'});history.pushState(null,"",`#${_d}`);}});});}const _f=()=>{if(window.scrollX!==0)window.scrollTo(0,window.scrollY);};window.addEventListener('scroll',_f,{passive:true});window.addEventListener('resize',_f);})();
+// Smooth scroll + evitar desplazamiento horizontal accidental
+(function () {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReduced) {
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, "", `#${id}`);
+        }
+      });
+    });
+  }
+
+  // Clamp scrollX para garantizar que nunca aparezca scroll horizontal
+  const clampScrollX = () => { if (window.scrollX !== 0) window.scrollTo(0, window.scrollY); };
+  window.addEventListener('scroll', clampScrollX, { passive: true });
+  window.addEventListener('resize', clampScrollX);
+})();

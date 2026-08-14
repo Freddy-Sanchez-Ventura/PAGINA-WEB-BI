@@ -1,0 +1,1 @@
+(function(){'use strict';const previous=window.BIM_RUNTIME_CONFIG&& typeof window.BIM_RUNTIME_CONFIG=== '\x6f\x62\x6a\x65\x63\x74'?window.BIM_RUNTIME_CONFIG:{};window.BIM_RUNTIME_CONFIG=Object.freeze({aiApiBaseUrl:typeof previous.aiApiBaseUrl=== '\x73\x74\x72\x69\x6e\x67'?previous.aiApiBaseUrl:'',forceConfiguredApiOnLocalhost:previous.forceConfiguredApiOnLocalhost=== true});})();

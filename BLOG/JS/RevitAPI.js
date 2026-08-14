@@ -1,1 +1,19 @@
-const t=document.getElementById("\x75\x70\x64\x61\x74\x65\x64");if(t){const d=new Date();t.textContent=d.toLocaleDateString(undefined,{year:"\x6e\x75\x6d\x65\x72\x69\x63",month:"\x73\x68\x6f\x72\x74",day:"\x32\x2d\x64\x69\x67\x69\x74"});}document.querySelector("\x2e\x63\x6f\x70\x79\x2d\x62\x74\x6e")?.addEventListener("\x63\x6c\x69\x63\x6b",()=>{const _k=document.querySelector("\x23\x63\x6f\x70\x79\x54\x61\x72\x67\x65\x74");if(!_k)return;const _l=_k.textContent.trim();navigator.clipboard?.writeText(_l).then(()=>{const _m=document.querySelector("\x2e\x63\x6f\x70\x79\x2d\x62\x74\x6e");const _n=_m.textContent;_m.textContent="\xa1\x43\x6f\x70\x69\x61\x64\x6f\x21";setTimeout(()=>_m.textContent=_n,1200);});});
+// Fecha "última actualización" (solo demo)
+const t = document.getElementById("updated");
+if (t){
+  const d = new Date();
+  t.textContent = d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"2-digit" });
+}
+
+// Copiar ruta
+document.querySelector(".copy-btn")?.addEventListener("click", () => {
+  const target = document.querySelector("#copyTarget");
+  if (!target) return;
+  const text = target.textContent.trim();
+  navigator.clipboard?.writeText(text).then(() => {
+    const btn = document.querySelector(".copy-btn");
+    const old = btn.textContent;
+    btn.textContent = "¡Copiado!";
+    setTimeout(() => btn.textContent = old, 1200);
+  });
+});
