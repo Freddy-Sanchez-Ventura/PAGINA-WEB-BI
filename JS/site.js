@@ -1,1 +1,36 @@
-const siteNavToggle=document.querySelector("\x23\x6e\x61\x76\x54\x6f\x67\x67\x6c\x65");const siteNavMenu=document.querySelector("\x23\x6e\x61\x76\x4d\x65\x6e\x75");const siteNavPanel=document.querySelector("\x23\x6e\x61\x76\x50\x61\x6e\x65\x6c");function setSiteMenu(_fe){document.body.classList.toggle("\x6d\x65\x6e\x75\x2d\x6f\x70\x65\x6e",_fe);siteNavMenu?.classList.toggle("\x6f\x70\x65\x6e",_fe);siteNavPanel?.classList.toggle("\x6f\x70\x65\x6e",_fe);siteNavToggle?.setAttribute("\x61\x72\x69\x61\x2d\x65\x78\x70\x61\x6e\x64\x65\x64",String(_fe));siteNavPanel?.setAttribute("\x61\x72\x69\x61\x2d\x68\x69\x64\x64\x65\x6e",String(!_fe));if(_fe){siteNavMenu?.querySelector("\x61")?.focus();}}siteNavToggle?.addEventListener("\x63\x6c\x69\x63\x6b",()=>{setSiteMenu(!siteNavMenu?.classList.contains("\x6f\x70\x65\x6e"));});siteNavPanel?.addEventListener("\x63\x6c\x69\x63\x6b",()=>setSiteMenu(false));siteNavMenu?.addEventListener("\x63\x6c\x69\x63\x6b",(_ff)=>{if(_ff.target.closest("\x61"))setSiteMenu(false);});document.addEventListener("\x6b\x65\x79\x64\x6f\x77\x6e",(_fg)=>{if(_fg.key==="\x45\x73\x63\x61\x70\x65"&&siteNavMenu?.classList.contains("\x6f\x70\x65\x6e")){setSiteMenu(false);siteNavToggle?.focus();}});document.querySelectorAll("\x5b\x64\x61\x74\x61\x2d\x63\x75\x72\x72\x65\x6e\x74\x2d\x79\x65\x61\x72\x5d").forEach((_fh)=>{_fh.textContent=new Date().getFullYear();});
+const siteNavToggle = document.querySelector("#navToggle");
+const siteNavMenu = document.querySelector("#navMenu");
+const siteNavPanel = document.querySelector("#navPanel");
+
+function setSiteMenu(open) {
+  document.body.classList.toggle("menu-open", open);
+  siteNavMenu?.classList.toggle("open", open);
+  siteNavPanel?.classList.toggle("open", open);
+  siteNavToggle?.setAttribute("aria-expanded", String(open));
+  siteNavPanel?.setAttribute("aria-hidden", String(!open));
+
+  if (open) {
+    siteNavMenu?.querySelector("a")?.focus();
+  }
+}
+
+siteNavToggle?.addEventListener("click", () => {
+  setSiteMenu(!siteNavMenu?.classList.contains("open"));
+});
+
+siteNavPanel?.addEventListener("click", () => setSiteMenu(false));
+
+siteNavMenu?.addEventListener("click", (event) => {
+  if (event.target.closest("a")) setSiteMenu(false);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && siteNavMenu?.classList.contains("open")) {
+    setSiteMenu(false);
+    siteNavToggle?.focus();
+  }
+});
+
+document.querySelectorAll("[data-current-year]").forEach((element) => {
+  element.textContent = new Date().getFullYear();
+});

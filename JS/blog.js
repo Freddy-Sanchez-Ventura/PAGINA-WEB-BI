@@ -1,1 +1,240 @@
-const $=(_aN,_aO=document)=>_aO.querySelector(_aN);const $$=(_aP,_aQ=document)=>Array.from(_aQ.querySelectorAll(_aP));const save=(_aR,_aS)=>localStorage.setItem(_aR,JSON.stringify(_aS));const load=(_aT,_aU)=>{try{return JSON.parse(localStorage.getItem(_aT))??_aU;}catch{return _aU;}};const BLOG_KEY="\x62\x69\x6d\x3a\x62\x6c\x6f\x67";const LAST_KEY=`${BLOG_KEY}:lastArticle`;const EXP_KEY=`${BLOG_KEY}:expandedNodes`;const TOC_JSON_PATH="../CURSOS/blog.json";const TOC_FALLBACK=[{title:"REVIT",items:[{title:"Introducción",path:"BLOG/HTML/RevitIntroduccion.html"}]}];let TOC=[];let nodeCounter=0;async function loadTOCFromJSON(){try{const _aV=new URL(TOC_JSON_PATH,window.location.href).href;const _aW=await fetch(_aV,{cache:"no-store"});if(!_aW.ok)throw new Error(`HTTP ${_aW.status}`);const _aX=await _aW.json();if(!Array.isArray(_aX))throw new Error("Formato inválido de blog.json");return _aX;}catch(_aY){console.warn("[blog] No se pudo cargar blog.json. Usando fallback.",_aY);return TOC_FALLBACK;}}function normalizeTree(_aZ,_a$=0,_a_=""){return _aZ.map((_ba,_bb)=>{const _bc=_a_?`${_a_}.${_bb}`:`n${_bb}`;const _bd={id:_bc,title:String(_ba.title||"Tema"),path:typeof _ba.path==="string"?_ba.path:"",depth:_a$,items:Array.isArray(_ba.items)?normalizeTree(_ba.items,_a$+1,_bc):[]};nodeCounter+=1;return _bd;});}function flattenLeaves(_be,_bf=[]){_be.forEach(_bg=>{if(_bg.path)_bf.push(_bg);if(_bg.items?.length)flattenLeaves(_bg.items,_bf);});return _bf;}function flattenAll(_bh,_bi=[]){_bh.forEach(_bj=>{_bi.push(_bj);if(_bj.items?.length)flattenAll(_bj.items,_bi);});return _bi;}const treeRoot=$("#blogTree");const titleEl=$("#articleTitle");const metaEl=$("#articleMeta");const frameEl=$("#readerFrame");function isValidPath(_bk){return /^(articulos\/[a-z0-9áéíóúñ-]+\/?|(\.?\/)?BLOG\/HTML\/[^?#]+\.(html?|htm))(#[^?]+)?$/i.test(_bk||"");}function ensureExpandedPath(_bl,_bm){const _bn=String(_bl||"").split(".");let _bo="";_bn.forEach((_bp,_bq)=>{_bo=_bq===0?_bp:`${_bo}.${_bp}`;_bm.add(_bo);});}function createNodeElement(_br,_bs){const _bt=document.createElement("div");_bt.className=`tree-node depth-${Math.min(_br.depth,3)}`;_bt.dataset.nodeId=_br.id;const _bu=_br.items?.length>0;const _bv=!!_br.path;const _bw=_bs.has(_br.id);if(_bu){const _bx=document.createElement("button");_bx.className=`tree-section depth-${Math.min(_br.depth,3)}`;_bx.type="button";_bx.setAttribute("role","treeitem");_bx.setAttribute("aria-expanded",String(_bw));_bx.innerHTML=`<span>${_br.title}</span><span class="\x74\x72\x65\x65\x2d\x63\x61\x72\x65\x74" aria-hidden="\x74\x72\x75\x65">▸</span>`;_bt.appendChild(_bx);const _by=document.createElement("div");_by.className=`tree-list depth-${Math.min(_br.depth+1,3)}`;if(!_bw)_by.style.display="none";_br.items.forEach(_bz=>_by.appendChild(createNodeElement(_bz,_bs)));_bt.appendChild(_by);_bx.addEventListener("click",()=>{const _bA=_bx.getAttribute("aria-expanded")==="true";_bx.setAttribute("aria-expanded",String(!_bA));_by.style.display=_bA?"none":"grid";if(_bA)_bs.delete(_br.id);else _bs.add(_br.id);save(EXP_KEY,Array.from(_bs));});}if(_bv){const _bB=document.createElement("div");_bB.className=`tree-item depth-${Math.min(_br.depth,3)}`;_bB.setAttribute("role","treeitem");_bB.tabIndex=0;_bB.dataset.path=_br.path;_bB.dataset.title=_br.title;_bB.dataset.nodeId=_br.id;_bB.textContent=_br.title;_bB.addEventListener("click",()=>openArticle(_br,_bB));_bB.addEventListener("keydown",(_bC)=>{if(_bC.key==="Enter"||_bC.key===" "){_bC.preventDefault();openArticle(_br,_bB);}});_bt.appendChild(_bB);}return _bt;}function renderTree(){const _bD=new Set(load(EXP_KEY,[]));treeRoot.innerHTML="";TOC.forEach(_bE=>treeRoot.appendChild(createNodeElement(_bE,_bD)));}function openArticle(_bF,_bG){$$(".tree-item.active").forEach(_bH=>_bH.classList.remove("active"));_bG?.classList.add("active");const _bI=String(_bF.path||"");if(!isValidPath(_bI))return;let _bJ=_bI.startsWith("/PAGINA-WEB-BI/")?_bI.slice(1):_bI;const _bK=_bJ.startsWith("/")?new URL(_bJ,window.location.origin).href:new URL(`../${_bJ}`,window.location.href).href;frameEl.src=_bK;titleEl.textContent=_bF.title||"Artículo";metaEl.textContent="Blog Técnico · BIM · Revit · Guía estructurada";const _bL=new Set(load(EXP_KEY,[]));ensureExpandedPath(_bF.id,_bL);save(EXP_KEY,Array.from(_bL));save(LAST_KEY,{title:_bF.title,path:_bF.path,nodeId:_bF.id});if(window.matchMedia("(max-width: 1000px)").matches){document.querySelector(".reader")?.scrollIntoView({behavior:"smooth",block:"start"});}}function applySearch(){const _bM=($("#searchInput")?.value||"").toLowerCase().trim();if(!_bM){renderTree();const _bN=load(LAST_KEY,null);if(_bN?.path){const _bO=$$(".tree-item").find(_bP=>_bP.dataset.path===_bN.path&&_bP.dataset.title===_bN.title);if(_bO)_bO.classList.add("active");}return;}treeRoot.innerHTML="";const _bQ=new Set();function _bR(_bS){return _bS.map(_bT=>{const _bU=_bR(_bT.items||[]);const _bV=_bT.title.toLowerCase().includes(_bM);const _bW=_bV||_bU.length>0||(_bT.path&&_bV);if(!_bW)return null;if(_bU.length>0)_bQ.add(_bT.id);return {..._bT,items:_bU};}).filter(Boolean);}const _bX=_bR(TOC);_bX.forEach(_bY=>treeRoot.appendChild(createNodeElement(_bY,_bQ)));}$("#searchInput")?.addEventListener("input",applySearch);$("#expandAll")?.addEventListener("click",()=>{const _bZ=flattenAll(TOC).filter(_b$=>_b$.items?.length).map(_b_=>_b_.id);save(EXP_KEY,_bZ);renderTree();});$("#collapseAll")?.addEventListener("click",()=>{save(EXP_KEY,[]);renderTree();});async function init(){const _ca=await loadTOCFromJSON();TOC=normalizeTree(_ca);renderTree();const _cb=load(LAST_KEY,null);const _cc=flattenLeaves(TOC);const _cd=_cc.find(_ce=>_ce.path===_cb?.path)||_cc[0];if(_cd){const _cf=new Set(load(EXP_KEY,[]));ensureExpandedPath(_cd.id,_cf);save(EXP_KEY,Array.from(_cf));renderTree();const _cg=$$(".tree-item").find(_ch=>_ch.dataset.path===_cd.path&&_ch.dataset.title===_cd.title);openArticle(_cd,_cg);}}document.addEventListener("DOMContentLoaded",init);
+// PAGINA-WEB-BI/JS/blog.js
+
+const $  = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+const load = (k,d) => { try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch{ return d; }};
+
+const BLOG_KEY = "bim:blog";
+const LAST_KEY = `${BLOG_KEY}:lastArticle`;
+const EXP_KEY  = `${BLOG_KEY}:expandedNodes`;
+const TOC_JSON_PATH = "../CURSOS/blog.json";
+
+const TOC_FALLBACK = [
+  {
+    title: "REVIT",
+    items: [
+      { title: "Introducción", path: "BLOG/HTML/RevitIntroduccion.html" }
+    ]
+  }
+];
+
+let TOC = [];
+let nodeCounter = 0;
+
+async function loadTOCFromJSON() {
+  try {
+    const url = new URL(TOC_JSON_PATH, window.location.href).href;
+    const resp = await fetch(url, { cache: "no-store" });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    if (!Array.isArray(data)) throw new Error("Formato inválido de blog.json");
+    return data;
+  } catch (err) {
+    console.warn("[blog] No se pudo cargar blog.json. Usando fallback.", err);
+    return TOC_FALLBACK;
+  }
+}
+
+function normalizeTree(nodes, depth = 0, parentId = ""){
+  return nodes.map((node, index) => {
+    const id = parentId ? `${parentId}.${index}` : `n${index}`;
+    const normalized = {
+      id,
+      title: String(node.title || "Tema"),
+      path: typeof node.path === "string" ? node.path : "",
+      depth,
+      items: Array.isArray(node.items) ? normalizeTree(node.items, depth + 1, id) : []
+    };
+    nodeCounter += 1;
+    return normalized;
+  });
+}
+
+function flattenLeaves(nodes, bucket = []){
+  nodes.forEach(node => {
+    if (node.path) bucket.push(node);
+    if (node.items?.length) flattenLeaves(node.items, bucket);
+  });
+  return bucket;
+}
+
+function flattenAll(nodes, bucket = []){
+  nodes.forEach(node => {
+    bucket.push(node);
+    if (node.items?.length) flattenAll(node.items, bucket);
+  });
+  return bucket;
+}
+
+const treeRoot = $("#blogTree");
+const titleEl  = $("#articleTitle");
+const metaEl   = $("#articleMeta");
+const frameEl  = $("#readerFrame");
+
+function isValidPath(raw){
+  return /^(articulos\/[a-z0-9áéíóúñ-]+\/?|(\.?\/)?BLOG\/HTML\/[^?#]+\.(html?|htm))(#[^?]+)?$/i.test(raw || "");
+}
+
+function ensureExpandedPath(nodeId, expandedSet){
+  const parts = String(nodeId || "").split(".");
+  let current = "";
+  parts.forEach((part, index) => {
+    current = index === 0 ? part : `${current}.${part}`;
+    expandedSet.add(current);
+  });
+}
+
+function createNodeElement(node, expandedSet){
+  const wrapper = document.createElement("div");
+  wrapper.className = `tree-node depth-${Math.min(node.depth, 3)}`;
+  wrapper.dataset.nodeId = node.id;
+
+  const hasChildren = node.items?.length > 0;
+  const isLeaf = !!node.path;
+  const isExpanded = expandedSet.has(node.id);
+
+  if (hasChildren) {
+    const btn = document.createElement("button");
+    btn.className = `tree-section depth-${Math.min(node.depth, 3)}`;
+    btn.type = "button";
+    btn.setAttribute("role", "treeitem");
+    btn.setAttribute("aria-expanded", String(isExpanded));
+    btn.innerHTML = `<span>${node.title}</span><span class="tree-caret" aria-hidden="true">▸</span>`;
+    wrapper.appendChild(btn);
+
+    const list = document.createElement("div");
+    list.className = `tree-list depth-${Math.min(node.depth + 1, 3)}`;
+    if (!isExpanded) list.style.display = "none";
+
+    node.items.forEach(child => list.appendChild(createNodeElement(child, expandedSet)));
+    wrapper.appendChild(list);
+
+    btn.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      list.style.display = open ? "none" : "grid";
+      if (open) expandedSet.delete(node.id); else expandedSet.add(node.id);
+      save(EXP_KEY, Array.from(expandedSet));
+    });
+  }
+
+  if (isLeaf) {
+    const item = document.createElement("div");
+    item.className = `tree-item depth-${Math.min(node.depth, 3)}`;
+    item.setAttribute("role", "treeitem");
+    item.tabIndex = 0;
+    item.dataset.path = node.path;
+    item.dataset.title = node.title;
+    item.dataset.nodeId = node.id;
+    item.textContent = node.title;
+
+    item.addEventListener("click", () => openArticle(node, item));
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openArticle(node, item);
+      }
+    });
+
+    wrapper.appendChild(item);
+  }
+
+  return wrapper;
+}
+
+function renderTree(){
+  const expandedSet = new Set(load(EXP_KEY, []));
+  treeRoot.innerHTML = "";
+  TOC.forEach(node => treeRoot.appendChild(createNodeElement(node, expandedSet)));
+}
+
+function openArticle(node, rowEl){
+  $$(".tree-item.active").forEach(n => n.classList.remove("active"));
+  rowEl?.classList.add("active");
+
+  const raw = String(node.path || "");
+  if (!isValidPath(raw)) return;
+
+  let normalized = raw.startsWith("/PAGINA-WEB-BI/") ? raw.slice(1) : raw;
+  const finalURL = normalized.startsWith("/")
+    ? new URL(normalized, window.location.origin).href
+    : new URL(`../${normalized}`, window.location.href).href;
+
+  frameEl.src = finalURL;
+  titleEl.textContent = node.title || "Artículo";
+  metaEl.textContent  = "Blog Técnico · BIM · Revit · Guía estructurada";
+
+  const expandedSet = new Set(load(EXP_KEY, []));
+  ensureExpandedPath(node.id, expandedSet);
+  save(EXP_KEY, Array.from(expandedSet));
+  save(LAST_KEY, { title: node.title, path: node.path, nodeId: node.id });
+
+  if (window.matchMedia("(max-width: 1000px)").matches){
+    document.querySelector(".reader")?.scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+}
+
+function applySearch(){
+  const q = ($("#searchInput")?.value || "").toLowerCase().trim();
+  if (!q) {
+    renderTree();
+    const last = load(LAST_KEY, null);
+    if (last?.path) {
+      const node = $$(".tree-item").find(n => n.dataset.path === last.path && n.dataset.title === last.title);
+      if (node) node.classList.add("active");
+    }
+    return;
+  }
+
+  treeRoot.innerHTML = "";
+  const expandedSet = new Set();
+
+  function filterNodes(nodes){
+    return nodes.map(node => {
+      const childMatches = filterNodes(node.items || []);
+      const selfMatch = node.title.toLowerCase().includes(q);
+      const keep = selfMatch || childMatches.length > 0 || (node.path && selfMatch);
+      if (!keep) return null;
+      if (childMatches.length > 0) expandedSet.add(node.id);
+      return { ...node, items: childMatches };
+    }).filter(Boolean);
+  }
+
+  const filtered = filterNodes(TOC);
+  filtered.forEach(node => treeRoot.appendChild(createNodeElement(node, expandedSet)));
+}
+
+$("#searchInput")?.addEventListener("input", applySearch);
+
+$("#expandAll")?.addEventListener("click", () => {
+  const allIds = flattenAll(TOC).filter(n => n.items?.length).map(n => n.id);
+  save(EXP_KEY, allIds);
+  renderTree();
+});
+
+$("#collapseAll")?.addEventListener("click", () => {
+  save(EXP_KEY, []);
+  renderTree();
+});
+
+async function init(){
+  const rawToc = await loadTOCFromJSON();
+  TOC = normalizeTree(rawToc);
+  renderTree();
+
+  const last = load(LAST_KEY, null);
+  const leaves = flattenLeaves(TOC);
+  const initial = leaves.find(n => n.path === last?.path) || leaves[0];
+
+  if (initial){
+    const expandedSet = new Set(load(EXP_KEY, []));
+    ensureExpandedPath(initial.id, expandedSet);
+    save(EXP_KEY, Array.from(expandedSet));
+    renderTree();
+    const node = $$(".tree-item").find(n => n.dataset.path === initial.path && n.dataset.title === initial.title);
+    openArticle(initial, node);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
