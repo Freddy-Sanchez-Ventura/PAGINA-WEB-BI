@@ -1,0 +1,1 @@
+(function(){'use strict';const runtime=window.BIM_RUNTIME_CONFIG||{};const visible=runtime.aiPanelVisible!==false;document.documentElement.classList.toggle('ai-ui-hidden',!visible);window.BIM_AI_PANEL_VISIBLE=visible;})();

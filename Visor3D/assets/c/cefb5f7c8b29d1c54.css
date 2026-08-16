@@ -1,0 +1,124 @@
+/* ===== Selección y copia de texto =====
+   La interfaz conserva los gestos de botones/splitters/canvas, pero el texto
+   informativo vuelve a poder seleccionarse con el ratón y copiarse con Ctrl+C. */
+.app-shell,
+#aiPanel,
+#issuesPanel {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+#aiPanel .ai-messages,
+#aiPanel .ai-message,
+#aiPanel .ai-message-bubble,
+#aiPanel .ai-message-text,
+#aiPanel .ai-result-table th,
+#aiPanel .ai-result-table td,
+#propertiesContent,
+#propertiesContent td,
+#propertiesContent th,
+.property-summary,
+.property-subgroup-summary,
+.gi-section-header,
+.project-load-name,
+.tree-name,
+.clash-tree-name,
+.plans-tree-name,
+.cloud-tree-file-name,
+.cloud-tree-folder-name,
+.clash-result-row,
+.clash-item-main,
+.issue-list-row,
+.issue-list-label,
+#worksSummaryContent,
+#worksWeeklyReportContent,
+#worksDailyReportContent,
+.works-summary-panel th,
+.works-summary-panel td,
+.works-month-details-table th,
+.works-month-details-table td,
+.works-temporal-table th,
+.works-temporal-table td,
+.works-invalid-dates-table th,
+.works-invalid-dates-table td,
+.works-partidas-table th,
+.works-partidas-table td,
+#plansStatus,
+.plans-item,
+.plans-folder-row-name,
+.plans-native-view-row {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+/* En Datos, árbol/listas/tabla usan multiselección propia y copiado mediante
+   menú contextual; no se habilita selección nativa de texto en esas superficies.
+   Controles y superficies de interacción siguen sin generar selecciones de texto accidentales. */
+#viewerCanvas,
+#viewCubeCanvas,
+.ai-panel-splitter,
+.column-splitter,
+.row-splitter,
+[role="separator"] {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+button,
+button *,
+input[type="button"],
+input[type="submit"],
+input[type="checkbox"],
+input[type="radio"],
+[role="button"],
+[role="button"] * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ===== Menú contextual compartido ===== */
+.bi-context-menu {
+  position: fixed;
+  z-index: 100000;
+  min-width: 138px;
+  padding: 4px;
+  border: 1px solid #475569;
+  border-radius: 5px;
+  background: #111827;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+}
+
+.bi-context-menu-action {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #f8fafc;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bi-context-menu-action:hover,
+.bi-context-menu-action:focus-visible {
+  outline: none;
+  background: #0f66c2;
+}
+
+.bi-context-menu-action:disabled {
+  opacity: 0.42;
+  cursor: default;
+  background: transparent;
+}
+
+.bi-context-menu-separator {
+  height: 1px;
+  margin: 4px 3px;
+  background: rgba(148, 163, 184, 0.28);
+}

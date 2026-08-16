@@ -1,0 +1,407 @@
+/* Sistema visual común para Datos, Interferencias, Obras e Incidencias.
+   Se carga al final para unificar módulos creados en etapas distintas. */
+:root {
+  --bim-ui-bg: #151d25;
+  --bim-ui-surface: #1b232c;
+  --bim-ui-control: #29343f;
+  --bim-ui-control-hover: #354350;
+  --bim-ui-border: #4b5967;
+  --bim-ui-border-soft: #35404b;
+  --bim-ui-text: #f8fafc;
+  --bim-ui-muted: #9eacba;
+  --bim-ui-primary: #0f6cbd;
+  --bim-ui-primary-hover: #1478c9;
+  --bim-ui-primary-border: #2588d8;
+  --bim-ui-success: #15803d;
+  --bim-ui-success-hover: #16a34a;
+  --bim-ui-success-border: #22c55e;
+  --bim-ui-danger: #3a2428;
+  --bim-ui-danger-hover: #4b2b31;
+  --bim-ui-danger-border: #78404a;
+  --bim-ui-radius: 5px;
+  --bim-ui-button-height: 30px;
+  --bim-ui-font-size: 11px;
+  --bim-ui-menu-font-size: 12px;
+}
+
+/* ===== Menús internos: referencia visual del panel Incidencias ===== */
+.issues-menu-tabs,
+.works-menu,
+.clash-menu-tabs {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  display: grid !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bim-ui-border-soft) !important;
+  border-radius: 0 !important;
+  background: var(--bim-ui-bg) !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
+}
+.issues-menu-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+.works-menu { grid-template-columns: 44px repeat(4, minmax(0, 1fr)) !important; }
+.clash-menu-tabs { grid-template-columns: 44px minmax(0, 1fr) !important; }
+
+.issues-menu-tab,
+.works-menu-button,
+.clash-menu-tab {
+  position: relative !important;
+  min-width: 0 !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 0 9px !important;
+  border: 0 !important;
+  border-right: 1px solid #303b46 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--bim-ui-muted) !important;
+  font: inherit !important;
+  font-size: var(--bim-ui-menu-font-size) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  transition: background .15s ease, color .15s ease, box-shadow .15s ease !important;
+}
+.issues-menu-tab:last-child,
+.works-menu-button:last-child,
+.clash-menu-tab:last-child { border-right: 0 !important; }
+.issues-menu-tab:hover,
+.works-menu-button:hover,
+.clash-menu-tab:hover {
+  background: #202b35 !important;
+  color: #edf4f9 !important;
+}
+.issues-menu-tab.active,
+.issues-menu-tab[aria-selected="true"],
+.works-menu-button.active,
+.works-menu-button[aria-selected="true"],
+.clash-menu-tab.active,
+.clash-menu-tab[aria-selected="true"] {
+  color: #fff !important;
+  background: #17344b !important;
+  box-shadow: inset 0 -3px 0 var(--bim-ui-primary-border) !important;
+}
+.issues-menu-tab:focus-visible,
+.works-menu-button:focus-visible,
+.clash-menu-tab:focus-visible {
+  outline: 2px solid #7dd3fc !important;
+  outline-offset: -2px !important;
+}
+.issues-menu-icon-tab,
+.works-menu-icon-button,
+.clash-menu-icon-tab {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+.issues-menu-gear,
+.works-menu-gear,
+.clash-menu-gear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, "Segoe UI Symbol", sans-serif;
+  font-size: 19px;
+  line-height: 1;
+}
+.issues-menu-count { font-size: 9px !important; }
+
+/* Obras conserva las configuraciones guardadas arriba y el menú unido al
+   contenido, igual que Incidencias. */
+.works-saved-config-header { margin-bottom: 8px !important; }
+.works-section {
+  border-radius: 0 0 7px 7px !important;
+  border-top: 0 !important;
+}
+
+/* ===== Interferencias: una sola vista activa en sistema de menús ===== */
+.clash-panel {
+  gap: 0 !important;
+  padding: 0 !important;
+  background: #0f172a !important;
+}
+.clash-menu-tabs { flex: 0 0 auto !important; }
+.clash-menu-view {
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+.clash-menu-view.collapsed { display: none !important; }
+.clash-menu-view > .clash-section-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  padding: 9px !important;
+  overflow: hidden !important;
+}
+#clashInterferencesSection > .clash-interferences-body { overflow: auto !important; }
+.clash-config-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid rgba(148, 163, 184, .24);
+  border-radius: var(--bim-ui-radius);
+  background: rgba(30, 41, 59, .74);
+  color: #cbd5e1;
+  font-size: 10px;
+}
+.clash-config-status small { color: #bae6fd; font-size: 10px; font-weight: 700; }
+.clash-controls { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto !important; }
+.clash-config-status { grid-column: 1 / -1; }
+
+/* ===== Botones comunes ===== */
+.issues-primary-button,
+.issues-secondary-button,
+.issues-danger-button,
+.issues-icon-button,
+.issues-upload-button,
+.saved-config-save-button,
+.saved-config-delete-button,
+.works-saved-config-save-button,
+.works-saved-config-delete-button,
+.gi-button,
+.gi-icon-button,
+.mass-button,
+.small-button,
+.clash-report-button,
+.clash-delete-button,
+.works-rule-add-button,
+.works-rule-remove-button,
+.works-remove-button,
+.works-partidas-import-excel-button,
+.works-partidas-export-excel-button,
+.works-partida-measurement-config-button {
+  appearance: none !important;
+  min-height: var(--bim-ui-button-height) !important;
+  height: var(--bim-ui-button-height) !important;
+  padding: 0 9px !important;
+  border: 1px solid var(--bim-ui-border) !important;
+  border-radius: var(--bim-ui-radius) !important;
+  background: var(--bim-ui-control) !important;
+  color: var(--bim-ui-text) !important;
+  box-sizing: border-box !important;
+  font: inherit !important;
+  font-size: var(--bim-ui-font-size) !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, opacity .15s ease !important;
+}
+.issues-secondary-button:hover,
+.issues-upload-button:hover,
+.issues-icon-button:hover,
+.gi-button:hover,
+.gi-icon-button:hover,
+.mass-button:hover,
+.small-button:hover,
+.works-partidas-import-excel-button:hover:not(:disabled),
+.works-partida-measurement-config-button:hover {
+  background: var(--bim-ui-control-hover) !important;
+  border-color: #627384 !important;
+  color: #fff !important;
+}
+
+/* Acciones principales y guardado */
+.issues-primary-button,
+.saved-config-save-button,
+.works-saved-config-save-button,
+#detectClashesButton,
+.works-rule-add-button,
+.gi-button.accent,
+.gi-button.active {
+  background: var(--bim-ui-primary) !important;
+  border-color: var(--bim-ui-primary-border) !important;
+  color: #fff !important;
+}
+.issues-primary-button:hover:not(:disabled),
+.saved-config-save-button:hover:not(:disabled),
+.works-saved-config-save-button:hover:not(:disabled),
+#detectClashesButton:hover:not(:disabled),
+.works-rule-add-button:hover:not(:disabled),
+.gi-button.accent:hover:not(:disabled),
+.gi-button.active:hover:not(:disabled) {
+  background: var(--bim-ui-primary-hover) !important;
+  border-color: #3d98de !important;
+}
+
+/* Exportaciones a Excel */
+.gi-export-excel-button,
+.clash-report-button,
+.works-partidas-export-excel-button {
+  background: var(--bim-ui-success) !important;
+  border-color: var(--bim-ui-success-border) !important;
+  color: #fff !important;
+}
+.gi-export-excel-button:hover:not(:disabled),
+.clash-report-button:hover:not(:disabled),
+.works-partidas-export-excel-button:hover:not(:disabled) {
+  background: var(--bim-ui-success-hover) !important;
+  border-color: #4ade80 !important;
+}
+
+/* Acciones destructivas */
+.issues-danger-button,
+.saved-config-delete-button,
+.works-saved-config-delete-button,
+.gi-button.danger,
+.gi-icon-button.danger,
+.clash-delete-button,
+.works-rule-remove-button,
+.works-remove-button {
+  background: var(--bim-ui-danger) !important;
+  border-color: var(--bim-ui-danger-border) !important;
+  color: #ffb9c2 !important;
+}
+.issues-danger-button:hover:not(:disabled),
+.saved-config-delete-button:hover:not(:disabled),
+.works-saved-config-delete-button:hover:not(:disabled),
+.gi-button.danger:hover:not(:disabled),
+.gi-icon-button.danger:hover:not(:disabled),
+.clash-delete-button:hover:not(:disabled),
+.works-rule-remove-button:hover:not(:disabled),
+.works-remove-button:hover:not(:disabled) {
+  background: var(--bim-ui-danger-hover) !important;
+  border-color: #a95461 !important;
+  color: #fff !important;
+}
+
+/* Botones cuadrados e iconos */
+.issues-icon-button,
+.gi-icon-button,
+.clash-delete-button,
+.works-rule-remove-button,
+.works-remove-button,
+.saved-config-save-button,
+.works-saved-config-save-button {
+  min-width: var(--bim-ui-button-height) !important;
+}
+.gi-icon-button,
+.clash-delete-button,
+.works-rule-remove-button,
+.works-remove-button { padding: 0 !important; }
+
+/* Estados deshabilitados y foco uniforme */
+.issues-panel button:disabled,
+.mass-info-panel button:disabled,
+.works-panel button:disabled,
+.clash-panel button:disabled {
+  opacity: .46 !important;
+  cursor: default !important;
+}
+.issues-panel button:focus-visible,
+.mass-info-panel button:focus-visible,
+.works-panel button:focus-visible,
+.clash-panel button:focus-visible {
+  outline: 2px solid #7dd3fc !important;
+  outline-offset: 1px !important;
+}
+
+/* ===== Barras de configuraciones guardadas de Datos y Obras ===== */
+.saved-config-bar,
+.works-saved-config-bar {
+  gap: 7px !important;
+  padding: 7px 8px !important;
+  border: 1px solid rgba(148, 163, 184, .28) !important;
+  border-radius: 7px !important;
+  background: var(--bim-ui-surface) !important;
+  box-shadow: none !important;
+}
+.saved-config-name-input,
+.saved-config-select,
+.works-saved-config-name-input,
+.works-saved-config-select {
+  min-height: var(--bim-ui-button-height) !important;
+  height: var(--bim-ui-button-height) !important;
+  padding: 0 8px !important;
+  border: 1px solid var(--bim-ui-border) !important;
+  border-radius: var(--bim-ui-radius) !important;
+  background: #111923 !important;
+  color: var(--bim-ui-text) !important;
+  font: inherit !important;
+  font-size: var(--bim-ui-font-size) !important;
+  box-shadow: none !important;
+}
+.saved-config-name-input:focus,
+.saved-config-select:focus,
+.works-saved-config-name-input:focus,
+.works-saved-config-select:focus {
+  border-color: var(--bim-ui-primary-border) !important;
+  box-shadow: 0 0 0 2px rgba(37, 136, 216, .16) !important;
+  outline: none !important;
+}
+
+/* Datos: elimina diferencias históricas entre botones creados en distintas
+   fases sin alterar controles especializados de color/transparencia. */
+.mass-info-panel .gi-button,
+.mass-info-panel .mass-button { min-width: 0; }
+.gi-button.secondary { background: var(--bim-ui-control) !important; border-color: var(--bim-ui-border) !important; }
+
+@media (max-width: 760px) {
+  :root { --bim-ui-menu-font-size: 11px; }
+  .issues-menu-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .issues-menu-tab:nth-child(n) { border-bottom: 0 !important; }
+  .works-menu-button,
+  .issues-menu-tab,
+  .clash-menu-tab { padding-inline: 5px !important; }
+}
+
+/* Acciones compactas dentro de listas y tablas: misma paleta y bordes, pero
+   conservan su tamaño reducido para no agrandar filas. */
+.gi-custom-param-add-button,
+.gi-custom-param-edit-button,
+.issue-list-delete-button,
+.issue-comment-edit-button,
+.issue-comment-delete-button,
+.issues-date-picker-button {
+  appearance: none !important;
+  border: 1px solid var(--bim-ui-border) !important;
+  border-radius: var(--bim-ui-radius) !important;
+  background: var(--bim-ui-control) !important;
+  color: var(--bim-ui-text) !important;
+  font: inherit !important;
+  font-size: 10px !important;
+  font-weight: 650 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  transition: background .15s ease, border-color .15s ease, color .15s ease !important;
+}
+.gi-custom-param-add-button:hover,
+.gi-custom-param-edit-button:hover,
+.issue-comment-edit-button:hover,
+.issues-date-picker-button:hover {
+  background: var(--bim-ui-control-hover) !important;
+  border-color: #627384 !important;
+  color: #fff !important;
+}
+.issue-list-delete-button,
+.issue-comment-delete-button {
+  background: var(--bim-ui-danger) !important;
+  border-color: var(--bim-ui-danger-border) !important;
+  color: #ffb9c2 !important;
+}
+.issue-list-delete-button:hover,
+.issue-comment-delete-button:hover {
+  background: var(--bim-ui-danger-hover) !important;
+  border-color: #a95461 !important;
+  color: #fff !important;
+}

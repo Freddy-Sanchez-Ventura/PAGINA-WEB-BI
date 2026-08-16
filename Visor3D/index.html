@@ -1,8 +1,893 @@
-<!DOCTYPE html><html lang="es" class="ai-ui-hidden"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Visor 3D | BIM Ingenieros</title><meta name="description" content="Visor 3D de BIM Ingenieros para consultar modelos BIM exportados desde el navegador." /><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.googleusercontent.com https://storage.googleapis.com https://*.storage.googleapis.com https://*.googleapis.com; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'" /><link rel="canonical" href="https://bimingenieros.online/Visor3D/" /><link rel="stylesheet" href="assets/c/ceab3f366e10d06.css?v=18.22-measure-local&loading-overlay=2" /><link rel="stylesheet" href="assets/c/c5a5def0288484d.css?v=19.5-tablet-config-defer" /><link rel="stylesheet" href="assets/c/cf571cf3bf615b6.css?v=19.5-tablet-responsive" /><link rel="stylesheet" href="assets/c/c3ffc0a24c1b8a5.css?v=cloud-collab-ui-2" /><link rel="stylesheet" href="assets/c/cdd6f75f7c94784.css?v=phase18-issues-5-header-marker" /><link rel="stylesheet" href="assets/c/cc5e35e18706524.css?v=control-splitters-2" /><link rel="stylesheet" href="assets/c/cd075c4e13154b7.css?v=1" /><link rel="stylesheet" href="assets/c/c19a2a08d3503d6.css?v=1" /><link rel="stylesheet" href="assets/c/c7aa199cddf7a0a.css?v=19.5-tablet-responsive" /><link rel="stylesheet" href="assets/c/c22f3b7401bafa5.css?v=19.5-tablet-responsive" /><link rel="stylesheet" href="assets/c/cbe49d28a598720.css?v=18.27.1" /><link rel="stylesheet" href="assets/c/cd2891175dcb327.css?v=19.6-control-accordion" /><link rel="stylesheet" href="assets/c/cc9466d9bff3cfe.css?v=6-hidden-ui" /><link rel="stylesheet" href="assets/c/c7575e332057ab8.css?v=1-copyable-ui" /></head><body><div class="app-shell"><header class="top-header"><div class="top-left-actions"><a class="top-brand" href="../" aria-label="Volver a la página principal de BIM Ingenieros"><img src="public/assets/Logo_Blancho.png" alt="BIM Ingenieros" /></a><div class="general-settings-wrapper"><button id="generalSettingsButton" class="general-settings-button" type="button" aria-label="Configuración general" aria-expanded="false" title="Configuración general">⚙</button><div id="generalSettingsPanel" class="general-settings-panel hidden" role="dialog" aria-label="Configuración general"><div class="general-settings-header"><div class="general-settings-title"><strong>Configuración general</strong><span>Estos cambios se aplican al aceptar y se guardan para las siguientes sesiones.</span></div><div class="general-settings-actions"><button id="resetGeneralSettingsButton" class="general-settings-secondary" type="button">Restablecer</button><button id="acceptGeneralSettingsButton" class="general-settings-accept" type="button">Aceptar</button></div></div><section class="general-settings-section"><div class="general-settings-section-title">Visor 3D</div><label class="general-settings-row"><span>Color de fondo</span><input id="viewerBackgroundColorInput" type="color" value="#ffffff" /></label><label class="general-settings-row"><span>Tipo de proyección</span><select id="viewerProjectionModeInput"><option value="orthographic">Ortográfica</option><option value="perspective">Perspectiva</option></select></label><label class="general-settings-row"><span>Tipo de navegación</span><select id="viewerNavigationModeInput"><option value="orbit">Orbitar</option><option value="free">Recorrido libre</option></select></label><label class="general-settings-row"><span>Permitir atravesar elementos</span><input id="viewerAllowWalkThroughInput" type="checkbox" checked /></label><label class="general-settings-row"><span>Velocidad de recorrido</span><select id="viewerWalkSpeedInput"><option value="low">Baja</option><option value="medium">Media</option><option value="high">Alta</option></select></label><label class="general-settings-row"><span>Nivel de visualización</span><select id="viewerVisualDetailLevelInput"><option value="auto">Automático - según tamaño</option><option value="medium">Medio - bordes externos</option><option value="high">Alto - bordes completos</option></select></label><p class="general-settings-note">Para recorrer interiores, usa Perspectiva + Recorrido libre. Con atravesar elementos activo, la cámara puede pasar muros y suelos.</p></section><section class="general-settings-section"><div class="general-settings-section-title">Transparencia general</div><label class="general-settings-row"><span>Color aplicado</span><input id="viewerTransparencyColorInput" type="color" value="#bebebe" /></label><label class="general-settings-row"><span>Porcentaje de transparencia</span><span class="general-settings-range-wrap"><input id="viewerTransparencyPercentInput" type="range" min="0" max="100" step="5" value="85" /><span id="viewerTransparencyPercentValue">85%</span></span></label></section><section class="general-settings-section"><div class="general-settings-colors-header"><div class="general-settings-section-title">Colores predefinidos</div><button id="addPredefinedColorButton" class="general-settings-secondary" type="button">Agregar</button></div><div id="predefinedColorsList" class="general-settings-color-list"></div></section></div></div><button id="fullscreenToggleButton" class="fullscreen-toggle-button" type="button" aria-label="Entrar en pantalla completa">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visor 3D | BIM Ingenieros</title>
+  <meta name="description" content="Visor 3D de BIM Ingenieros para consultar modelos BIM exportados desde el navegador." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://plataforma-bim-ai.fredsv511.workers.dev https://script.google.com https://script.googleusercontent.com https://*.googleusercontent.com https://storage.googleapis.com https://*.storage.googleapis.com https://*.googleapis.com; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <link rel="canonical" href="https://bimingenieros.online/Visor3D/" />
+  <link rel="stylesheet" href="assets/c/c71c10c3129200b67.css?v=18.22-measure-local&loading-overlay=2" />
+  <link rel="stylesheet" href="assets/c/c3363180bcf56f1af.css?v=19.5-tablet-config-defer&data-selection=2" />
+  <link rel="stylesheet" href="assets/c/c034dc941dc60aa1a.css?v=19.5-tablet-responsive" />
+  <link rel="stylesheet" href="assets/c/cd0f389c6a4abb522.css?v=cloud-collab-ui-2" />
+  <link rel="stylesheet" href="assets/c/ca3f96de126822fcc.css?v=phase18-issues-5-header-marker" />
+  <link rel="stylesheet" href="assets/c/ce788cc9ef20f6add.css?v=control-splitters-2" />
+  <link rel="stylesheet" href="assets/c/c0911c1a0738f6fec.css?v=1" />
+  <link rel="stylesheet" href="assets/c/c237c1085cf59eece.css?v=1" />
+  <link rel="stylesheet" href="assets/c/c673bd721e1908a07.css?v=19.5-tablet-responsive" />
+  <link rel="stylesheet" href="assets/c/c759e79762a296d16.css?v=19.5-tablet-responsive&data-footer=2" />
+  <link rel="stylesheet" href="assets/c/c110f60077527cb2e.css?v=18.27.1" />
+  <link rel="stylesheet" href="assets/c/cdbdd62b38b0b16fe.css?v=19.6-control-accordion" />
+  <link rel="stylesheet" href="assets/c/c2f90d91452ddd890.css?v=9-table-filters-stable-scroll" />
+  <link rel="stylesheet" href="assets/c/cefb5f7c8b29d1c54.css?v=3-shared-context-menu" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-header">
+      <div class="top-left-actions">
+        <a class="top-brand" href="../" aria-label="Volver a la página principal de BIM Ingenieros">
+          <img src="public/assets/Logo_Blancho.png" alt="BIM Ingenieros" />
+        </a>
+        <div class="general-settings-wrapper">
+          <button id="generalSettingsButton" class="general-settings-button" type="button" aria-label="Configuración general" aria-expanded="false" title="Configuración general">⚙</button>
+          <div id="generalSettingsPanel" class="general-settings-panel hidden" role="dialog" aria-label="Configuración general">
+            <div class="general-settings-header">
+              <div class="general-settings-title">
+                <strong>Configuración general</strong>
+                <span>Estos cambios se aplican al aceptar y se guardan para las siguientes sesiones.</span>
+              </div>
+              <div class="general-settings-actions">
+                <button id="resetGeneralSettingsButton" class="general-settings-secondary" type="button">Restablecer</button>
+                <button id="acceptGeneralSettingsButton" class="general-settings-accept" type="button">Aceptar</button>
+              </div>
+            </div>
+            <section class="general-settings-section">
+              <div class="general-settings-section-title">Visor 3D</div>
+              <label class="general-settings-row">
+                <span>Color de fondo</span>
+                <input id="viewerBackgroundColorInput" type="color" value="#ffffff" />
+              </label>
+              <label class="general-settings-row">
+                <span>Tipo de proyección</span>
+                <select id="viewerProjectionModeInput">
+                  <option value="orthographic">Ortográfica</option>
+                  <option value="perspective">Perspectiva</option>
+                </select>
+              </label>
+              <label class="general-settings-row">
+                <span>Tipo de navegación</span>
+                <select id="viewerNavigationModeInput">
+                  <option value="orbit">Orbitar</option>
+                  <option value="free">Recorrido libre</option>
+                </select>
+              </label>
+              <label class="general-settings-row">
+                <span>Permitir atravesar elementos</span>
+                <input id="viewerAllowWalkThroughInput" type="checkbox" checked />
+              </label>
+              <label class="general-settings-row">
+                <span>Velocidad de recorrido</span>
+                <select id="viewerWalkSpeedInput">
+                  <option value="low">Baja</option>
+                  <option value="medium">Media</option>
+                  <option value="high">Alta</option>
+                </select>
+              </label>
+              <label class="general-settings-row">
+                <span>Nivel de visualización</span>
+                <select id="viewerVisualDetailLevelInput">
+                  <option value="auto">Automático - según tamaño</option>
+                  <option value="medium">Medio - bordes externos</option>
+                  <option value="high">Alto - bordes completos</option>
+                </select>
+              </label>
+              <p class="general-settings-note">Para recorrer interiores, usa Perspectiva + Recorrido libre. Con atravesar elementos activo, la cámara puede pasar muros y suelos.</p>
+            </section>
+            <section class="general-settings-section">
+              <div class="general-settings-section-title">Transparencia general</div>
+              <label class="general-settings-row">
+                <span>Color aplicado</span>
+                <input id="viewerTransparencyColorInput" type="color" value="#bebebe" />
+              </label>
+              <label class="general-settings-row">
+                <span>Porcentaje de transparencia</span>
+                <span class="general-settings-range-wrap">
+                  <input id="viewerTransparencyPercentInput" type="range" min="0" max="100" step="5" value="85" />
+                  <span id="viewerTransparencyPercentValue">85%</span>
+                </span>
+              </label>
+            </section>
+            <section class="general-settings-section">
+              <div class="general-settings-colors-header">
+                <div class="general-settings-section-title">Colores predefinidos</div>
+                <button id="addPredefinedColorButton" class="general-settings-secondary" type="button">Agregar</button>
+              </div>
+              <div id="predefinedColorsList" class="general-settings-color-list"></div>
+            </section>
+          </div>
+        </div>
+        <button id="fullscreenToggleButton" class="fullscreen-toggle-button" type="button" aria-label="Entrar en pantalla completa">
           Pantalla Completa
-        </button><a class="header-guide-link" href="guia-navegador/" target="_blank" rel="noopener noreferrer">Guía de Uso</a></div><div class="top-actions"><span id="loadStatus" class="header-status">Esperando proyecto...</span><div id="cloudCacheSyncHost" class="cloud-cache-sync-host" aria-live="polite"></div><button id="cloudLoginButton" class="cloud-login-button" type="button" title="Ingresar con cuenta y abrir proyectos guardados en la nube">Login</button><label class="upload-button header-upload">
+        </button>
+        <a class="header-guide-link" href="guia-navegador/" target="_blank" rel="noopener noreferrer">Guía de Uso</a>
+      </div>
+
+      <div class="top-actions">
+        <span id="loadStatus" class="header-status">Esperando proyecto...</span>
+        <div id="cloudCacheSyncHost" class="cloud-cache-sync-host" aria-live="polite"></div>
+        <button id="cloudLoginButton" class="cloud-login-button" type="button" title="Ingresar con cuenta y abrir proyectos guardados en la nube">Login</button>
+        <label class="upload-button header-upload">
           Cargar Proyecto
-          <input id="folderInput" type="file" webkitdirectory directory multiple /></label></div></header><div class="workspace-shell" id="workspaceShell"><div class="app" id="appLayout"><aside class="sidebar" id="sidebar"><div class="sidebar-toggle-row"><span>Panel de control</span></div><section id="projectControlSection" class="works-section control-tree-section project-panel"><button id="projectSectionToggle" class="works-section-toggle control-section-toggle" type="button" aria-expanded="true" aria-controls="projectSectionBody" title="Contraer Proyecto"><span class="works-section-caret control-section-caret">▶</span><span>Proyecto</span></button><div id="projectSectionBody" class="works-section-body control-section-body"><div class="control-section-tools"><div class="tree-search-row"><span class="gi-search-icon">⌕</span><input id="projectSearchInput" class="tree-search" type="text" placeholder="Filtrar proyecto..." /></div><label class="tree-selection-mode"><input id="projectSelectOnClickCheckbox" type="checkbox" /><span>Seleccionar en visor</span></label></div><div id="projectTree" class="tree-list empty">Sin proyectos cargados</div></div></section><section id="categoryControlSection" class="works-section control-tree-section category-panel"><button id="categorySectionToggle" class="works-section-toggle control-section-toggle" type="button" aria-expanded="true" aria-controls="categorySectionBody" title="Contraer Categorías"><span class="works-section-caret control-section-caret">▶</span><span>Categorías</span></button><div id="categorySectionBody" class="works-section-body control-section-body"><div class="control-section-tools"><div class="tree-search-row"><span class="gi-search-icon">⌕</span><input id="categorySearchInput" class="tree-search" type="text" placeholder="Filtrar categorías..." /></div><label class="tree-selection-mode"><input id="categorySelectOnClickCheckbox" type="checkbox" /><span>Seleccionar en visor</span></label></div><div id="categoryList" class="tree-list empty">Sin datos</div></div></section></aside><div id="columnSplitter" class="column-splitter" title="Arrastra para cambiar el ancho"></div><aside class="properties-column"><section class="panel properties-panel"><div class="properties-header"><h2>Propiedades</h2><div class="properties-search-row"><input id="propertiesSearchInput" class="properties-search" type="text" placeholder="Filtrar propiedades..." autocomplete="off" /><button id="propertiesSearchAddButton" class="properties-search-add" type="button" title="Agregar filtro" aria-label="Agregar filtro de propiedades">+</button></div><div id="propertiesSearchFilters" class="properties-search-filters hidden" aria-label="Filtros de propiedades activos" aria-live="polite"></div></div><div id="propertiesContent" class="properties-content empty">Selecciona un elemento.</div></section></aside><div id="propertiesSplitter" class="column-splitter properties-splitter" title="Arrastra para cambiar el ancho"></div><main class="viewer-column"><div class="viewer-card"><canvas id="viewerCanvas"></canvas><div id="issuesMarkerLayer" class="issues-marker-layer hidden" aria-label="Marcadores de incidencias en el modelo"></div><div id="viewCube" class="view-cube" title="ViewCube"><canvas id="viewCubeCanvas"></canvas></div><div class="mobile-panel-buttons" aria-label="Paneles desplegables"><button id="mobileLeftPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="sidebar">Panel de Control</button><button id="mobilePropertiesButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="propertiesContent">Propiedades</button><button id="mobileDataPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="massInfoPanel">Datos</button><button id="mobileClashPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="clashPanel">Interferencias</button><button id="mobileIssuesPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="issuesPanel">Incidencias</button><button id="mobilePlansPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="plansPanel">2D</button><button id="mobileWorksPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="worksPanel">Obras</button></div><div class="viewer-actions floating-actions"><button id="gridButton" title="Mostrar / ocultar cuadrícula nivel 00">▦</button><button id="areaZoomButton" title="Zoom por ventana (Z+R)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6"/><path d="M7.5 10.5h6"/></svg></button><button id="fitButton" title="Ajustar vista">⛶</button><button id="isolateButton" title="Aislar selección (H+I)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/></svg></button><button id="hideSelectedButton" title="Ocultar selección (H+H)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/><path d="M4 20 20 4"/></svg></button><button id="fadeUnselectedButton" title="Transparentar no seleccionados">◑</button><button id="sectionBoxButton" title="Caja de corte (B+X)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8.5 12 5l6 3.5v7L12 19l-6-3.5z"/><path d="M6 8.5 12 12l6-3.5"/><path d="M12 12v7"/></svg></button><button id="sectionRotateXButton" class="measure-mini-button section-axis-button section-axis-x hidden" title="Girar caja alrededor del eje X">X</button><button id="sectionRotateYButton" class="measure-mini-button section-axis-button section-axis-y hidden" title="Girar caja alrededor del eje Y">Y</button><button id="sectionRotateZButton" class="measure-mini-button section-axis-button section-axis-z hidden" title="Girar caja alrededor del eje Z vertical">Z</button><button id="measureButton" title="Medir"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 17 4l3 3L7 20z"/><path d="M8 16l-2-2"/><path d="M11 13l-2-2"/><path d="M14 10l-2-2"/><path d="M17 7l-2-2"/></svg></button><button id="measureAddButton" class="measure-mini-button hidden" title="Agregar medida">+</button><button id="measureRemoveButton" class="measure-mini-button hidden" title="Quitar última medida">−</button><button id="elevationButton" title="Consultar elevación"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h14"/><path d="M7 7h10l-5 8z"/><path d="M12 15v5"/></svg></button><button id="elevationAddButton" class="measure-mini-button hidden" title="Agregar elevación">+</button><button id="elevationRemoveButton" class="measure-mini-button hidden" title="Quitar última elevación">−</button><button id="resetButton" title="Restablecer vista (R+R)">↺</button></div><div id="viewerOverlay" class="viewer-overlay"><strong>ExportModel Viewer</strong><span>Carga el proyecto exportado para visualizar los modelos.</span></div><div id="loadingPanel" class="loading-panel hidden"><div class="loading-card"><strong id="loadingTitle">Cargando modelo...</strong><span id="loadingDetail">Preparando información.</span><div class="loading-bar"><div id="loadingBar" class="loading-bar-fill"></div></div><small id="loadingPercent">0%</small><button id="loadingCancelButton" class="loading-cancel-button hidden" type="button">Cancelar</button></div></div></div></main><div id="viewerRowSplitter" class="column-splitter data-panel-splitter" title="Arrastra para cambiar el ancho del panel Datos"></div><aside id="massInfoPanel" class="mass-info-panel data-side-panel"><div id="savedConfigBar" class="saved-config-bar"><button id="savedConfigSaveButton" class="saved-config-save-button" type="button" title="Guardar configuración" aria-label="Guardar configuración"><svg class="bim-save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5h10.8L19.5 8v11.5h-15v-15H5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 4.5v5h7.5v-5M8 15h8v4.5H8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><input id="savedConfigNameInput" class="saved-config-name-input" type="text" placeholder="Nombre de configuración" /><select id="savedConfigSelect" class="saved-config-select" title="Configuraciones guardadas"><option value="">&#60;Ninguno&#62;</option></select><button id="savedConfigDeleteButton" class="saved-config-delete-button" title="Eliminar configuración activa">Eliminar</button></div><nav id="dataPanelMenu" class="data-menu-tabs" role="tablist" aria-label="Secciones del panel Datos"><button id="dataConfigToggle" class="data-menu-tab active" type="button" role="tab" aria-selected="true" aria-expanded="true" aria-controls="dataConfigSection">Configuraciones</button><button id="dataResultsToggle" class="data-menu-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" aria-controls="dataResultsSection">Datos</button><button id="dataColorsToggle" class="data-menu-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" aria-controls="dataColorsSection">Colores</button></nav><div id="dataConfigSection" class="data-menu-view active" role="tabpanel" aria-labelledby="dataConfigToggle"><div id="massConfigPanel" class="mass-column config-column"></div></div><div id="dataResultsSection" class="data-menu-view hidden" role="tabpanel" aria-labelledby="dataResultsToggle" aria-hidden="true"><div id="massDataPanel" class="mass-column data-column"></div></div><div id="dataColorsSection" class="data-menu-view hidden" role="tabpanel" aria-labelledby="dataColorsToggle" aria-hidden="true"><div id="classificationValueColorsPanel" class="classification-value-colors-panel"></div></div><div id="massColumnSplitter" class="mass-column-splitter hidden" aria-hidden="true"></div></aside><div id="clashSplitter" class="column-splitter clash-splitter hidden" title="Panel Interferencias"></div><aside id="clashPanel" class="clash-column hidden"><section class="panel clash-panel"><nav id="clashMenu" class="clash-menu-tabs" role="tablist" aria-label="Secciones del panel Interferencias"><button id="clashElementsToggle" class="clash-menu-tab clash-menu-icon-tab active" type="button" role="tab" aria-selected="true" aria-expanded="true" aria-controls="clashElementsBody" title="Configuración" aria-label="Configuración"><span class="clash-menu-gear" aria-hidden="true">⚙</span></button><button id="clashInterferencesToggle" class="clash-menu-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" aria-controls="clashInterferencesBody">Interferencias</button></nav><div id="clashElementsSection" class="clash-section clash-menu-view" role="tabpanel" aria-labelledby="clashElementsToggle"><div id="clashElementsBody" class="clash-section-body clash-config-row"><div class="clash-groups"><div class="clash-group"><h3>Grupo A</h3><div class="tree-search-row clash-project-search-row"><span class="gi-search-icon">⌕</span><input id="clashGroupASearchInput" class="gi-input clash-project-search" type="text" placeholder="Filtrar proyectos Grupo A..." /></div><div id="clashGroupATree" class="clash-tree empty">Sin proyectos</div><div class="clash-group-mode-section"><label class="clash-mode-row" for="clashGroupAModeSelect"><span>Modo</span><select id="clashGroupAModeSelect" class="gi-select clash-mode-select"><option value="exclude">Excluir</option><option value="include">Solo elegidos</option><option value="categories">Categorías</option></select></label><div id="clashGroupAFilterModePanel" class="gi-section clash-filter-section clash-mode-panel"><div id="clashGroupAFilterModeTitle" class="gi-section-header clash-mode-title">Elementos excluidos</div><div class="gi-filter-toolbar"><span class="gi-search-icon">⌕</span><input id="clashGroupAFilterSearch" class="gi-input" type="text" placeholder="Buscar parámetro..." /><div class="clash-filter-toolbar-actions"><button id="clashGroupAAddFilter" type="button" class="gi-button">Agregar filtro</button><button id="clashGroupAAddFilterGroup" type="button" class="gi-button secondary hidden">Agregar grupo</button></div></div><div id="clashGroupAFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div></div><div id="clashGroupACategoryPanel" class="clash-category-panel clash-mode-panel hidden"><div class="tree-search-row clash-category-search-row"><span class="gi-search-icon">⌕</span><input id="clashGroupACategorySearch" class="gi-input" type="text" placeholder="Buscar categoría..." /></div><div id="clashGroupACategoryTree" class="clash-category-tree empty">Selecciona archivos</div></div></div></div><div class="clash-group"><h3>Grupo B</h3><div class="tree-search-row clash-project-search-row"><span class="gi-search-icon">⌕</span><input id="clashGroupBSearchInput" class="gi-input clash-project-search" type="text" placeholder="Filtrar proyectos Grupo B..." /></div><div id="clashGroupBTree" class="clash-tree empty">Sin proyectos</div><div class="clash-group-mode-section"><label class="clash-mode-row" for="clashGroupBModeSelect"><span>Modo</span><select id="clashGroupBModeSelect" class="gi-select clash-mode-select"><option value="exclude">Excluir</option><option value="include">Solo elegidos</option><option value="categories">Categorías</option></select></label><div id="clashGroupBFilterModePanel" class="gi-section clash-filter-section clash-mode-panel"><div id="clashGroupBFilterModeTitle" class="gi-section-header clash-mode-title">Elementos excluidos</div><div class="gi-filter-toolbar"><span class="gi-search-icon">⌕</span><input id="clashGroupBFilterSearch" class="gi-input" type="text" placeholder="Buscar parámetro..." /><div class="clash-filter-toolbar-actions"><button id="clashGroupBAddFilter" type="button" class="gi-button">Agregar filtro</button><button id="clashGroupBAddFilterGroup" type="button" class="gi-button secondary hidden">Agregar grupo</button></div></div><div id="clashGroupBFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div></div><div id="clashGroupBCategoryPanel" class="clash-category-panel clash-mode-panel hidden"><div class="tree-search-row clash-category-search-row"><span class="gi-search-icon">⌕</span><input id="clashGroupBCategorySearch" class="gi-input" type="text" placeholder="Buscar categoría..." /></div><div id="clashGroupBCategoryTree" class="clash-category-tree empty">Selecciona archivos</div></div></div></div></div><div class="clash-controls"><div class="clash-config-status"><span>Estado</span><small id="clashStatus">Sin evaluación</small></div><label class="clash-field">Tolerancia cm³
-                  <input id="clashToleranceInput" type="number" min="0" step="0.1" value="1" /></label><label class="clash-field">Nombre evaluación
-                  <input id="clashNameInput" type="text" placeholder="Interferencia 01" /></label><button id="detectClashesButton" type="button" class="small-button">Detectar Interferencias</button></div></div></div><div id="clashInterferencesSection" class="clash-section clash-menu-view collapsed" role="tabpanel" aria-labelledby="clashInterferencesToggle" aria-hidden="true"><div id="clashInterferencesBody" class="clash-section-body clash-interferences-body"><div class="clash-row clash-evaluations-row"><h3>Evaluaciones</h3><div id="clashEvaluationsList" class="clash-list"><div class="clash-empty">Sin evaluaciones.</div></div></div><div class="clash-row clash-results-row"><div class="clash-results-titlebar"><h3>Elementos con Interferencia</h3><div class="clash-report-actions"><button id="clashExcelReportButton" type="button" class="clash-report-button">Reporte Excel</button></div></div><div class="clash-results-search-row"><span class="gi-search-icon" aria-hidden="true">⌕</span><input id="clashResultsSearchInput" class="gi-input" type="text" placeholder="Buscar interferencia..." aria-label="Buscar en las interferencias" /></div><div id="clashResultsList" class="clash-list"><div class="clash-empty">Selecciona una evaluación.</div></div></div></div></div></section></aside><div id="worksSplitter" class="column-splitter works-splitter hidden" title="Panel Obras"></div><aside id="worksPanel" class="works-column hidden"><section class="panel works-panel"><div class="properties-header works-saved-config-header"><div id="worksSavedConfigBar" class="works-saved-config-bar" aria-label="Configuraciones guardadas del panel Obras"><button id="worksSavedConfigSaveButton" class="works-saved-config-save-button" type="button" title="Guardar configuración de Obras" aria-label="Guardar configuración de Obras"><svg class="bim-save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5h10.8L19.5 8v11.5h-15v-15H5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 4.5v5h7.5v-5M8 15h8v4.5H8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><input id="worksSavedConfigNameInput" class="works-saved-config-name-input" type="text" placeholder="Nombre de configuración" autocomplete="off" /><select id="worksSavedConfigSelect" class="works-saved-config-select" title="Configuraciones guardadas de Obras"><option value="">&lt;Ninguno&gt;</option></select><button id="worksSavedConfigDeleteButton" class="works-saved-config-delete-button" type="button" title="Eliminar configuración activa" disabled>Eliminar</button></div></div><nav id="worksMenu" class="works-menu" role="tablist" aria-label="Secciones del panel Obras"><button id="worksConfigToggle" type="button" class="works-menu-button works-menu-icon-button active" role="tab" aria-selected="true" aria-controls="worksConfigBody" title="Configuración" aria-label="Configuración"><span class="works-menu-gear" aria-hidden="true">⚙</span></button><button id="worksPartidasToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksPartidasBody">Partidas</button><button id="worksSummaryToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksSummaryBody">Mensual</button><button id="worksWeeklyReportToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksWeeklyReportBody">Semanal</button><button id="worksDailyReportToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksDailyReportBody">Diario</button></nav><div id="worksConfigSection" class="works-section" role="tabpanel" aria-labelledby="worksConfigToggle"><div id="worksConfigBody" class="works-section-body"><div class="works-config-grid"><div class="works-config-left"><div class="works-field-block"><div class="works-field-label">Código de partida</div><div id="worksCodeList" class="works-assigned-list" data-works-target="code" tabindex="0"></div></div><div class="works-field-block"><div class="works-field-label">Descripción de partida</div><div id="worksDescriptionList" class="works-assigned-list" data-works-target="description" tabindex="0"></div></div><div class="works-field-block"><div class="works-field-label">Unidad de partida</div><div id="worksUnitList" class="works-assigned-list" data-works-target="unit" tabindex="0"></div></div><div class="works-field-block"><div class="works-field-label">Fecha de avance</div><div id="worksProgressDateList" class="works-assigned-list works-single-list" data-works-target="progressDate" tabindex="0"></div></div></div><div class="works-config-right"><label class="works-field-label" for="worksParameterSearch"><span>Parámetros disponibles</span><input id="worksParameterSearch" class="works-input works-parameter-search" type="text" placeholder="Filtrar parámetros..." autocomplete="off" /></label><div id="worksParametersList" class="works-parameter-list"></div></div></div></div></div><div id="worksPartidasSection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksPartidasToggle"><div id="worksPartidasBody" class="works-section-body"><div class="works-partidas-panel"><div class="works-partidas-menu-status-row"><small id="worksPartidasSummary" class="works-partidas-summary">Sin datos</small></div><div class="works-partidas-options-row"><label class="works-partidas-select-viewer-toggle" for="worksPartidasSelectViewerCheckbox"><input id="worksPartidasSelectViewerCheckbox" type="checkbox" /><span>Seleccionar elementos en el modelo</span></label><label class="works-partidas-show-config-toggle" for="worksPartidasShowMeasurementConfigCheckbox"><input id="worksPartidasShowMeasurementConfigCheckbox" type="checkbox" /><span>Mostrar configuración</span></label><div class="works-partidas-excel-actions"><button id="worksPartidasImportExcelButton" class="works-partidas-import-excel-button" type="button" title="Importar códigos y descripciones desde las columnas A y B de un Excel">Importar Excel</button><button id="worksPartidasExportExcelButton" class="works-partidas-export-excel-button" type="button" title="Exportar a Excel las partidas chequeadas">Exportar Excel</button></div><input id="worksPartidasImportExcelInput" class="works-partidas-import-excel-input" type="file" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12" /></div><div class="works-partidas-search-row"><span class="works-partidas-search-icon">⌕</span><input id="worksPartidasSearch" class="works-partidas-search-input" type="text" placeholder="Buscar partida..." autocomplete="off" /></div><div class="works-partidas-table-wrap"><table id="worksPartidasTable" class="works-partidas-table" aria-label="Estructura de partidas"><thead><tr><th class="works-partida-code-column">Código</th><th class="works-partida-description-column">Descripción</th><th class="works-partida-unit-column">Unidad</th><th class="works-partida-quantity-column">Total</th><th class="works-partida-measurement-config-column">Configuración</th><th class="works-partida-use-column">Usar</th></tr></thead><tbody id="worksPartidasTableBody"><tr><td colspan="6"><div class="works-partidas-empty">Configura los parámetros de código, descripción y unidad para recuperar las partidas.</div></td></tr></tbody></table></div></div></div></div><div id="worksSummarySection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksSummaryToggle"><div id="worksSummaryBody" class="works-section-body"><div id="worksSummaryContent" class="works-summary-panel"><div class="works-summary-empty">Configura las partidas y el parámetro Fecha de avance para ver el resumen general de obra.</div></div></div></div><div id="worksWeeklyReportSection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksWeeklyReportToggle"><div id="worksWeeklyReportBody" class="works-section-body"><div id="worksWeeklyReportContent" class="works-summary-panel"><div class="works-summary-empty">Selecciona un mes en Resumen General de Obra para ver sus semanas.</div></div></div></div><div id="worksDailyReportSection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksDailyReportToggle"><div id="worksDailyReportBody" class="works-section-body"><div id="worksDailyReportContent" class="works-summary-panel"><div class="works-summary-empty">Selecciona un mes en Resumen General de Obra para consultar sus días.</div></div></div></div></section></aside><div id="plansColumnSplitter" class="column-splitter plans-column-splitter hidden" title="Panel 2D"></div><aside id="plansPanel" class="plans-drawer hidden" aria-label="Panel 2D"><div id="plansDrawerResizeHandle" class="plans-drawer-resizer" role="separator" aria-orientation="vertical" aria-label="Cambiar ancho del panel 2D"></div><section class="panel plans-panel"><div class="plans-body"><div class="plans-list-wrap"><div class="tree-search-row plans-search-row"><span class="gi-search-icon">⌕</span><input id="plansSearchInput" class="tree-search" type="text" placeholder="Filtrar láminas..." /></div><div class="plans-counter-row"><span id="plansStatus" class="plans-status">Sin planos cargados</span></div><div id="plansList" class="plans-list empty">Carga un proyecto con archivos _2D.bi.</div></div><div id="plansListResizeHandle" class="plans-list-resizer" role="separator" aria-orientation="vertical" aria-label="Cambiar tamaño del listado de planos"></div><div class="plans-viewer-wrap"><div id="plansPdfViewer" class="plans-pdf-viewer hidden" aria-label="Visualizador PDF 2D"><div class="plans-pdf-toolbar"><div class="plans-pdf-toolbar-left"><label class="plans-pdf-quality-label" title="Calidad de visualización del plano"><span>Calidad</span><select id="plansPdfQualitySelect" class="plans-pdf-quality-select" aria-label="Calidad de visualización del PDF"><option value="low">Ligera</option><option value="medium" selected>Media</option><option value="high">Alta</option><option value="max">Máxima</option></select></label><button id="plansPdfFitButton" type="button" class="plans-pdf-tool plans-pdf-tool-text" title="Ajustar plano">Ajustar</button><button id="plansPdfZoomOutButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Alejar" aria-label="Alejar">−</button><span id="plansPdfZoomValue" class="plans-pdf-zoom-value">100%</span><button id="plansPdfZoomInButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Acercar" aria-label="Acercar">+</button><button id="plansPdfRotateButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Rotar plano" aria-label="Rotar plano"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.32 4H3.25A9 9 0 1 0 12 3V0L7 4l5 4V5z" fill="currentColor"/></svg></button><button id="plansPdfDownloadButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Descargar PDF" aria-label="Descargar PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17V3zm-6 16h14v2H5v-2z" fill="currentColor"/></svg></button><button id="plansNativeViewsButton" type="button" class="plans-pdf-tool plans-pdf-tool-text plans-native-views-button hidden" title="Superponer una vista nativa sobre el modelo 3D" aria-label="Vistas nativas para superponer en 3D" aria-expanded="false">
-                    Vistas 3D <span id="plansNativeViewsCount" class="plans-native-views-count">0</span></button></div></div><div id="plansNativeViewsMenu" class="plans-native-views-menu hidden" aria-label="Vistas nativas disponibles"></div><div id="plansAnnotationToolbar" class="plans-annotation-toolbar" aria-label="Herramientas de anotación 2D"><div class="plans-annotation-tools"><button id="plansAnnoRectButton" type="button" class="plans-anno-tool" data-anno-tool="rect" title="Rectángulo" aria-label="Rectángulo">▭</button><button id="plansAnnoCircleButton" type="button" class="plans-anno-tool" data-anno-tool="circle" title="Círculo" aria-label="Círculo">○</button><button id="plansAnnoCloudButton" type="button" class="plans-anno-tool" data-anno-tool="cloud" title="Nube" aria-label="Nube">☁</button><button id="plansAnnoArrowButton" type="button" class="plans-anno-tool" data-anno-tool="arrow" title="Flecha" aria-label="Flecha">↗</button><button id="plansAnnoLineButton" type="button" class="plans-anno-tool" data-anno-tool="line" title="Línea" aria-label="Línea">╱</button><button id="plansAnnoTextButton" type="button" class="plans-anno-tool" data-anno-tool="text" title="Texto" aria-label="Texto">T</button><label class="plans-anno-control" title="Color de anotación"><span>Color</span><input id="plansAnnoColorInput" type="color" value="#ff0000" aria-label="Color de anotación" /></label><label class="plans-anno-control" title="Grosor o tamaño de anotación"><span>Tamaño</span><input id="plansAnnoSizeInput" class="plans-anno-size-input" type="number" min="0" step="0.5" value="4" aria-label="Tamaño de anotación" /></label><button id="plansAnnoUndoButton" type="button" class="plans-anno-tool" title="Deshacer última anotación" aria-label="Deshacer última anotación">↶</button><button id="plansAnnoDeleteButton" type="button" class="plans-anno-tool danger" title="Eliminar anotación seleccionada (Supr)" aria-label="Eliminar anotación seleccionada">🗑</button><button id="plansAnnoClearButton" type="button" class="plans-anno-tool danger" title="Borrar anotaciones del plano" aria-label="Borrar anotaciones del plano">🧹</button></div></div><div id="plansPdfStage" class="plans-pdf-stage"><canvas id="plansPdfCanvas" class="plans-pdf-canvas"></canvas><svg id="plansAnnotationLayer" class="plans-annotation-layer" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg><div id="plansNativeViewHotspots" class="plans-native-view-hotspots" aria-label="Accesos directos a vistas 3D"></div><div id="plansPdfLoading" class="plans-pdf-loading hidden">Preparando plano...</div></div></div><div id="plansViewerEmpty" class="plans-viewer-empty">Selecciona una lámina para visualizarla.</div></div></div></section></aside></div><div id="issuesSplitter" class="issues-panel-splitter hidden" role="separator" aria-orientation="vertical" aria-label="Cambiar ancho del panel Incidencias" title="Arrastra para cambiar el ancho"></div><aside id="issuesPanel" class="issues-panel-shell hidden" aria-label="Gestión de incidencias BIM" aria-hidden="true"><header class="issues-panel-header"><div class="issues-panel-heading"><strong>Incidencias</strong></div><label class="issues-marker-toggle issues-marker-toggle-header"><input id="issuesMarkerToggle" type="checkbox" /><span>Mostrar marcadores en el modelo 3D</span></label></header><nav class="issues-menu-tabs" aria-label="Secciones del panel Incidencias"><button id="issuesNewMenuButton" class="issues-menu-tab active" type="button" data-issues-menu="list" aria-selected="true">Incidencias</button><button id="issuesDetailsMenuButton" class="issues-menu-tab" type="button" data-issues-menu="details" aria-selected="false">Detalles</button><button id="issuesHistoryMenuButton" class="issues-menu-tab" type="button" data-issues-menu="history" aria-selected="false">Historial <span id="issueHistoryCount" class="issues-menu-count">0</span></button><button id="issuesSettingsMenuButton" class="issues-menu-tab issues-menu-icon-tab" type="button" data-issues-menu="settings" aria-selected="false" title="Configuración" aria-label="Configuración"><span class="issues-menu-gear" aria-hidden="true">⚙</span></button></nav><div class="issues-menu-content"><section id="issuesListView" class="issues-menu-view issues-list-view" data-issues-view="list" aria-label="Listado y creación de incidencias"><div class="issues-list-actions"><button id="issuesNewButton" class="issues-primary-button" type="button" disabled>+ Nueva incidencia</button></div><div class="issues-panel-toolbar"><input id="issuesSearchInput" class="issues-search" type="search" placeholder="Buscar por código, etiqueta, responsable o texto..." /><select id="issuesStatusFilter" class="issues-select" aria-label="Filtrar por estado"></select><select id="issuesPriorityFilter" class="issues-select" aria-label="Filtrar por prioridad"></select><select id="issuesLabelFilter" class="issues-select" aria-label="Filtrar por etiqueta"></select><select id="issuesAssigneeFilter" class="issues-select" aria-label="Filtrar por responsable"></select></div><div id="issuesStats" class="issues-stats" aria-label="Resumen de incidencias"></div><section class="issues-list-pane" aria-label="Listado de incidencias"><div id="issuesList" class="issues-list"></div><div id="issuesListEmpty" class="issues-empty">Todavía no existen incidencias para este proyecto.</div></section></section><section id="issuesDetailsView" class="issues-menu-view issues-details-view hidden" data-issues-view="details" aria-label="Detalles de incidencia"><div id="issuesEditorEmpty" class="issues-editor-empty">Selecciona una incidencia en el menú Incidencias o crea una nueva desde el modelo 3D.</div><div id="issuesEditor" class="issues-editor hidden"><div class="issues-editor-heading"><strong id="issuesEditorTitle">Detalle</strong><div class="issues-editor-heading-actions"><button id="issueFocusButton" class="issues-secondary-button" type="button">Ver en modelo</button><button id="issueRelocateButton" class="issues-secondary-button" type="button">Reubicar</button></div></div><div class="issues-form-grid"><label class="issues-field"><span>Etiqueta</span><select id="issueLabelInput" class="issues-select"></select></label><label class="issues-field"><span>Estado</span><span class="issues-status-select-wrap"><i id="issueStatusColorSwatch" class="issues-status-color-swatch" aria-hidden="true"></i><select id="issueStatusInput" class="issues-select"></select></span></label><label class="issues-field full"><span>Título</span><input id="issueTitleInput" class="issues-input" type="text" maxlength="180" placeholder="Describe brevemente el problema" /></label><label class="issues-field full"><span>Descripción</span><textarea id="issueDescriptionInput" class="issues-textarea" placeholder="Explica qué debe revisarse o corregirse"></textarea></label><label class="issues-field"><span>Tipo</span><select id="issueTypeInput" class="issues-select"></select></label><label class="issues-field"><span>Prioridad</span><select id="issuePriorityInput" class="issues-select"></select></label><label class="issues-field"><span>Responsable</span><select id="issueAssigneeInput" class="issues-select"><option value="">Sin asignar</option></select></label><div class="issues-field"><span>Fecha límite (DD/MM/AAAA)</span><span class="issues-date-input-wrap"><input id="issueDueDateInput" class="issues-input issues-date-text-input" type="text" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD/MM/AAAA" aria-label="Fecha límite en formato día, mes y año" /><button id="issueDueDatePickerButton" class="issues-date-picker-button" type="button" title="Mostrar selector de fechas" aria-label="Mostrar selector de fechas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 4.5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><input id="issueDueDatePickerNative" class="issues-date-native-picker" type="date" tabindex="-1" aria-hidden="true" /></span></div><div class="issues-field full"><span>Vinculación BIM</span><div id="issueLinkedElements" class="issue-linked-elements">Marcador pendiente de ubicar</div></div></div><div class="issues-section"><div class="issues-section-title"><strong>Evidencias generales</strong><div class="issues-section-actions"><label class="issues-upload-button">Agregar imágenes<input id="issueImageInput" type="file" accept="image/*" multiple /></label><button id="issueCaptureButton" class="issues-secondary-button" type="button">Capturar vista</button></div></div><div id="issueAttachmentsList" class="issue-attachments-list"></div></div><div class="issues-section"><div class="issues-section-title"><strong>Comentarios y evidencias asociadas</strong></div><div class="issue-comment-compose"><textarea id="issueCommentInput" class="issues-textarea" placeholder="Agregar comentario y, opcionalmente, imágenes asociadas..."></textarea><div class="issue-comment-actions"><label class="issues-upload-button">Imágenes<input id="issueCommentImageInput" type="file" accept="image/*" multiple /></label><button id="issueCommentCaptureButton" class="issues-secondary-button" type="button">Capturar</button><button id="issueCancelCommentEditButton" class="issues-secondary-button hidden" type="button">Cancelar edición</button><button id="issueAddCommentButton" class="issues-primary-button" type="button">Agregar comentario</button></div></div><div id="issueCommentPendingAttachments" class="issue-comment-pending"></div><div id="issueCommentsList" class="issue-comments-list"></div></div><footer class="issues-editor-footer"><button id="issueCancelButton" class="issues-secondary-button" type="button">Cerrar detalle</button><button id="issueSaveButton" class="issues-primary-button" type="button">Guardar modificaciones</button></footer></div></section><section id="issuesHistoryView" class="issues-menu-view issues-history-view hidden" data-issues-view="history" aria-label="Historial de actividad"><div id="issuesHistoryEmpty" class="issues-editor-empty">Selecciona una incidencia para consultar su historial de actividad.</div><div id="issuesHistoryContent" class="issues-history-content hidden"><div class="issues-view-heading"><div><strong>Historial de actividad</strong><span id="issuesHistoryTitle">Incidencia seleccionada</span></div><button id="issuesHistoryFocusButton" class="issues-secondary-button" type="button">Ver en modelo</button></div><div id="issueHistoryList" class="issue-history-list issues-history-full-list"></div></div></section><section id="issuesSettingsView" class="issues-menu-view issues-settings-view hidden" data-issues-view="settings" aria-label="Configuración de incidencias"><section id="issuesTeamPanel" class="issues-config-section" aria-label="Equipo de trabajo"><div class="issues-config-heading"><div><strong>Equipo de trabajo</strong><span>Registra las personas disponibles para asignarlas como responsables.</span></div></div><div class="issues-team-form"><input id="issuesTeamNameInput" class="issues-input" type="text" maxlength="100" placeholder="Nombre completo" /><input id="issuesTeamRoleInput" class="issues-input" type="text" maxlength="100" placeholder="Cargo o especialidad" /><input id="issuesTeamEmailInput" class="issues-input" type="email" maxlength="160" placeholder="Correo (opcional)" /><button id="issuesTeamAddButton" class="issues-primary-button" type="button">Agregar persona</button></div><div id="issuesTeamList" class="issues-team-list"></div></section><section id="issuesLabelsPanel" class="issues-config-section" aria-label="Catálogo de etiquetas"><div class="issues-config-heading"><div><strong>Etiquetas de incidencias</strong><span>Define el nombre y color que se mostrarán en el modelo 3D.</span></div></div><div class="issues-labels-form"><input id="issuesLabelNameInput" class="issues-input" type="text" maxlength="80" placeholder="Nombre de la etiqueta" /><input id="issuesLabelColorInput" class="issues-color-input" type="color" value="#2563eb" aria-label="Color de la etiqueta" /><button id="issuesLabelAddButton" class="issues-primary-button" type="button">Agregar etiqueta</button></div><div id="issuesLabelsList" class="issues-labels-list"></div></section></section></div></aside></div></div><div id="issuesPlacementBanner" class="issues-placement-banner hidden" role="status"><strong>Ubicar incidencia</strong><span>Haz clic sobre el punto exacto del modelo. Se guardarán la cámara y los elementos seleccionados.</span><button id="issuesPlacementCancel" class="issues-secondary-button" type="button">Cancelar</button></div><div id="issuesImagePreview" class="issues-image-preview hidden" role="dialog" aria-modal="true" aria-label="Vista previa de evidencia"><div class="issues-image-preview-toolbar" role="toolbar" aria-label="Controles de imagen"><button id="issuesImagePreviewZoomOut" class="issues-icon-button" type="button" aria-label="Alejar imagen">−</button><span id="issuesImagePreviewZoomLabel" aria-live="polite">100%</span><button id="issuesImagePreviewZoomIn" class="issues-icon-button" type="button" aria-label="Acercar imagen">+</button><button id="issuesImagePreviewReset" class="issues-secondary-button" type="button">Restablecer</button></div><button id="issuesImagePreviewClose" class="issues-icon-button issues-image-preview-close" type="button" aria-label="Cerrar imagen">×</button><div id="issuesImagePreviewViewport" class="issues-image-preview-viewport"><img id="issuesImagePreviewImage" alt="Evidencia de incidencia" draggable="false" /></div><div class="issues-image-preview-help">Rueda: zoom · arrastrar: mover · doble clic: restablecer · Esc: cerrar</div></div><script src="vendor/three.min.js"></script><script src="assets/j/j0780ffb27ea55d.js?v=1"></script><script src="assets/j/jdd00f51b690ed8.js?v=security-1"></script><script src="assets/j/j71765478c4a6df.js?v=3-security"></script><script src="assets/j/jd32ed1bc48a4d2.js?v=1"></script><script src="assets/j/jc37b68572163e5.js?v=1"></script><script src="assets/j/jc1f6b9a781e10d.js?v=1"></script><script src="assets/j/j66cb30101283b2.js?v=3"></script><script src="assets/j/jc47df97edd86c3.js?v=1.1"></script><script src="assets/j/j6502bb62a78d6e.js?v=3"></script><script src="assets/j/j21280d08692495.js?v=5"></script><script src="assets/j/jc70578f381a74b.js?v=12"></script><script src="assets/j/j74b6ff1988ec52.js?v=12"></script><script src="assets/j/j0808e99c5957df.js?v=12"></script><script src="assets/j/ja5b06a0b082063.js?v=12"></script><script src="assets/j/j37ee30da0555a9.js?v=12&incremental-viewer-selection=1"></script><script src="assets/j/j6015f636cbea3b.js?v=12&operation-progress=1&data-scope-incremental=1&initial-project-visibility-fast=1"></script><script src="assets/j/j14433f5d250853.js?v=12"></script><script src="assets/j/j59aecc6c53dc74.js?v=5"></script><script src="assets/j/j916962aa294bb4.js?v=5"></script><script src="assets/j/j1e69a3d3a116f5.js?v=5"></script><script src="assets/j/j47dd13317f0503.js?v=5&deferred-hidden-panel=1"></script><script src="assets/j/j36ae1024448c2e.js?v=4"></script><script src="assets/j/j1bcdeb911e55da.js?v=8&save-verify=1"></script><script src="assets/j/j9823e1c41231f0.js?v=15.3"></script><script src="assets/j/j5c21ff4d3c49d7.js?v=15.6&operation-progress=2&group-label-counts=1"></script><script src="assets/j/j0103891e0d4e41.js?v=16-classification-filters"></script><script src="assets/j/jccc66b1b1f9a69.js?v=9-classification-filters&data-operation-progress=1"></script><script src="assets/j/jcd4dede066b9cc.js?v=8&excel-changes=1&virtual-table-100=1"></script><script src="assets/j/j8a593555d46a59.js?v=8"></script><script src="assets/j/ja24c3615c549dd.js?v=8&excel-changes=1"></script><script src="assets/j/j46fe32fd31f7e1.js?v=8"></script><script src="assets/j/j321e833aff51ef.js?v=9-rules-2"></script><script src="assets/j/j1239f7959126c8.js?v=10-dialogs-excel-rowheight-1"></script><script src="assets/j/jb16e54f1b0ba10.js?v=18.24-panel-close-progress&real-progress=1"></script><script src="assets/j/j0e16572de34be4.js?v=9-partida-config-1"></script><script src="assets/j/j7a57e630332c05.js?v=9-rules-2"></script><script src="assets/j/ja0d64cd82c0797.js?v=9-partida-config-1"></script><script src="assets/j/j7a1c2fb29f794e.js?v=9"></script><script src="assets/j/j05eebb5d181cd4.js?v=9"></script><script src="assets/j/j335dfbc787a299.js?v=10.2"></script><script src="assets/j/j4411d6b7446b4f.js?v=18.24&sync-scope=1&clash-filter-groups=1&clash-exclude-groups=1&clash-results-search=1&clash-cm3=1&clash-auto-first=1&clash-filter-rows=7-10&clash-scroll-stable=1&panel-close-progress=1&real-progress=1"></script><script src="assets/j/j5ba88345eb217f.js?v=10.3-bvh&sync-scope=1&clash-filter-groups=1"></script><script src="assets/j/j79ce70aa78f31a.js?v=18.24-exact-contact-clean-indexed"></script><script src="assets/j/j52e41e91bceb90.js?v=10.3-bvh&clash-filter-groups=1&clash-auto-open=1&positive-clash-volume=2&clash-cm3=1&clash-auto-first=1"></script><script src="assets/j/jb200fde60dcd8f.js?v=18.24-exact-contact-demand&clash-auto-first=1&clash-keyboard-nav=1&clash-scroll-stable=1"></script><script src="assets/j/j6f9847b229c254.js?v=10.3-bvh&clash-cm3=1"></script><script src="assets/j/ja6842fcd0eac49.js?v=10.2"></script><script src="assets/j/j6578add72dc560.js?v=3"></script><script src="assets/j/jf6cf72cfa40674.js?v=4&security=2"></script><script src="assets/j/j9893b007527ea1.js?v=3"></script><script src="assets/j/jef1c76a5ef6d91.js?v=4"></script><script src="assets/j/j13991aa1fef95d.js?v=3"></script><script src="assets/j/j62efcfe3720661.js?v=3"></script><script src="assets/j/jb531b775e7b6a8.js?v=13"></script><script src="assets/j/jd6e10864948d00.js"></script><script src="assets/j/j5554aa8b974dca.js?v=phase4-cache-sync-1&issues=18.8&security=1&save-verify=1&works-state=1"></script><script src="assets/j/jff290858e1e17b.js?v=bin96"></script><script src="assets/j/j3b13f47d56a904.js?v=large-model-lod-1&security=1"></script><script src="assets/j/j3d85b4132e144c.js?v=phase4-cache-sync-1&security=1&save-verify=1&works-state=1"></script><script src="assets/j/j5a8cc87ad9e7c3.js?v=large-model-lod-1&security=1"></script><script src="assets/j/j551b76927a32ee.js?v=adaptive-quality-2"></script><script src="vendor/pdf.min.js?v=3.11.174-local"></script><script src="assets/j/j28c48c2f5d9d00.js?v=11&security=1"></script><script src="assets/j/j1471445c353b59.js?v=11&save-verify=1"></script><script src="assets/j/j801f35c55b90bc.js?v=11"></script><script src="assets/j/jeb87276b5fba76.js?v=11"></script><script src="assets/j/j1a9494c4c20dcd.js?v=11"></script><script src="assets/j/jfa9138a1dfe99a.js?v=11"></script><script src="assets/j/ja24ac03f068908.js?v=12-multipage-local-pdfjs-2"></script><script src="assets/j/j71cb6b2df3f876.js?v=11"></script><script src="assets/j/j3d7ee3fef6c66f.js?v=16.12-native-view-section-pivot-local-pdfjs-2"></script><script src="assets/j/jad40390768ecba.js?v=16.15-multipage-pdf-local-pdfjs-2&real-progress=1"></script><script src="assets/j/j00e3bd3462b974.js?v=14"></script><script src="assets/j/j96c36d7afa4a46.js?v=15.5-multiselect-release"></script><script src="assets/j/jfde8b90a413c5f.js?v=18.23-color-priority&world-prewarm=1&visibility-index=1"></script><script src="assets/j/j8d1b36bf01849a.js?v=14"></script><script src="assets/j/jdf26ac9188152d.js?v=18.21-exact-sweep"></script><script src="assets/j/je0289e28b0c5c4.js?v=14"></script><script src="assets/j/j88c1c02895c717.js?v=19.1-camera-framing&isolation-progress=3&real-progress=2&shortcut-progress=1&memory-safe-load=1&indexed-edges=1&ghost-residue=2&strict-isolation=1&shortcut-command-parity=1&hide-fast=1&strict-isolation-render-guard=2&restore-chunk-visibility=1&strict-project-visibility=4&project-scoped-chunks=1&initial-load-visibility-fast=1&hide-edges-complete=2&selection-source-opacity50=1&selection-index-mask=1&edge-build-generation=1&exterior-edge-fallback=1&stable-effect-edges=1&visual-state-selection-mask=1&data-chunk-render=1&adaptive-edge-classifier=6&selection-overlay-priority=1&incremental-restore=2&local-cell-restore=1&colored-edge-coverage=1&tubular-edge-detach=1&data-operation-progress=2&multiselect-release=1&viewer-transparency-progress=1&ai-section-keys=1&ai-preserve-visual-state=1"></script><script src="assets/j/j9cc9fb73e69a39.js?v=phase4-cache-sync-1"></script><script src="assets/j/j1fc17d0eb27e03.js?v=15.1"></script><script src="assets/j/j80eac4471e8fdc.js?v=classification-color-identity-1"></script><script src="assets/j/jb7da3a9c2318f5.js"></script><script src="assets/j/jee2a8bc3a606da.js?v=classification-filters-1&release=19.5-config-defer-group-remove&data-operation-progress=3&caret-preservation=1&spatial-restore-progress=1"></script><script src="runtime-config.js?v=1-unified-environment"></script><script src="assets/j/ja737b86c14caf0.js?v=1-unified-environment"></script><script src="assets/j/je4e51ce8686313.js?v=7-excel-reports-actions"></script><script src="assets/j/ja1e31198227c52.js?v=1-excel-reports"></script><script src="assets/j/j920d79ab1b64e7.js?v=7-unified-environment"></script><script src="assets/j/j013bc2aeef4ef1.js?v=2-math"></script><script src="assets/j/j14229d07d17cd8.js?v=phase12-project-tree-modules-1&release=18.24-panel-close-progress-2&works-partida-config=1&works-state=1&unified-ui=1&operation-progress=2&clash-group-modes=1&clash-filter-groups=1&clash-results-search=1&clash-cm3=1&clash-keyboard-nav=1&real-progress=2&shortcut-progress=1&shortcut-command-parity=2&hide-fast=1&strict-isolation-render-guard=2&restore-chunk-visibility=1&selection-dom-delta=1&data-operation-progress=1&viewer-transparency-progress=1"></script><script src="assets/j/j4bf3e59826e6d8.js?v=phase14-selection-modules-1&release=19.5-tablet-workspace-authority&real-progress=1&memory-safe-load=1&deferred-properties-render=1"></script><script src="assets/j/jbbb535c04f0e93.js?v=19.5-tablet-detection"></script><script src="assets/j/jced66ab69d3441.js?v=phase18-issues-8"></script><script src="assets/j/j5d1f85ddc68179.js?v=phase18-issues-8&security=1"></script><script src="assets/j/jc7de71541011ff.js?v=phase18-issues-8"></script><script src="assets/j/j2a3802c934740a.js?v=phase18-issues-8"></script><script src="assets/j/j8e5b1b59023c16.js?v=18.22-markers-off&real-progress=2&issue-close-fast=1"></script><script src="assets/j/j6a137e8fe5df86.js?v=18.24-panel-close-progress-2&phase18-issues-15-complete-view-state=1&real-progress=2"></script><script src="assets/j/j087ae5e71024d0.js?v=2"></script><script src="assets/j/j7c069d069f0795.js?v=phase13-cloud-changes-1&issues=18.12&security=1&save-verify=1&download-integrity=1&works-transient=1&cloud-ui=2"></script><script src="assets/j/ja7adab91b68b23.js?v=19.5-native-fullscreen&real-progress=1"></script><script src="assets/j/jadfe5c0285ea1a.js?v=8-unified-environment"></script></body></html>
+          <input id="folderInput" type="file" webkitdirectory directory multiple />
+        </label>
+      </div>
+    </header>
+
+    <div class="workspace-shell" id="workspaceShell">
+      <div class="app" id="appLayout">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-toggle-row">
+          <span>Panel de control</span>
+        </div>
+
+        <section id="projectControlSection" class="works-section control-tree-section project-panel">
+          <button id="projectSectionToggle" class="works-section-toggle control-section-toggle" type="button" aria-expanded="true" aria-controls="projectSectionBody" title="Contraer Proyecto">
+            <span class="works-section-caret control-section-caret">▶</span>
+            <span>Proyecto</span>
+          </button>
+          <div id="projectSectionBody" class="works-section-body control-section-body">
+            <div class="control-section-tools">
+              <div class="tree-search-row">
+                <span class="gi-search-icon">⌕</span>
+                <input id="projectSearchInput" class="tree-search" type="text" placeholder="Filtrar proyecto..." />
+              </div>
+              <label class="tree-selection-mode">
+                <input id="projectSelectOnClickCheckbox" type="checkbox" />
+                <span>Seleccionar en visor</span>
+              </label>
+            </div>
+            <div id="projectTree" class="tree-list empty">Sin proyectos cargados</div>
+          </div>
+        </section>
+
+        <section id="categoryControlSection" class="works-section control-tree-section category-panel">
+          <button id="categorySectionToggle" class="works-section-toggle control-section-toggle" type="button" aria-expanded="true" aria-controls="categorySectionBody" title="Contraer Categorías">
+            <span class="works-section-caret control-section-caret">▶</span>
+            <span>Categorías</span>
+          </button>
+          <div id="categorySectionBody" class="works-section-body control-section-body">
+            <div class="control-section-tools">
+              <div class="tree-search-row">
+                <span class="gi-search-icon">⌕</span>
+                <input id="categorySearchInput" class="tree-search" type="text" placeholder="Filtrar categorías..." />
+              </div>
+              <label class="tree-selection-mode">
+                <input id="categorySelectOnClickCheckbox" type="checkbox" />
+                <span>Seleccionar en visor</span>
+              </label>
+            </div>
+            <div id="categoryList" class="tree-list empty">Sin datos</div>
+          </div>
+        </section>
+      </aside>
+
+      <div id="columnSplitter" class="column-splitter" title="Arrastra para cambiar el ancho"></div>
+
+      <aside class="properties-column">
+        <section class="panel properties-panel">
+          <div class="properties-header">
+            <h2>Propiedades</h2>
+            <div class="properties-search-row">
+              <input id="propertiesSearchInput" class="properties-search" type="text" placeholder="Filtrar propiedades..." autocomplete="off" />
+              <button id="propertiesSearchAddButton" class="properties-search-add" type="button" title="Agregar filtro" aria-label="Agregar filtro de propiedades">+</button>
+            </div>
+            <div id="propertiesSearchFilters" class="properties-search-filters hidden" aria-label="Filtros de propiedades activos" aria-live="polite"></div>
+          </div>
+          <div id="propertiesContent" class="properties-content empty">Selecciona un elemento.</div>
+        </section>
+      </aside>
+
+      <div id="propertiesSplitter" class="column-splitter properties-splitter" title="Arrastra para cambiar el ancho"></div>
+
+      <main class="viewer-column">
+        <div class="viewer-card">
+          <canvas id="viewerCanvas"></canvas>
+          <div id="issuesMarkerLayer" class="issues-marker-layer hidden" aria-label="Marcadores de incidencias en el modelo"></div>
+
+          <div id="viewCube" class="view-cube" title="ViewCube">
+            <canvas id="viewCubeCanvas"></canvas>
+          </div>
+
+          <div class="mobile-panel-buttons" aria-label="Paneles desplegables">
+            <button id="mobileLeftPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="sidebar">Panel de Control</button>
+            <button id="mobilePropertiesButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="propertiesContent">Propiedades</button>
+            <button id="mobileDataPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="massInfoPanel">Datos</button>
+            <button id="mobileClashPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="clashPanel">Interferencias</button>
+            <button id="mobileIssuesPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="issuesPanel">Incidencias</button>
+            <button id="mobilePlansPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="plansPanel">2D</button>
+            <button id="mobileWorksPanelButton" type="button" class="mobile-panel-button" aria-expanded="false" aria-controls="worksPanel">Obras</button>
+          </div>
+
+          <div class="viewer-actions floating-actions">
+            <button id="gridButton" title="Mostrar / ocultar cuadrícula nivel 00">▦</button>
+            <button id="areaZoomButton" title="Zoom por ventana (Z+R)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6"/><path d="M7.5 10.5h6"/></svg></button>
+            <button id="fitButton" title="Ajustar vista">⛶</button>
+            <button id="isolateButton" title="Aislar selección (H+I)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <button id="hideSelectedButton" title="Ocultar selección (H+H)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="3"/><path d="M4 20 20 4"/></svg></button>
+            <button id="fadeUnselectedButton" title="Transparentar no seleccionados">◑</button>
+            <button id="sectionBoxButton" title="Caja de corte (B+X)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8.5 12 5l6 3.5v7L12 19l-6-3.5z"/><path d="M6 8.5 12 12l6-3.5"/><path d="M12 12v7"/></svg></button>
+            <button id="sectionRotateXButton" class="measure-mini-button section-axis-button section-axis-x hidden" title="Girar caja alrededor del eje X">X</button>
+            <button id="sectionRotateYButton" class="measure-mini-button section-axis-button section-axis-y hidden" title="Girar caja alrededor del eje Y">Y</button>
+            <button id="sectionRotateZButton" class="measure-mini-button section-axis-button section-axis-z hidden" title="Girar caja alrededor del eje Z vertical">Z</button>
+            <button id="measureButton" title="Medir"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 17 4l3 3L7 20z"/><path d="M8 16l-2-2"/><path d="M11 13l-2-2"/><path d="M14 10l-2-2"/><path d="M17 7l-2-2"/></svg></button>
+            <button id="measureAddButton" class="measure-mini-button hidden" title="Agregar medida">+</button>
+            <button id="measureRemoveButton" class="measure-mini-button hidden" title="Quitar última medida">−</button>
+            <button id="elevationButton" title="Consultar elevación"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h14"/><path d="M7 7h10l-5 8z"/><path d="M12 15v5"/></svg></button>
+            <button id="elevationAddButton" class="measure-mini-button hidden" title="Agregar elevación">+</button>
+            <button id="elevationRemoveButton" class="measure-mini-button hidden" title="Quitar última elevación">−</button>
+            <button id="resetButton" title="Restablecer vista (R+R)">↺</button>
+          </div>
+
+          <div id="viewerOverlay" class="viewer-overlay">
+            <strong>ExportModel Viewer</strong>
+            <span>Carga el proyecto exportado para visualizar los modelos.</span>
+          </div>
+
+          <div id="loadingPanel" class="loading-panel hidden">
+            <div class="loading-card">
+              <strong id="loadingTitle">Cargando modelo...</strong>
+              <span id="loadingDetail">Preparando información.</span>
+              <div class="loading-bar">
+                <div id="loadingBar" class="loading-bar-fill"></div>
+              </div>
+              <small id="loadingPercent">0%</small>
+              <button id="loadingCancelButton" class="loading-cancel-button hidden" type="button">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+        <div id="viewerRowSplitter" class="column-splitter data-panel-splitter" title="Arrastra para cambiar el ancho del panel Datos"></div>
+
+        <aside id="massInfoPanel" class="mass-info-panel data-side-panel">
+          <div id="savedConfigBar" class="saved-config-bar">
+            <button id="savedConfigSaveButton" class="saved-config-save-button" type="button" title="Guardar configuración" aria-label="Guardar configuración"><svg class="bim-save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5h10.8L19.5 8v11.5h-15v-15H5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 4.5v5h7.5v-5M8 15h8v4.5H8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+            <input id="savedConfigNameInput" class="saved-config-name-input" type="text" placeholder="Nombre de configuración" />
+            <select id="savedConfigSelect" class="saved-config-select" title="Configuraciones guardadas">
+              <option value="">&#60;Ninguno&#62;</option>
+            </select>
+            <button id="savedConfigDeleteButton" class="saved-config-delete-button" title="Eliminar configuración activa">Eliminar</button>
+          </div>
+          <nav id="dataPanelMenu" class="data-menu-tabs" role="tablist" aria-label="Secciones del panel Datos">
+            <button id="dataConfigToggle" class="data-menu-tab active" type="button" role="tab" aria-selected="true" aria-expanded="true" aria-controls="dataConfigSection">Configuraciones</button>
+            <button id="dataResultsToggle" class="data-menu-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" aria-controls="dataResultsSection">Datos</button>
+            <button id="dataColorsToggle" class="data-menu-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" aria-controls="dataColorsSection">Colores</button>
+          </nav>
+          <div id="dataConfigSection" class="data-menu-view active" role="tabpanel" aria-labelledby="dataConfigToggle">
+            <div id="massConfigPanel" class="mass-column config-column"></div>
+          </div>
+          <div id="dataResultsSection" class="data-menu-view hidden" role="tabpanel" aria-labelledby="dataResultsToggle" aria-hidden="true">
+            <div id="massDataPanel" class="mass-column data-column"></div>
+          </div>
+          <div id="dataColorsSection" class="data-menu-view hidden" role="tabpanel" aria-labelledby="dataColorsToggle" aria-hidden="true">
+            <div id="classificationValueColorsPanel" class="classification-value-colors-panel"></div>
+          </div>
+          <div id="massColumnSplitter" class="mass-column-splitter hidden" aria-hidden="true"></div>
+        </aside>
+
+      <div id="clashSplitter" class="column-splitter clash-splitter hidden" title="Panel Interferencias"></div>
+
+      <aside id="clashPanel" class="clash-column hidden">
+        <section class="panel clash-panel">
+          <nav id="clashMenu" class="clash-menu-tabs" role="tablist" aria-label="Secciones del panel Interferencias">
+            <button id="clashElementsToggle" class="clash-menu-tab clash-menu-icon-tab active" type="button" role="tab" aria-selected="true" aria-expanded="true" aria-controls="clashElementsBody" title="Configuración" aria-label="Configuración">
+              <span class="clash-menu-gear" aria-hidden="true">⚙</span>
+            </button>
+            <button id="clashInterferencesToggle" class="clash-menu-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" aria-controls="clashInterferencesBody">Interferencias</button>
+          </nav>
+
+          <div id="clashElementsSection" class="clash-section clash-menu-view" role="tabpanel" aria-labelledby="clashElementsToggle">
+            <div id="clashElementsBody" class="clash-section-body clash-config-row">
+              <div class="clash-groups">
+                <div class="clash-group">
+                  <h3>Grupo A</h3>
+                  <div class="tree-search-row clash-project-search-row">
+                    <span class="gi-search-icon">⌕</span>
+                    <input id="clashGroupASearchInput" class="gi-input clash-project-search" type="text" placeholder="Filtrar proyectos Grupo A..." />
+                  </div>
+                  <div id="clashGroupATree" class="clash-tree empty">Sin proyectos</div>
+                  <div class="clash-group-mode-section">
+                    <label class="clash-mode-row" for="clashGroupAModeSelect">
+                      <span>Modo</span>
+                      <select id="clashGroupAModeSelect" class="gi-select clash-mode-select">
+                        <option value="exclude">Excluir</option>
+                        <option value="include">Solo elegidos</option>
+                        <option value="categories">Categorías</option>
+                      </select>
+                    </label>
+                    <div id="clashGroupAFilterModePanel" class="gi-section clash-filter-section clash-mode-panel">
+                      <div id="clashGroupAFilterModeTitle" class="gi-section-header clash-mode-title">Elementos excluidos</div>
+                      <div class="gi-filter-toolbar">
+                        <span class="gi-search-icon">⌕</span>
+                        <input id="clashGroupAFilterSearch" class="gi-input" type="text" placeholder="Buscar parámetro..." />
+                        <div class="clash-filter-toolbar-actions">
+                          <button id="clashGroupAAddFilter" type="button" class="gi-button">Agregar filtro</button>
+                          <button id="clashGroupAAddFilterGroup" type="button" class="gi-button secondary hidden">Agregar grupo</button>
+                        </div>
+                      </div>
+                      <div id="clashGroupAFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div>
+                    </div>
+                    <div id="clashGroupACategoryPanel" class="clash-category-panel clash-mode-panel hidden">
+                      <div class="tree-search-row clash-category-search-row">
+                        <span class="gi-search-icon">⌕</span>
+                        <input id="clashGroupACategorySearch" class="gi-input" type="text" placeholder="Buscar categoría..." />
+                      </div>
+                      <div id="clashGroupACategoryTree" class="clash-category-tree empty">Selecciona archivos</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clash-group">
+                  <h3>Grupo B</h3>
+                  <div class="tree-search-row clash-project-search-row">
+                    <span class="gi-search-icon">⌕</span>
+                    <input id="clashGroupBSearchInput" class="gi-input clash-project-search" type="text" placeholder="Filtrar proyectos Grupo B..." />
+                  </div>
+                  <div id="clashGroupBTree" class="clash-tree empty">Sin proyectos</div>
+                  <div class="clash-group-mode-section">
+                    <label class="clash-mode-row" for="clashGroupBModeSelect">
+                      <span>Modo</span>
+                      <select id="clashGroupBModeSelect" class="gi-select clash-mode-select">
+                        <option value="exclude">Excluir</option>
+                        <option value="include">Solo elegidos</option>
+                        <option value="categories">Categorías</option>
+                      </select>
+                    </label>
+                    <div id="clashGroupBFilterModePanel" class="gi-section clash-filter-section clash-mode-panel">
+                      <div id="clashGroupBFilterModeTitle" class="gi-section-header clash-mode-title">Elementos excluidos</div>
+                      <div class="gi-filter-toolbar">
+                        <span class="gi-search-icon">⌕</span>
+                        <input id="clashGroupBFilterSearch" class="gi-input" type="text" placeholder="Buscar parámetro..." />
+                        <div class="clash-filter-toolbar-actions">
+                          <button id="clashGroupBAddFilter" type="button" class="gi-button">Agregar filtro</button>
+                          <button id="clashGroupBAddFilterGroup" type="button" class="gi-button secondary hidden">Agregar grupo</button>
+                        </div>
+                      </div>
+                      <div id="clashGroupBFilters" class="gi-filter-list"><div class="gi-subtle">Sin filtros activos.</div></div>
+                    </div>
+                    <div id="clashGroupBCategoryPanel" class="clash-category-panel clash-mode-panel hidden">
+                      <div class="tree-search-row clash-category-search-row">
+                        <span class="gi-search-icon">⌕</span>
+                        <input id="clashGroupBCategorySearch" class="gi-input" type="text" placeholder="Buscar categoría..." />
+                      </div>
+                      <div id="clashGroupBCategoryTree" class="clash-category-tree empty">Selecciona archivos</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clash-controls">
+                <div class="clash-config-status"><span>Estado</span><small id="clashStatus">Sin evaluación</small></div>
+                <label class="clash-field">Tolerancia cm³
+                  <input id="clashToleranceInput" type="number" min="0" step="0.1" value="1" />
+                </label>
+                <label class="clash-field">Nombre evaluación
+                  <input id="clashNameInput" type="text" placeholder="Interferencia 01" />
+                </label>
+                <button id="detectClashesButton" type="button" class="small-button">Detectar Interferencias</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="clashInterferencesSection" class="clash-section clash-menu-view collapsed" role="tabpanel" aria-labelledby="clashInterferencesToggle" aria-hidden="true">
+            <div id="clashInterferencesBody" class="clash-section-body clash-interferences-body">
+              <div class="clash-row clash-evaluations-row">
+                <h3>Evaluaciones</h3>
+                <div id="clashEvaluationsList" class="clash-list"><div class="clash-empty">Sin evaluaciones.</div></div>
+              </div>
+
+              <div class="clash-row clash-results-row">
+                <div class="clash-results-titlebar">
+                  <h3>Elementos con Interferencia</h3>
+                  <div class="clash-report-actions">
+                    <button id="clashExcelReportButton" type="button" class="clash-report-button">Reporte Excel</button>
+                  </div>
+                </div>
+                <div class="clash-results-search-row">
+                  <span class="gi-search-icon" aria-hidden="true">⌕</span>
+                  <input id="clashResultsSearchInput" class="gi-input" type="text" placeholder="Buscar interferencia..." aria-label="Buscar en las interferencias" />
+                </div>
+                <div id="clashResultsList" class="clash-list"><div class="clash-empty">Selecciona una evaluación.</div></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </aside>
+
+      <div id="worksSplitter" class="column-splitter works-splitter hidden" title="Panel Obras"></div>
+
+      <aside id="worksPanel" class="works-column hidden">
+        <section class="panel works-panel">
+          <div class="properties-header works-saved-config-header">
+            <div id="worksSavedConfigBar" class="works-saved-config-bar" aria-label="Configuraciones guardadas del panel Obras">
+              <button id="worksSavedConfigSaveButton" class="works-saved-config-save-button" type="button" title="Guardar configuración de Obras" aria-label="Guardar configuración de Obras"><svg class="bim-save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5h10.8L19.5 8v11.5h-15v-15H5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 4.5v5h7.5v-5M8 15h8v4.5H8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+              <input id="worksSavedConfigNameInput" class="works-saved-config-name-input" type="text" placeholder="Nombre de configuración" autocomplete="off" />
+              <select id="worksSavedConfigSelect" class="works-saved-config-select" title="Configuraciones guardadas de Obras">
+                <option value="">&lt;Ninguno&gt;</option>
+              </select>
+              <button id="worksSavedConfigDeleteButton" class="works-saved-config-delete-button" type="button" title="Eliminar configuración activa" disabled>Eliminar</button>
+            </div>
+          </div>
+          <nav id="worksMenu" class="works-menu" role="tablist" aria-label="Secciones del panel Obras">
+            <button id="worksConfigToggle" type="button" class="works-menu-button works-menu-icon-button active" role="tab" aria-selected="true" aria-controls="worksConfigBody" title="Configuración" aria-label="Configuración">
+              <span class="works-menu-gear" aria-hidden="true">⚙</span>
+            </button>
+            <button id="worksPartidasToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksPartidasBody">Partidas</button>
+            <button id="worksSummaryToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksSummaryBody">Mensual</button>
+            <button id="worksWeeklyReportToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksWeeklyReportBody">Semanal</button>
+            <button id="worksDailyReportToggle" type="button" class="works-menu-button" role="tab" aria-selected="false" aria-controls="worksDailyReportBody">Diario</button>
+          </nav>
+          <div id="worksConfigSection" class="works-section" role="tabpanel" aria-labelledby="worksConfigToggle">
+            <div id="worksConfigBody" class="works-section-body">
+              <div class="works-config-grid">
+                <div class="works-config-left">
+                  <div class="works-field-block">
+                    <div class="works-field-label">Código de partida</div>
+                    <div id="worksCodeList" class="works-assigned-list" data-works-target="code" tabindex="0"></div>
+                  </div>
+                  <div class="works-field-block">
+                    <div class="works-field-label">Descripción de partida</div>
+                    <div id="worksDescriptionList" class="works-assigned-list" data-works-target="description" tabindex="0"></div>
+                  </div>
+                  <div class="works-field-block">
+                    <div class="works-field-label">Unidad de partida</div>
+                    <div id="worksUnitList" class="works-assigned-list" data-works-target="unit" tabindex="0"></div>
+                  </div>
+                  <div class="works-field-block">
+                    <div class="works-field-label">Fecha de avance</div>
+                    <div id="worksProgressDateList" class="works-assigned-list works-single-list" data-works-target="progressDate" tabindex="0"></div>
+                  </div>
+                </div>
+                <div class="works-config-right">
+                  <label class="works-field-label" for="worksParameterSearch">
+                    <span>Parámetros disponibles</span>
+                    <input id="worksParameterSearch" class="works-input works-parameter-search" type="text" placeholder="Filtrar parámetros..." autocomplete="off" />
+                  </label>
+                  <div id="worksParametersList" class="works-parameter-list"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="worksPartidasSection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksPartidasToggle">
+            <div id="worksPartidasBody" class="works-section-body">
+              <div class="works-partidas-panel">
+                <div class="works-partidas-menu-status-row">
+                  <small id="worksPartidasSummary" class="works-partidas-summary">Sin datos</small>
+                </div>
+                <div class="works-partidas-options-row">
+                  <label class="works-partidas-select-viewer-toggle" for="worksPartidasSelectViewerCheckbox">
+                    <input id="worksPartidasSelectViewerCheckbox" type="checkbox" />
+                    <span>Seleccionar elementos en el modelo</span>
+                  </label>
+                  <label class="works-partidas-show-config-toggle" for="worksPartidasShowMeasurementConfigCheckbox">
+                    <input id="worksPartidasShowMeasurementConfigCheckbox" type="checkbox" />
+                    <span>Mostrar configuración</span>
+                  </label>
+                  <div class="works-partidas-excel-actions">
+                    <button id="worksPartidasImportExcelButton" class="works-partidas-import-excel-button" type="button" title="Importar códigos y descripciones desde las columnas A y B de un Excel">Importar Excel</button>
+                    <button id="worksPartidasExportExcelButton" class="works-partidas-export-excel-button" type="button" title="Exportar a Excel las partidas chequeadas">Exportar Excel</button>
+                  </div>
+                  <input id="worksPartidasImportExcelInput" class="works-partidas-import-excel-input" type="file" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12" />
+                </div>
+                <div class="works-partidas-search-row">
+                  <span class="works-partidas-search-icon">⌕</span>
+                  <input id="worksPartidasSearch" class="works-partidas-search-input" type="text" placeholder="Buscar partida..." autocomplete="off" />
+                </div>
+                <div class="works-partidas-table-wrap">
+                  <table id="worksPartidasTable" class="works-partidas-table" aria-label="Estructura de partidas">
+                    <thead>
+                      <tr>
+                        <th class="works-partida-code-column">Código</th>
+                        <th class="works-partida-description-column">Descripción</th>
+                        <th class="works-partida-unit-column">Unidad</th>
+                        <th class="works-partida-quantity-column">Total</th>
+                        <th class="works-partida-measurement-config-column">Configuración</th>
+                        <th class="works-partida-use-column">Usar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="worksPartidasTableBody">
+                      <tr><td colspan="6"><div class="works-partidas-empty">Configura los parámetros de código, descripción y unidad para recuperar las partidas.</div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="worksSummarySection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksSummaryToggle">
+            <div id="worksSummaryBody" class="works-section-body">
+              <div id="worksSummaryContent" class="works-summary-panel">
+                <div class="works-summary-empty">Configura las partidas y el parámetro Fecha de avance para ver el resumen general de obra.</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="worksWeeklyReportSection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksWeeklyReportToggle">
+            <div id="worksWeeklyReportBody" class="works-section-body">
+              <div id="worksWeeklyReportContent" class="works-summary-panel">
+                <div class="works-summary-empty">Selecciona un mes en Resumen General de Obra para ver sus semanas.</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="worksDailyReportSection" class="works-section collapsed" role="tabpanel" aria-labelledby="worksDailyReportToggle">
+            <div id="worksDailyReportBody" class="works-section-body">
+              <div id="worksDailyReportContent" class="works-summary-panel">
+                <div class="works-summary-empty">Selecciona un mes en Resumen General de Obra para consultar sus días.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <div id="plansColumnSplitter" class="column-splitter plans-column-splitter hidden" title="Panel 2D"></div>
+
+      <aside id="plansPanel" class="plans-drawer hidden" aria-label="Panel 2D">
+      <div id="plansDrawerResizeHandle" class="plans-drawer-resizer" role="separator" aria-orientation="vertical" aria-label="Cambiar ancho del panel 2D"></div>
+      <section class="panel plans-panel">
+        <div class="plans-body">
+          <div class="plans-list-wrap">
+            <div class="tree-search-row plans-search-row">
+              <span class="gi-search-icon">⌕</span>
+              <input id="plansSearchInput" class="tree-search" type="text" placeholder="Filtrar láminas..." />
+            </div>
+            <div class="plans-counter-row">
+              <span id="plansStatus" class="plans-status">Sin planos cargados</span>
+            </div>
+            <div id="plansList" class="plans-list empty">Carga un proyecto con archivos _2D.bi.</div>
+          </div>
+          <div id="plansListResizeHandle" class="plans-list-resizer" role="separator" aria-orientation="vertical" aria-label="Cambiar tamaño del listado de planos"></div>
+          <div class="plans-viewer-wrap">
+            <div id="plansPdfViewer" class="plans-pdf-viewer hidden" aria-label="Visualizador PDF 2D">
+              <div class="plans-pdf-toolbar">
+                <div class="plans-pdf-toolbar-left">
+                  <label class="plans-pdf-quality-label" title="Calidad de visualización del plano">
+                    <span>Calidad</span>
+                    <select id="plansPdfQualitySelect" class="plans-pdf-quality-select" aria-label="Calidad de visualización del PDF">
+                      <option value="low">Ligera</option>
+                      <option value="medium" selected>Media</option>
+                      <option value="high">Alta</option>
+                      <option value="max">Máxima</option>
+                    </select>
+                  </label>
+                  <button id="plansPdfFitButton" type="button" class="plans-pdf-tool plans-pdf-tool-text" title="Ajustar plano">Ajustar</button>
+                  <button id="plansPdfZoomOutButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Alejar" aria-label="Alejar">−</button>
+                  <span id="plansPdfZoomValue" class="plans-pdf-zoom-value">100%</span>
+                  <button id="plansPdfZoomInButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Acercar" aria-label="Acercar">+</button>
+                  <button id="plansPdfRotateButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Rotar plano" aria-label="Rotar plano">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.32 4H3.25A9 9 0 1 0 12 3V0L7 4l5 4V5z" fill="currentColor"/></svg>
+                  </button>
+                  <button id="plansPdfDownloadButton" type="button" class="plans-pdf-tool plans-pdf-tool-icon" title="Descargar PDF" aria-label="Descargar PDF">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17V3zm-6 16h14v2H5v-2z" fill="currentColor"/></svg>
+                  </button>
+                  <button id="plansNativeViewsButton" type="button" class="plans-pdf-tool plans-pdf-tool-text plans-native-views-button hidden" title="Superponer una vista nativa sobre el modelo 3D" aria-label="Vistas nativas para superponer en 3D" aria-expanded="false">
+                    Vistas 3D <span id="plansNativeViewsCount" class="plans-native-views-count">0</span>
+                  </button>
+                </div>
+              </div>
+              <div id="plansNativeViewsMenu" class="plans-native-views-menu hidden" aria-label="Vistas nativas disponibles"></div>
+              <div id="plansAnnotationToolbar" class="plans-annotation-toolbar" aria-label="Herramientas de anotación 2D">
+                <div class="plans-annotation-tools">
+                  <button id="plansAnnoRectButton" type="button" class="plans-anno-tool" data-anno-tool="rect" title="Rectángulo" aria-label="Rectángulo">▭</button>
+                  <button id="plansAnnoCircleButton" type="button" class="plans-anno-tool" data-anno-tool="circle" title="Círculo" aria-label="Círculo">○</button>
+                  <button id="plansAnnoCloudButton" type="button" class="plans-anno-tool" data-anno-tool="cloud" title="Nube" aria-label="Nube">☁</button>
+                  <button id="plansAnnoArrowButton" type="button" class="plans-anno-tool" data-anno-tool="arrow" title="Flecha" aria-label="Flecha">↗</button>
+                  <button id="plansAnnoLineButton" type="button" class="plans-anno-tool" data-anno-tool="line" title="Línea" aria-label="Línea">╱</button>
+                  <button id="plansAnnoTextButton" type="button" class="plans-anno-tool" data-anno-tool="text" title="Texto" aria-label="Texto">T</button>
+                  <label class="plans-anno-control" title="Color de anotación">
+                    <span>Color</span>
+                    <input id="plansAnnoColorInput" type="color" value="#ff0000" aria-label="Color de anotación" />
+                  </label>
+                  <label class="plans-anno-control" title="Grosor o tamaño de anotación">
+                    <span>Tamaño</span>
+                    <input id="plansAnnoSizeInput" class="plans-anno-size-input" type="number" min="0" step="0.5" value="4" aria-label="Tamaño de anotación" />
+                  </label>
+                  <button id="plansAnnoUndoButton" type="button" class="plans-anno-tool" title="Deshacer última anotación" aria-label="Deshacer última anotación">↶</button>
+                  <button id="plansAnnoDeleteButton" type="button" class="plans-anno-tool danger" title="Eliminar anotación seleccionada (Supr)" aria-label="Eliminar anotación seleccionada">🗑</button>
+                  <button id="plansAnnoClearButton" type="button" class="plans-anno-tool danger" title="Borrar anotaciones del plano" aria-label="Borrar anotaciones del plano">🧹</button>
+                </div>
+              </div>
+              <div id="plansPdfStage" class="plans-pdf-stage">
+                <canvas id="plansPdfCanvas" class="plans-pdf-canvas"></canvas>
+                <svg id="plansAnnotationLayer" class="plans-annotation-layer" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg>
+                <div id="plansNativeViewHotspots" class="plans-native-view-hotspots" aria-label="Accesos directos a vistas 3D"></div>
+                <div id="plansPdfLoading" class="plans-pdf-loading hidden">Preparando plano...</div>
+              </div>
+            </div>
+            <div id="plansViewerEmpty" class="plans-viewer-empty">Selecciona una lámina para visualizarla.</div>
+          </div>
+        </div>
+      </section>
+      </aside>
+      </div>
+
+      <div id="issuesSplitter" class="issues-panel-splitter hidden" role="separator" aria-orientation="vertical" aria-label="Cambiar ancho del panel Incidencias" title="Arrastra para cambiar el ancho"></div>
+
+      <aside id="issuesPanel" class="issues-panel-shell hidden" aria-label="Gestión de incidencias BIM" aria-hidden="true">
+        <header class="issues-panel-header">
+          <div class="issues-panel-heading">
+            <strong>Incidencias</strong>
+          </div>
+          <label class="issues-marker-toggle issues-marker-toggle-header">
+            <input id="issuesMarkerToggle" type="checkbox" />
+            <span>Mostrar marcadores en el modelo 3D</span>
+          </label>
+        </header>
+
+        <nav class="issues-menu-tabs" aria-label="Secciones del panel Incidencias">
+          <button id="issuesNewMenuButton" class="issues-menu-tab active" type="button" data-issues-menu="list" aria-selected="true">Incidencias</button>
+          <button id="issuesDetailsMenuButton" class="issues-menu-tab" type="button" data-issues-menu="details" aria-selected="false">Detalles</button>
+          <button id="issuesHistoryMenuButton" class="issues-menu-tab" type="button" data-issues-menu="history" aria-selected="false">Historial <span id="issueHistoryCount" class="issues-menu-count">0</span></button>
+          <button id="issuesSettingsMenuButton" class="issues-menu-tab issues-menu-icon-tab" type="button" data-issues-menu="settings" aria-selected="false" title="Configuración" aria-label="Configuración"><span class="issues-menu-gear" aria-hidden="true">⚙</span></button>
+        </nav>
+
+        <div class="issues-menu-content">
+          <section id="issuesListView" class="issues-menu-view issues-list-view" data-issues-view="list" aria-label="Listado y creación de incidencias">
+            <div class="issues-list-actions">
+              <button id="issuesNewButton" class="issues-primary-button" type="button" disabled>+ Nueva incidencia</button>
+            </div>
+
+            <div class="issues-panel-toolbar">
+              <input id="issuesSearchInput" class="issues-search" type="search" placeholder="Buscar por código, etiqueta, responsable o texto..." />
+              <select id="issuesStatusFilter" class="issues-select" aria-label="Filtrar por estado"></select>
+              <select id="issuesPriorityFilter" class="issues-select" aria-label="Filtrar por prioridad"></select>
+              <select id="issuesLabelFilter" class="issues-select" aria-label="Filtrar por etiqueta"></select>
+              <select id="issuesAssigneeFilter" class="issues-select" aria-label="Filtrar por responsable"></select>
+            </div>
+
+            <div id="issuesStats" class="issues-stats" aria-label="Resumen de incidencias"></div>
+            <section class="issues-list-pane" aria-label="Listado de incidencias">
+              <div id="issuesList" class="issues-list"></div>
+              <div id="issuesListEmpty" class="issues-empty">Todavía no existen incidencias para este proyecto.</div>
+            </section>
+          </section>
+
+          <section id="issuesDetailsView" class="issues-menu-view issues-details-view hidden" data-issues-view="details" aria-label="Detalles de incidencia">
+            <div id="issuesEditorEmpty" class="issues-editor-empty">Selecciona una incidencia en el menú Incidencias o crea una nueva desde el modelo 3D.</div>
+            <div id="issuesEditor" class="issues-editor hidden">
+              <div class="issues-editor-heading">
+                <strong id="issuesEditorTitle">Detalle</strong>
+                <div class="issues-editor-heading-actions">
+                  <button id="issueFocusButton" class="issues-secondary-button" type="button">Ver en modelo</button>
+                  <button id="issueRelocateButton" class="issues-secondary-button" type="button">Reubicar</button>
+                </div>
+              </div>
+
+              <div class="issues-form-grid">
+                <label class="issues-field"><span>Etiqueta</span><select id="issueLabelInput" class="issues-select"></select></label>
+                <label class="issues-field"><span>Estado</span><span class="issues-status-select-wrap"><i id="issueStatusColorSwatch" class="issues-status-color-swatch" aria-hidden="true"></i><select id="issueStatusInput" class="issues-select"></select></span></label>
+                <label class="issues-field full"><span>Título</span><input id="issueTitleInput" class="issues-input" type="text" maxlength="180" placeholder="Describe brevemente el problema" /></label>
+                <label class="issues-field full"><span>Descripción</span><textarea id="issueDescriptionInput" class="issues-textarea" placeholder="Explica qué debe revisarse o corregirse"></textarea></label>
+                <label class="issues-field"><span>Tipo</span><select id="issueTypeInput" class="issues-select"></select></label>
+                <label class="issues-field"><span>Prioridad</span><select id="issuePriorityInput" class="issues-select"></select></label>
+                <label class="issues-field"><span>Responsable</span><select id="issueAssigneeInput" class="issues-select"><option value="">Sin asignar</option></select></label>
+                <div class="issues-field">
+                  <span>Fecha límite (DD/MM/AAAA)</span>
+                  <span class="issues-date-input-wrap">
+                    <input id="issueDueDateInput" class="issues-input issues-date-text-input" type="text" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD/MM/AAAA" aria-label="Fecha límite en formato día, mes y año" />
+                    <button id="issueDueDatePickerButton" class="issues-date-picker-button" type="button" title="Mostrar selector de fechas" aria-label="Mostrar selector de fechas">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 4.5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <input id="issueDueDatePickerNative" class="issues-date-native-picker" type="date" tabindex="-1" aria-hidden="true" />
+                  </span>
+                </div>
+                <div class="issues-field full"><span>Vinculación BIM</span><div id="issueLinkedElements" class="issue-linked-elements">Marcador pendiente de ubicar</div></div>
+              </div>
+
+              <div class="issues-section">
+                <div class="issues-section-title">
+                  <strong>Evidencias generales</strong>
+                  <div class="issues-section-actions">
+                    <label class="issues-upload-button">Agregar imágenes<input id="issueImageInput" type="file" accept="image/*" multiple /></label>
+                    <button id="issueCaptureButton" class="issues-secondary-button" type="button">Capturar vista</button>
+                  </div>
+                </div>
+                <div id="issueAttachmentsList" class="issue-attachments-list"></div>
+              </div>
+
+              <div class="issues-section">
+                <div class="issues-section-title"><strong>Comentarios y evidencias asociadas</strong></div>
+                <div class="issue-comment-compose">
+                  <textarea id="issueCommentInput" class="issues-textarea" placeholder="Agregar comentario y, opcionalmente, imágenes asociadas..."></textarea>
+                  <div class="issue-comment-actions">
+                    <label class="issues-upload-button">Imágenes<input id="issueCommentImageInput" type="file" accept="image/*" multiple /></label>
+                    <button id="issueCommentCaptureButton" class="issues-secondary-button" type="button">Capturar</button>
+                    <button id="issueCancelCommentEditButton" class="issues-secondary-button hidden" type="button">Cancelar edición</button>
+                    <button id="issueAddCommentButton" class="issues-primary-button" type="button">Agregar comentario</button>
+                  </div>
+                </div>
+                <div id="issueCommentPendingAttachments" class="issue-comment-pending"></div>
+                <div id="issueCommentsList" class="issue-comments-list"></div>
+              </div>
+
+              <footer class="issues-editor-footer">
+                <button id="issueCancelButton" class="issues-secondary-button" type="button">Cerrar detalle</button>
+                <button id="issueSaveButton" class="issues-primary-button" type="button">Guardar modificaciones</button>
+              </footer>
+            </div>
+          </section>
+
+          <section id="issuesHistoryView" class="issues-menu-view issues-history-view hidden" data-issues-view="history" aria-label="Historial de actividad">
+            <div id="issuesHistoryEmpty" class="issues-editor-empty">Selecciona una incidencia para consultar su historial de actividad.</div>
+            <div id="issuesHistoryContent" class="issues-history-content hidden">
+              <div class="issues-view-heading">
+                <div><strong>Historial de actividad</strong><span id="issuesHistoryTitle">Incidencia seleccionada</span></div>
+                <button id="issuesHistoryFocusButton" class="issues-secondary-button" type="button">Ver en modelo</button>
+              </div>
+              <div id="issueHistoryList" class="issue-history-list issues-history-full-list"></div>
+            </div>
+          </section>
+
+          <section id="issuesSettingsView" class="issues-menu-view issues-settings-view hidden" data-issues-view="settings" aria-label="Configuración de incidencias">
+            <section id="issuesTeamPanel" class="issues-config-section" aria-label="Equipo de trabajo">
+              <div class="issues-config-heading">
+                <div><strong>Equipo de trabajo</strong><span>Registra las personas disponibles para asignarlas como responsables.</span></div>
+              </div>
+              <div class="issues-team-form">
+                <input id="issuesTeamNameInput" class="issues-input" type="text" maxlength="100" placeholder="Nombre completo" />
+                <input id="issuesTeamRoleInput" class="issues-input" type="text" maxlength="100" placeholder="Cargo o especialidad" />
+                <input id="issuesTeamEmailInput" class="issues-input" type="email" maxlength="160" placeholder="Correo (opcional)" />
+                <button id="issuesTeamAddButton" class="issues-primary-button" type="button">Agregar persona</button>
+              </div>
+              <div id="issuesTeamList" class="issues-team-list"></div>
+            </section>
+
+            <section id="issuesLabelsPanel" class="issues-config-section" aria-label="Catálogo de etiquetas">
+              <div class="issues-config-heading">
+                <div><strong>Etiquetas de incidencias</strong><span>Define el nombre y color que se mostrarán en el modelo 3D.</span></div>
+              </div>
+              <div class="issues-labels-form">
+                <input id="issuesLabelNameInput" class="issues-input" type="text" maxlength="80" placeholder="Nombre de la etiqueta" />
+                <input id="issuesLabelColorInput" class="issues-color-input" type="color" value="#2563eb" aria-label="Color de la etiqueta" />
+                <button id="issuesLabelAddButton" class="issues-primary-button" type="button">Agregar etiqueta</button>
+              </div>
+              <div id="issuesLabelsList" class="issues-labels-list"></div>
+            </section>
+          </section>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="issuesPlacementBanner" class="issues-placement-banner hidden" role="status">
+    <strong>Ubicar incidencia</strong>
+    <span>Haz clic sobre el punto exacto del modelo. Se guardarán la cámara y los elementos seleccionados.</span>
+    <button id="issuesPlacementCancel" class="issues-secondary-button" type="button">Cancelar</button>
+  </div>
+
+  <div id="issuesImagePreview" class="issues-image-preview hidden" role="dialog" aria-modal="true" aria-label="Vista previa de evidencia">
+    <div class="issues-image-preview-toolbar" role="toolbar" aria-label="Controles de imagen">
+      <button id="issuesImagePreviewZoomOut" class="issues-icon-button" type="button" aria-label="Alejar imagen">−</button>
+      <span id="issuesImagePreviewZoomLabel" aria-live="polite">100%</span>
+      <button id="issuesImagePreviewZoomIn" class="issues-icon-button" type="button" aria-label="Acercar imagen">+</button>
+      <button id="issuesImagePreviewReset" class="issues-secondary-button" type="button">Restablecer</button>
+    </div>
+    <button id="issuesImagePreviewClose" class="issues-icon-button issues-image-preview-close" type="button" aria-label="Cerrar imagen">×</button>
+    <div id="issuesImagePreviewViewport" class="issues-image-preview-viewport">
+      <img id="issuesImagePreviewImage" alt="Evidencia de incidencia" draggable="false" />
+    </div>
+    <div class="issues-image-preview-help">Rueda: zoom · arrastrar: mover · doble clic: restablecer · Esc: cerrar</div>
+  </div>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="assets/j/j854faba063550cdb.js?v=1"></script>
+  <script src="assets/j/j7f93c7fe27515304.js?v=1-tree-copy"></script>
+  <script src="assets/j/j477bb73daaf9f216.js?v=security-1"></script>
+  <script src="assets/j/j04d00a2d0c91b87b.js?v=3-security"></script>
+  <script src="assets/j/j9efffae85cc4d3d9.js?v=1"></script>
+  <script src="assets/j/j585d8181a9013406.js?v=1"></script>
+  <script src="assets/j/jd0c1d69471ad8894.js?v=1"></script>
+  <script src="assets/j/je4670c56b6e169ee.js?v=3"></script>
+  <script src="assets/j/j19978a10fd3f62fb.js?v=1.1"></script>
+  <script src="assets/j/jd9abfea3a5bb6926.js?v=3"></script>
+  <script src="assets/j/je08da92d47416ee4.js?v=5"></script>
+  <script src="assets/j/j8ee215ce7a63627b.js?v=12"></script>
+  <script src="assets/j/jf34b1b155ef17ec0.js?v=12"></script>
+  <script src="assets/j/j985c3d5778c9dd8b.js?v=12"></script>
+  <script src="assets/j/j29c40f9e7ed9fe33.js?v=12&context-menu=1"></script>
+  <script src="assets/j/j04a721ca8f1adfeb.js?v=12&incremental-viewer-selection=1"></script>
+  <script src="assets/j/jfe462f9fc81b22a1.js?v=12&operation-progress=1&data-scope-incremental=1&initial-project-visibility-fast=1"></script>
+  <script src="assets/j/jcd09c2beade98cb4.js?v=12"></script>
+  <script src="assets/j/j1b45081eb36a9f1d.js?v=5"></script>
+  <script src="assets/j/jbb91d23bafa2e003.js?v=5"></script>
+  <script src="assets/j/jeda83b5d7f3e0515.js?v=5"></script>
+  <script src="assets/j/j119ae54187b96b36.js?v=5&deferred-hidden-panel=1"></script>
+  <script src="assets/j/j0dd6ee07e9d0b000.js?v=4"></script>
+  <script src="assets/j/jba159cfe86470267.js?v=8&save-verify=1"></script>
+  <script src="assets/j/j142ea8b93b27e82c.js?v=15.3"></script>
+  <script src="assets/j/jece70f3ffe258751.js?v=15.6&operation-progress=2&group-label-counts=1"></script>
+  <script src="assets/j/jc3b1d15c1d879267.js?v=16-classification-filters"></script>
+  <script src="assets/j/ja374b7fa26bec502.js?v=9-classification-filters&data-operation-progress=1"></script>
+  <script src="assets/j/jee137f4cc70701f7.js?v=8&excel-changes=1&virtual-table-100=1"></script>
+  <script src="assets/j/j4afc1324fc99cdbe.js?v=8&data-selection=2"></script>
+  <script src="assets/j/j6b52271c99ae9c20.js?v=8&excel-changes=1"></script>
+  <script src="assets/j/j64edd020a7c91d28.js?v=8"></script>
+  <script src="assets/j/j2176955b0c21a714.js?v=9-rules-2"></script>
+  <script src="assets/j/j77be409c2c5399b7.js?v=10-dialogs-excel-rowheight-1"></script>
+  <script src="assets/j/j4dc45f28a103b6f4.js?v=18.24-panel-close-progress&real-progress=1"></script>
+  <script src="assets/j/jb6e2ac1eb932c478.js?v=10-context-menu"></script>
+  <script src="assets/j/jf153aadccfde9871.js?v=9-rules-2"></script>
+  <script src="assets/j/jef09903300c0f431.js?v=9-partida-config-1"></script>
+  <script src="assets/j/j2e4f8076fded2ccd.js?v=9"></script>
+  <script src="assets/j/j2fd83621385c8a71.js?v=9"></script>
+  <script src="assets/j/j761c07faf5dac364.js?v=10.2"></script>
+  <script src="assets/j/jb1f398f6cbe26cf6.js?v=18.24&sync-scope=1&clash-filter-groups=1&clash-exclude-groups=1&clash-results-search=1&clash-cm3=1&clash-auto-first=1&clash-filter-rows=7-10&clash-scroll-stable=1&panel-close-progress=1&real-progress=1"></script>
+  <script src="assets/j/j0d12614959a5a4f9.js?v=10.3-bvh&sync-scope=1&clash-filter-groups=1"></script>
+  <script src="assets/j/j2374a9309cb1e46b.js?v=18.24-exact-contact-clean-indexed"></script>
+  <script src="assets/j/j23fd5ffb9b0ff444.js?v=10.3-bvh&clash-filter-groups=1&clash-auto-open=1&positive-clash-volume=2&clash-cm3=1&clash-auto-first=1"></script>
+  <script src="assets/j/j14c3ba97402876da.js?v=18.24-exact-contact-demand&clash-auto-first=1&clash-keyboard-nav=1&clash-scroll-stable=1"></script>
+  <script src="assets/j/jad8cbca6341347cb.js?v=10.3-bvh&clash-cm3=1"></script>
+  <script src="assets/j/j4d7b6f388476b3d0.js?v=10.2"></script>
+  <script src="assets/j/j120467c260f42c13.js?v=3"></script>
+  <script src="assets/j/j94acbafdc8b280f1.js?v=4&security=2"></script>
+  <script src="assets/j/jf57ae53a5b2ed088.js?v=3"></script>
+  <script src="assets/j/j7c2e5b5a0e49f413.js?v=4"></script>
+  <script src="assets/j/jd128fb33ccbbfdfa.js?v=3"></script>
+  <script src="assets/j/ja244e035fee88f0e.js?v=3"></script>
+  <script src="assets/j/jf14ae112145b5edb.js?v=13"></script>
+  <script src="assets/j/j88e76d776b7f99e0.js"></script>
+  <script src="assets/j/jd1c061a8728f67ee.js?v=phase4-cache-sync-1&issues=18.8&security=1&save-verify=1&works-state=1&project-identity=2"></script>
+  <script src="assets/j/jbef50323e7998c18.js?v=bin96"></script>
+  <script src="assets/j/j512855ccb5915fc5.js?v=large-model-lod-1&security=1"></script>
+  <script src="assets/j/j0f4de178e814f5f3.js?v=phase4-cache-sync-1&security=1&save-verify=1&works-state=1"></script>
+  <script src="assets/j/j6a69e6f42955be5c.js?v=large-model-lod-1&security=1"></script>
+  <script src="assets/j/jc9936091be260a57.js?v=adaptive-quality-2"></script>
+  <!-- Compatibilidad de regresión: plansPanel.js?v=phase7-workflow-fixes-1 -->
+  <script src="vendor/pdf.min.js?v=3.11.174-local"></script>
+  <script src="assets/j/j32ae839926a76787.js?v=11&security=1"></script>
+  <script src="assets/j/ja4fac7c926ce5ce8.js?v=11&save-verify=1"></script>
+  <script src="assets/j/j4e56d82d8c7ba1c3.js?v=11"></script>
+  <script src="assets/j/jace98fb06399bc37.js?v=11"></script>
+  <script src="assets/j/j41cdf548427ca518.js?v=11"></script>
+  <script src="assets/j/j1685bdfc5d0e60a5.js?v=11"></script>
+  <script src="assets/j/j284723ada484cc25.js?v=12-multipage-local-pdfjs-2"></script>
+  <script src="assets/j/j9ae4d68621ad1490.js?v=11"></script>
+  <script src="assets/j/j91ea0b7e9909daee.js?v=16.12-native-view-section-pivot-local-pdfjs-2"></script>
+  <script src="assets/j/j1be7bdca8271f14b.js?v=16.16-context-menu&real-progress=1"></script>
+  <script src="assets/j/j584d3e7d72600241.js?v=14"></script>
+  <script src="assets/j/je54a14eae25f2e83.js?v=15.5-multiselect-release"></script>
+  <script src="assets/j/j50d86da0d5563655.js?v=18.23-color-priority&world-prewarm=1&visibility-index=1"></script>
+  <script src="assets/j/jd5f64712bc88b605.js?v=14"></script>
+  <script src="assets/j/je80b6f0960f58b25.js?v=18.21-exact-sweep"></script>
+  <script src="assets/j/j3973b83e4e5a42c7.js?v=14"></script>
+  <script src="assets/j/j9fd837f9340f35e8.js?v=19.1-camera-framing&isolation-progress=3&real-progress=2&shortcut-progress=1&memory-safe-load=1&indexed-edges=1&ghost-residue=2&strict-isolation=1&shortcut-command-parity=1&hide-fast=1&strict-isolation-render-guard=2&restore-chunk-visibility=1&strict-project-visibility=4&project-scoped-chunks=1&initial-load-visibility-fast=1&hide-edges-complete=2&selection-source-opacity50=1&selection-index-mask=1&edge-build-generation=1&exterior-edge-fallback=1&stable-effect-edges=1&visual-state-selection-mask=1&data-chunk-render=1&adaptive-edge-classifier=6&selection-overlay-priority=1&incremental-restore=2&local-cell-restore=1&colored-edge-coverage=1&tubular-edge-detach=1&data-operation-progress=2&multiselect-release=1&viewer-transparency-progress=1&ai-section-keys=1&ai-preserve-visual-state=1&section-transparency=1&responsive-visual-reset=1"></script>
+  <script src="assets/j/j611638d7af68fb2e.js?v=phase4-cache-sync-1"></script>
+  <script src="assets/j/j207cd422e733ac1f.js?v=15.1"></script>
+  <script src="assets/j/j15f49c5805e61ba5.js?v=classification-color-identity-1"></script>
+  <script src="assets/j/jcde767c1f41b732b.js"></script>
+  <script src="assets/j/j4ae5a6798bc232d2.js?v=classification-filters-1&release=19.5-config-defer-group-remove&data-operation-progress=3&caret-preservation=1&spatial-restore-progress=1&data-selection=2&context-menu=4&config-copy=2&responsive-visual-reset=1"></script>
+  <script src="runtime-config.js?v=1-unified-environment"></script>
+  <script src="assets/j/jea378999a2213b52.js?v=1-cloudflare-worker"></script>
+  <script src="assets/j/j7c85398a1e4d1020.js?v=2-cloudflare-worker"></script>
+  <script src="assets/j/jf72abb0b3f300274.js?v=11-general-percentages"></script>
+  <script src="assets/j/jb9ed82a34a384ac0.js?v=3-interactive-report-preview"></script>
+  <script src="assets/j/j3542e29d09cac51e.js?v=11-general-percentages"></script>
+  <script src="assets/j/j92922e922f7a5cbd.js?v=2-math"></script>
+  <script src="assets/j/j66f3d44d2fe2648f.js?v=phase12-project-tree-modules-1&release=18.24-panel-close-progress-2&works-partida-config=1&works-state=1&unified-ui=1&operation-progress=2&clash-group-modes=1&clash-filter-groups=1&clash-results-search=1&clash-cm3=1&clash-keyboard-nav=1&real-progress=2&shortcut-progress=1&shortcut-command-parity=2&hide-fast=1&strict-isolation-render-guard=2&restore-chunk-visibility=1&selection-dom-delta=1&data-operation-progress=1&viewer-transparency-progress=1&context-copy=1"></script>
+  <script src="assets/j/j7c4e0712222dd6a6.js?v=phase14-selection-modules-1&release=19.5-tablet-workspace-authority&real-progress=1&memory-safe-load=1&deferred-properties-render=1"></script>
+  <script src="assets/j/j15c86fc8251aed21.js?v=19.5-tablet-detection"></script>
+  <script src="assets/j/j16dae71c88e6dfb6.js?v=phase18-issues-8"></script>
+  <script src="assets/j/jbcb014d44da919a6.js?v=phase18-issues-8&security=1"></script>
+  <script src="assets/j/j9bedc724a5a2835f.js?v=phase18-issues-8"></script>
+  <script src="assets/j/j8046a9daf802299f.js?v=phase18-issues-8"></script>
+  <script src="assets/j/j75cb3c25ac1c3d49.js?v=18.22-markers-off&real-progress=2&issue-close-fast=1"></script>
+  <script src="assets/j/jf884949961491bbf.js?v=18.24-panel-close-progress-2&phase18-issues-15-complete-view-state=1&real-progress=2&task-coalesce=1&render-coalesce=1&local-cache-identity=2"></script>
+  <script src="assets/j/jbaa6d93c1f49b944.js?v=2"></script>
+  <!-- Compatibilidad de regresión: cloudAccess.js?v=phase6-interferences-persistence-1 -->
+  <script src="assets/j/j9868608ec4dacfbf.js?v=phase13-cloud-changes-1&issues=18.12&security=1&save-verify=1&download-integrity=1&works-transient=1&cloud-ui=2"></script>
+
+  <script src="assets/j/jcba8c06b8a9bd77a.js?v=19.5-native-fullscreen&real-progress=1"></script>
+  <script src="assets/j/jc53a88c8885c0645.js?v=13-general-percentages"></script>
+</body>
+</html>
