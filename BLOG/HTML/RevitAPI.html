@@ -2,7 +2,9 @@
         La API de Autodesk Revit permite automatizar flujos, crear comandos personalizados y
         extender el comportamiento del software mediante <strong>.NET (C#)</strong>.
         Provee acceso a documentos, elementos, parámetros, transacciones y eventos.
-      </p></section><section><h2>Arquitectura básica</h2><ul><li><strong>IExternalCommand</strong>: comandos que el usuario ejecuta desde Revit.</li><li><strong>IExternalApplication</strong>: add-ins que gestionan ciclo de vida (arranque/cierre), pestañas y botones.</li><li><strong>Transacciones</strong>: bloque de cambios atómicos dentro del documento.</li></ul></section><section><h2>Ejemplo mínimo de <code>IExternalCommand</code></h2><pre class="code"><code class="language-csharp">
+      </p></section><section><h2>Arquitectura básica</h2><ul><li><strong>IExternalCommand</strong>: comandos que el usuario ejecuta desde Revit.</li><li><strong>IExternalApplication</strong>: add-ins que gestionan ciclo de vida (arranque/cierre), pestañas y botones.</li><li><strong>Transacciones</strong>: bloque de cambios atómicos dentro del documento.</li></ul></section><section><h2>Ejemplo mínimo de <code>IExternalCommand</code></h2>
+
+      <pre class="code"><code class="language-csharp">
 // Attribute para ejecutar en Revit
 [Transaction(TransactionMode.Manual)]
 public class HelloRevit : IExternalCommand
@@ -13,4 +15,9 @@ public class HelloRevit : IExternalCommand
     return Result.Succeeded;
   }
 }
-      </code></pre><p class="tip">Compílalo como <em>Class Library</em>, crea el archivo <code>.addin</code> y colócalo en la carpeta de Addins de tu versión de Revit.</p></section><section><h2>Recursos recomendados</h2><ol><li>Revit API Docs</li><li>The Building Coder</li><li>Ejemplos oficiales de Autodesk</li></ol></section><footer class="doc-footer"><button class="copy-btn" data-copy="#copyTarget">Copiar ruta de Addins</button><code id="copyTarget">%PROGRAMDATA%\Autodesk\Revit\Addins\2024</code></footer></article><script src="../JS/RevitAPI.js"></script></body></html>
+      </code></pre>
+
+      <p class="tip">Compílalo como <em>Class Library</em>, crea el archivo <code>.addin</code> y colócalo en la carpeta de Addins de tu versión de Revit.</p></section><section><h2>Recursos recomendados</h2><ol><li>Revit API Docs</li><li>The Building Coder</li><li>Ejemplos oficiales de Autodesk</li></ol></section><footer class="doc-footer"><button class="copy-btn" data-copy="#copyTarget">Copiar ruta de Addins</button><code id="copyTarget">%PROGRAMDATA%\Autodesk\Revit\Addins\2024</code></footer></article>
+
+  <script src="../JS/4e20e8716ee63ebf.js"></script>
+</body></html>
