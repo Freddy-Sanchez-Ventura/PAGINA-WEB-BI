@@ -8,7 +8,7 @@ const $=(s,c=document)=>c .querySelector(s);const $$=(s,c=document)=>Array .from
         </article>
       `).join("")}
     </div>
-  `;}function renderPricing(data){const panel=$(".price-panel");if(!panel)return;const pricing=data?.pricing||{};const ctaHref=data .ctaUrl||"https://www.mediafire.com/file/dz440g0ncqvns2q/InstaladorBI_v2.rar/file";const ctaLabel=pricing .ctaLabel||data .ctaLabel||"Descargar gratis";panel .innerHTML=`
+  `;}function renderPricing(data){const panel=$(".price-panel");if(!panel)return;const pricing=data?.pricing||{};const ctaHref=data .ctaUrl||"https://drive.google.com/file/d/1r3XpBAb82cPVm-IKMnq_9MZfcFTIr9gB/view?usp=sharing";const ctaLabel=pricing .ctaLabel||data .ctaLabel||"Descargar gratis";panel .innerHTML=`
     <span class="price-label">${ escapeHtml(pricing .label||"Complemento gratuito")}</span>
     <strong class="price-value">${ escapeHtml(pricing .title||"100% GRATIS")}</strong>
     <p class="price-note">${ escapeHtml(pricing .note||"Disponible sin costo. Descarga el instalador de BIM Ingenieros para comenzar a utilizarlo en Revit.")}</p>
